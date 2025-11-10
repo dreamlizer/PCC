@@ -1,0 +1,34 @@
+/* pages/practice/detail.wxss */
+/* 收紧卡片内边距以提升信息密度 */
+.option-card { padding: 12rpx; border-radius: 8rpx; background: #fff; }
+.option-text { display: block; width: 100%; word-break: break-word; line-height: 1.5; }
+.actions { flex-shrink: 0; }
+/* 缩小操作按钮尺寸以节省行距 */
+.btn-sm { padding: 10rpx 16rpx; font-size: var(--font-sm); border-radius: 8rpx; }
+.ml-12 { margin-left: 12rpx; }
+/* 本页使用的更紧凑的上边距 */
+.mt-12 { margin-top: 12rpx; }
+
+/* 解析态高亮：最佳浅绿，最差浅红（保持原卡面高亮） */
+.option-card.best { background: #e8f5e9; }
+.option-card.worst { background: #ffe0e0; }
+
+/* 按钮风格：最佳深绿白字、最差艳红白字，并增加轻微立体阴影 */
+.btn-best { background: #1B5E20; color: #ffffff; border: none; box-shadow: 0 6rpx 12rpx rgba(0,0,0,0.10), 0 2rpx 4rpx rgba(0,0,0,0.08); }
+.btn-worst { background: #D32F2F; color: #ffffff; border: none; box-shadow: 0 6rpx 12rpx rgba(0,0,0,0.10), 0 2rpx 4rpx rgba(0,0,0,0.08); }
+.btn-best.selected { filter: brightness(1.05); box-shadow: 0 8rpx 14rpx rgba(0,0,0,0.12); }
+.btn-worst.selected { filter: brightness(1.05); box-shadow: 0 8rpx 14rpx rgba(0,0,0,0.12); }
+.label { font-weight: 600; margin-right: 8rpx; }
+
+/* 顶部收藏图标按钮 */
+.icon-btn { padding: 0; border: none; background: transparent; }
+.icon-img { width: 36rpx; height: 36rpx; display: block; }
+
+/* 主按钮：解析按钮常态与禁用态 */
+.btn[disabled] { opacity: 1; }
+.analyze-btn { background: #ffffff; color: #1a1a1a; border: 2rpx solid #1a1a1a; }
+/* 禁用时中灰底 + 白字，边框同底色以确保一致视觉 */
+.analyze-btn[disabled] { background: #8C8C8C; color: #ffffff; border-color: #8C8C8C; }
+
+/* 解析摘要的轻量外观，不占空间但与正文有区分 */
+.analysis-recap { font-size: var(--font-sm); color: #333; background: #F5F5F5; padding: 10rpx 12rpx; border-radius: 8rpx; }

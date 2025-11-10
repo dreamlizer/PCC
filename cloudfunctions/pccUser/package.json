@@ -1,0 +1,9 @@
+{
+  "name": "pccUser",
+  "version": "1.0.0",
+  "description": "User data cloud function for PCC app",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "^2.8.3"
+  }
+}

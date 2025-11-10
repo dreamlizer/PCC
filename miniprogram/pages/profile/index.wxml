@@ -1,0 +1,40 @@
+<view class="page" style="background: {{theme.pageBg}};">
+  <view class="hero" style="background: linear-gradient(135deg, {{theme.heroFrom}} 0%, {{theme.heroTo}} 100%);">
+    <view class="h1">个人中心</view>
+  </view>
+  <view class="card card--split">
+    <view class="row-split">
+      <view class="h2 left nowrap">挑战记录</view>
+      <view class="actions"><button class="btn-ghost" bindtap="openReview">查看</button></view>
+    </view>
+    <block wx:for="{{history}}" wx:key="timestamp">
+      <view class="mt-16 row space-between" bindtap="openReview" data-idx="{{index}}">
+        <view>
+          <view>模式：{{item.mode === 'sequence' ? '按序' : '随机'}}</view>
+          <view class="muted">用时：{{item.duration}}</view>
+        </view>
+        <view>
+          <view>得分：{{item.score}}%</view>
+          <view class="muted">正确：{{item.correct_count}} / {{item.total_count}}</view>
+        </view>
+      </view>
+      <view class="divider"></view>
+    </block>
+  </view>
+
+  <view class="card card--split mt-24">
+    <view class="row-split">
+      <view class="h2 left nowrap">收藏的题目（共 {{favoritesCount}} 题）</view>
+      <view class="actions"><button class="btn-ghost" bindtap="openFavorites">查看</button></view>
+    </view>
+  </view>
+
+  <view class="card card--split mt-24" style="border-left-color: {{theme.cardBorder}};">
+    <view class="row-split">
+      <view class="h2 left nowrap">主题配色</view>
+      <view class="actions"><button class="btn-ghost" bindtap="openDrawer">选择</button></view>
+    </view>
+  </view>
+
+  <theme-drawer visible="{{drawerVisible}}" themes="{{themes}}" active-id="{{themeId}}" bindselect="onSelectTheme" bindclose="onCloseDrawer" />
+</view>

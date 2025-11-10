@@ -1,0 +1,16 @@
+/* pages/profile/index.wxss */
+.hero { padding: 40rpx 32rpx 24rpx; color: #fff; }
+.theme-row { display: flex; align-items: center; padding: 12rpx 0; }
+.theme-chip { width: 56rpx; height: 32rpx; border-radius: 999rpx; margin-right: 16rpx; box-shadow: 0 4rpx 10rpx rgba(0,0,0,0.08); }
+.theme-name { flex: 1; font-weight: 600; }
+.theme-check { width: 40rpx; text-align: right; color: #2FB3A9; font-weight: 700; }
+
+/* --- 卡片分区布局：左侧内容有内边距，右侧完全贴边 --- */
+.card.card--split { padding: 24rpx 0 24rpx 24rpx; }
+.row-split { display: flex; align-items: center; min-height: 72rpx; }
+.row-split .left { flex: 1; }
+.row-split .actions { margin-right: 0; }
+.row-split .actions .btn-ghost { min-width: 140rpx; text-align: center; }
+
+/* 标题不换行，过长省略 */
+.nowrap { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

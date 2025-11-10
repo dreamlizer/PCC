@@ -1,0 +1,20 @@
+<view class="page">
+  <view class="card">
+    <view class="h2">逐题解析</view>
+    <view class="muted">按题号(number)排列，黄色星星代表已收藏</view>
+  </view>
+
+  <scroll-view scroll-y style="height: calc(100vh - 240rpx);">
+    <block wx:for="{{list}}" wx:key="id">
+      <view class="card" bindtap="openDetail" data-id="{{item.id}}">
+        <view class="row space-between">
+          <view>题目 {{item.number}}</view>
+          <image wx:if="{{item.favored}}" class="list-star" src="/images/icons/favorite-on.svg" mode="aspectFit"></image>
+        </view>
+      </view>
+    </block>
+    <view wx:if="{{!list.length}}" class="card">
+      <view class="muted">暂未加载到题目，请稍候或检查云环境。</view>
+    </view>
+  </scroll-view>
+</view>

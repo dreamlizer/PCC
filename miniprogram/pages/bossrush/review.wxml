@@ -1,0 +1,22 @@
+<view class="page">
+  <view class="card">
+    <view class="row space-between">
+      <view class="h2">逐题复盘</view>
+      <button class="btn-ghost" bindtap="toggleWrongOnly">{{showWrongOnly ? '显示全部' : '只看错题'}}</button>
+    </view>
+  </view>
+  <scroll-view scroll-y style="height: calc(100vh - 240rpx);">
+    <block wx:for="{{list}}" wx:key="id">
+      <view class="card" wx:if="{{!showWrongOnly || item.wrong}}" bindtap="openDetail" data-id="{{item.id}}">
+        <view class="row space-between">
+          <view>{{item.title}}</view>
+          <view>
+            <text class="icon {{item.isBestCorrect ? 'icon-check' : 'icon-cross'}}">{{item.isBestCorrect ? '✓' : '✗'}}</text>
+            <text class="icon ml-12 {{item.isWorstCorrect ? 'icon-check' : 'icon-cross'}}">{{item.isWorstCorrect ? '✓' : '✗'}}</text>
+          </view>
+        </view>
+        <view wx:if="{{item.wrong}}" class="mt-12 worst">答错高亮</view>
+      </view>
+    </block>
+  </scroll-view>
+</view>

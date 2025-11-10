@@ -1,0 +1,38 @@
+<view class="page">
+  <!-- 阶段0：选模式 -->
+  <view class="card" wx:if="{{phase === 'mode'}}">
+    <view class="h2">选择挑战模式</view>
+    <view class="row space-between mt-24">
+      <button class="btn" bindtap="startMode" data-mode="sequence">▷ 按序挑战</button>
+      <button class="btn-secondary" bindtap="startMode" data-mode="random">🔀 随机挑战</button>
+    </view>
+    <view class="muted mt-16">挑战过程中不提供反馈，完成后进入战报与复盘。</view>
+  </view>
+
+  <!-- 阶段1：答题 -->
+  <view class="card" wx:if="{{phase === 'answer'}}">
+    <view class="row space-between">
+      <view class="h2">{{elapsed}}</view>
+      <view>进度：{{currentIndex + 1}} / {{order.length}}</view>
+    </view>
+    <view class="row space-between mt-16">
+      <view class="h2">{{resolve(question.title)}}</view>
+      <button class="btn-ghost" wx:if="{{isBilingual}}" bindtap="switchLang">[中/EN]</button>
+    </view>
+    <view class="divider mt-16"></view>
+    <block wx:for="{{question.options}}" wx:key="id">
+      <view class="mt-16 option-card">
+        <view class="row space-between">
+          <view>{{resolve(item.text)}}</view>
+          <view class="row">
+            <button class="btn-ghost" data-id="{{item.id}}" bindtap="pickBest">(★)</button>
+            <button class="btn-ghost ml-12" data-id="{{item.id}}" bindtap="pickWorst">(👎)</button>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view class="row space-between mt-24">
+      <button class="btn" bindtap="next">{{currentIndex + 1 === order.length ? '完成答题' : '下一题'}}</button>
+    </view>
+  </view>
+</view>

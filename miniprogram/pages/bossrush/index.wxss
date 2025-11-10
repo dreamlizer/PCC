@@ -1,0 +1,3 @@
+/* pages/bossrush/index.wxss */
+.option-card { padding: 16rpx; border-radius: 8rpx; background: #fff; }
+.ml-12 { margin-left: 12rpx; }

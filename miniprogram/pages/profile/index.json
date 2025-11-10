@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "theme-drawer": "/components/themeDrawer/index"
+  },
+  "navigationBarTitleText": "个人中心"
+}

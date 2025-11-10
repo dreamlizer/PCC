@@ -1,0 +1,18 @@
+<view class="page" style="background: {{theme.pageBg}};">
+  <view class="hero" style="background: linear-gradient(135deg, {{theme.heroFrom}} 0%, {{theme.heroTo}} 100%);">
+    <view class="h1">{{title}}</view>
+    <view class="sub">邪修还是正道？</view>
+  </view>
+
+  <scroll-view scroll-y style="height: calc(100vh - 220rpx);">
+    <block wx:for="{{sections}}" wx:key="index">
+      <view class="card card-tight" style="border-left-color: {{theme.cardBorder}};">
+        <view class="row">
+          <view class="title">{{item.title}}</view>
+        </view>
+        <view class="text">{{item.text}}</view>
+      </view>
+    </block>
+    <view style="height: 140rpx;"></view>
+  </scroll-view>
+</view>

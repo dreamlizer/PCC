@@ -1,0 +1,14 @@
+<view class="page">
+  <view class="card">
+    <view class="h2">战报</view>
+    <view class="mt-16">模式：{{mode === 'sequence' ? '按序挑战' : '随机挑战'}}</view>
+    <view class="mt-12">总得分：{{score}}%</view>
+    <view class="mt-12">最佳正确率：{{bestRate}}%</view>
+    <view class="mt-12">最差正确率：{{worstRate}}%</view>
+    <view class="mt-12">用时：{{duration}}</view>
+    <view class="row space-between mt-24">
+      <button class="btn-ghost" bindtap="exit">退出</button>
+      <button class="btn" bindtap="gotoReview">🚀 逐题复盘</button>
+    </view>
+  </view>
+</view>

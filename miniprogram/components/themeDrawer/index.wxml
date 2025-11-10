@@ -1,0 +1,14 @@
+<view wx:if="{{visible}}" class="drawer-mask" bindtap="close">
+  <view class="drawer" catchtap="noop">
+    <view class="drawer-header">选择主题配色</view>
+    <block wx:for="{{themes}}" wx:key="id">
+      <view class="theme-row" bindtap="select" data-id="{{item.id}}">
+        <view class="theme-chip" style="background: linear-gradient(135deg, {{item.heroFrom}} 0%, {{item.heroTo}} 100%);"></view>
+        <view class="theme-name">{{item.name}}</view>
+        <view class="theme-check" wx:if="{{activeId === item.id}}">✓</view>
+      </view>
+      <view class="divider"></view>
+    </block>
+    <button class="btn-close" bindtap="close">关闭</button>
+  </view>
+</view>
