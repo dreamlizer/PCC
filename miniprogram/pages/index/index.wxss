@@ -1,142 +1,211 @@
-/**index.wxss**/
-
 page {
-  padding-top: 54rpx;
-  background-color: #f6f6f6;
-  padding-bottom: 60rpx;
+  background: #ffffff; /* 页面底色（一般被 .page 覆盖，兜底用） */
 }
 
-.container {
-  font-family: PingFang SC;
+.page {
+  width: 100%; /* 适配全宽 */
+  height: 100vh; /* 全屏高度（避免内容不足时露底） */
+  background: #e6e9f0; /* 外层背景灰（整体基调） */
+  display: flex; /* 用于让 viewport 居中 */
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  overflow: hidden; /* 防止背景装饰溢出出现滚动条 */
+}
+
+.viewport {
+  width: 100%; /* 内容视口宽度（想留边可改 92% 等） */
+  height: 100%; /* 内容视口高度 */
+  background: #ffffff; /* 视口底色 */
+  display: flex; /* 内部纵向布局 */
+  flex-direction: column; /* 上下排列：main + footer */
+  position: relative; /* 给 footer/bg 装饰的绝对定位当参照 */
+  overflow: hidden; /* 裁切圆形/波浪装饰，避免超出 */
+}
+
+.main {
+  flex: 1; /* 占满除 footer 外的剩余高度 */
+  display: flex; /* 让主内容可垂直居中 */
+  flex-direction: column; /* 标题/副标题/按钮纵向排列 */
+  justify-content: center; /* 主内容整体垂直居中（想靠上可改 flex-start） */
+  align-items: center; /* 主内容水平居中 */
+  text-align: center; /* 文字居中 */
+  position: relative; /* 作为 main 内部装饰层的定位参照 */
+  padding: 30rpx 24rpx 180rpx; /* 留白(上/左右/下)：下值给按钮区+底部波浪预留 */
+  background: radial-gradient(circle at 50% 40%, #ffffff 0%, #eef2f8 100%); /* 主区背景：中心亮、边缘微灰 */
+}
+
+.content {
+  width: 100%; /* 内容区全宽，方便按钮按宽度对齐 */
+  display: flex; /* 纵向排布 */
+  flex-direction: column; /* 标题/按钮组纵向 */
+  align-items: center; /* 内容整体居中 */
+  position: relative; /* 让 z-index 生效 */
+  z-index: 1; /* 盖在背景装饰之上，避免被遮挡 */
+}
+
+.accent-line {
+  width: 88rpx; /* 标题上方金色短横线长度 */
+  height: 10rpx; /* 短横线厚度 */
+  background: var(--icf-gold, #ffbf3f); /* 点缀色（跟主题金一致） */
+  margin-bottom: 48rpx; /* 与标题的间距 */
+  border-radius: 999rpx; /* 胶囊圆角 */
+  box-shadow: 0 4rpx 8rpx rgba(255, 191, 63, 0.3); /* 轻微发光 */
 }
 
 .title {
-  font-family: PingFang SC;
-  font-weight: 500;
-  color: #000000;
-  font-size: 44rpx;
-  margin-bottom: 40rpx;
-}
-.function_title {
-  font-family: PingFang SC;
-  font-weight: 500;
-  color: #000000;
-  font-size: 36rpx;
-  text-align: left;
-  width: 93%;
-  margin-top: 50rpx;
+  font-size: 96rpx; /* 主标题字号（整体最显眼的地方） */
+  font-weight: 800; /* 粗体增加“牌面” */
+  color: #060e9f; /* 主蓝色 */
+  line-height: 1.15; /* 行高（两行标题时更紧凑） */
+  letter-spacing: -1rpx; /* 微收紧字距，显得更利落 */
+  text-shadow: 0 4rpx 8rpx rgba(6, 14, 159, 0.05); /* 极轻阴影增加层次 */
 }
 
-.top_tip {
-  font-size: 28rpx;
-  font-family: PingFang SC;
-  font-weight: 400;
-  color: #888888;
-  margin-bottom: 28rpx;
+.br {
+  white-space: pre; /* 允许标题里用换行/空格做排版 */
 }
 
-.examples_container {
-  display: flex;
-  flex-direction: column;
-  gap: 16rpx;
-  width: 100%;
-  align-items: center;
+.sub-title {
+  margin-top: 20rpx; /* 与主标题的间距 */
+  font-size: 22rpx; /* 副标题字号（小一档） */
+  color: #555; /* 副标题颜色（弱化） */
+  letter-spacing: 4rpx; /* 字距拉开，偏“标语感” */
+  font-weight: 700; /* 稍粗，增强可读性 */
+  text-transform: uppercase; /* 英文时强制大写（风格一致） */
+  margin-bottom: 80rpx; /* 与按钮组的间距 */
 }
 
-.example_item {
-  border: 3rpx solid #e5e5e5;
-  border-radius: 10rpx;
-  padding: 24rpx;
-  width: 90%;
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.button-group {
+  width: 100%; /* 让按钮组以内容区宽度为基准 */
+  display: flex; /* 纵向排列按钮 */
+  flex-direction: column; /* 上下堆叠 */
+  align-items: center; /* 按钮整体居中 */
+  gap: 28rpx; /* 按钮垂直间距（越大越松） */
 }
 
-.power {
-  margin-top: 30rpx;
-  border-radius: 5px;
-  background-color: white;
-  width: 93%;
-  padding-bottom: 1rpx;
+.icf-btn {
+  font-weight: 700; /* 按钮文字粗细 */
+  font-size: 34rpx; /* 按钮字号（影响“按钮高度感”） */
+  width: 460rpx; /* 按钮宽度（想更紧凑可改 420rpx） */
+  padding: 22rpx 0; /* 按钮高度（主要靠上下 padding 撑开） */
+  border-radius: 999rpx; /* 胶囊按钮（越大越圆） */
+  letter-spacing: 1rpx; /* 文字微分散更“稳” */
+  border: 4rpx solid transparent; /* 预留描边宽度，避免不同按钮高度跳变 */
+  display: flex; /* 让文字垂直居中 */
+  justify-content: center; /* 文字水平居中 */
+  align-items: center; /* 文字垂直居中 */
+  box-sizing: border-box; /* border 不额外撑大宽度 */
 }
 
-.power_info {
-  display: flex;
-  padding: 30rpx 25rpx;
-  align-items: center;
-  justify-content: space-between;
+.icf-btn:active {
+  transform: scale(0.97); /* 按下反馈：轻微缩小 */
 }
 
-.power_info_more {
-  width: 30rpx;
-  height: 30rpx;
-  transform: rotate(90deg);
+.icf-btn.btn-primary {
+  background: #060e9f; /* 主按钮背景色 */
+  color: #ffffff; /* 主按钮文字色 */
+  border-color: #060e9f; /* 主按钮描边色（与背景一致） */
+  box-shadow: 0 20rpx 50rpx -10rpx rgba(6, 14, 159, 0.4); /* 主按钮投影（突出主操作） */
 }
 
-.power_info_less {
-  width: 30rpx;
-  height: 30rpx;
-  transform: rotate(270deg);
+.icf-btn.btn-outline {
+  background: transparent; /* 描边按钮背景透明 */
+  color: #060e9f; /* 描边按钮文字色 */
+  border-color: #060e9f; /* 描边颜色 */
+  font-weight: 600; /* 比主按钮稍轻一点 */
 }
 
-.power_info_text {
-  display: flex;
-  flex-direction: column;
+.icf-btn.btn-outline:active {
+  background: rgba(6, 14, 159, 0.08); /* 描边按钮按下底色 */
 }
 
-.power_info_text_title {
-  margin-bottom: 10rpx;
-  font-weight: 400;
-  font-size: 32rpx;
-  display: flex;
-  align-items: center;
-  font-family: 'PingFang SC';
-  color: #000;
+.icf-btn.btn-ghost {
+  background: transparent; /* 幽灵按钮背景透明 */
+  color: #777; /* 幽灵按钮文字色（更弱） */
+  font-weight: 600; /* 字重稍高，避免太飘 */
+  font-size: 26rpx; /* 幽灵按钮字号（小一档） */
+  border: none; /* 幽灵按钮无描边 */
+  width: auto; /* 宽度跟随内容 */
+  padding: 16rpx 40rpx; /* 点击热区（左右越大越好点） */
+  box-shadow: none; /* 去掉投影，保持低优先级 */
 }
 
-.power_info_text_tag {
-  margin-left: 20rpx;
-  background-color: #fbe0e0;
-  color: #e54545;
-  padding: 0 7px;
-  font-size: 14px;
-  vertical-align: middle;
-  border-radius: 3px;
+.icf-btn.btn-ghost:active {
+  color: #060e9f; /* 幽灵按钮按下时变主色，提示可点 */
 }
 
-.power_info_text_tip {
-  color: rgba(0, 0, 0, 0.6);
-  font-size: 28rpx;
-  padding-right: 30rpx;
+.footer {
+  position: absolute; /* 固定在底部（不占 main 高度） */
+  left: 0; /* 撑满宽 */
+  right: 0; /* 撑满宽 */
+  bottom: 0; /* 贴底 */
+  padding: 48rpx 24rpx calc(48rpx + env(safe-area-inset-bottom)); /* 内边距(上/左右/下)：下值自动兼容安全区 */
+  text-align: center; /* 文案居中 */
+  z-index: 2; /* 盖过底部背景波浪，避免文字被遮 */
 }
 
-.power_item {
-  padding: 30rpx 25rpx;
-  display: flex;
-  justify-content: space-between;
+.footer-text {
+  font-size: 20rpx; /* 页脚文字大小 */
+  color: rgba(255, 255, 255, 0.72); /* 页脚文字颜色（压低存在感） */
+  font-weight: 500; /* 适中粗细 */
+  letter-spacing: 1rpx; /* 字距略开更清晰 */
 }
 
-.power_item_title {
-  font-size: 28rpx;
-  color: rgba(0, 0, 0, 0.9);
+.bg-shape-top {
+  position: absolute; /* 纯装饰，不参与布局 */
+  width: 640rpx; /* 装饰圆尺寸（越大越“包裹”） */
+  height: 640rpx; /* 装饰圆尺寸 */
+  border-radius: 50%; /* 圆形 */
+  background: linear-gradient(135deg, rgba(6, 14, 159, 0.08) 0%, rgba(255, 255, 255, 0) 70%); /* 蓝→透明渐变 */
+  top: -220rpx; /* 向上偏移，露出一角 */
+  right: -220rpx; /* 向右偏移，露出一角 */
+  z-index: 0; /* 在内容后面 */
 }
 
-.power_item_icon {
-  width: 30rpx;
-  height: 30rpx;
+.bg-shape-bottom {
+  position: absolute; /* 底部装饰容器 */
+  left: 0; /* 撑满宽 */
+  right: 0; /* 撑满宽 */
+  bottom: 0; /* 贴底 */
+  height: 520rpx; /* 底部装饰高度（越大波浪越明显） */
+  overflow: hidden; /* 裁切超出部分 */
+  z-index: 0; /* 在内容后面 */
+  pointer-events: none; /* 不挡住点击（重要） */
 }
 
-.line {
-  width: 95%;
-  margin: 0 auto;
-  height: 2rpx;
-  background-color: rgba(0, 0, 0, 0.1);
+.bg-shape-bottom::before {
+  content: '';
+  position: absolute;
+  width: 200%; /* 拉宽让弧线更平滑 */
+  height: 980rpx; /* 半圆高度 */
+  left: -60%; /* 横向偏移决定弧线中心 */
+  bottom: -760rpx; /* 纵向偏移决定露出高度 */
+  border-radius: 50%;
+  background: linear-gradient(180deg, #0b1aa8 0%, #040b64 100%);
+  transform: rotate(-6deg);
 }
 
-.environment {
-  color: rgba(0, 0, 0, 0.4);
-  font-size: 24rpx;
-  margin-top: 25%;
+.bg-shape-bottom::after {
+  content: '';
+  position: absolute;
+  width: 210%; /* 第二层更宽一点，制造层次 */
+  height: 980rpx; /* 半圆高度 */
+  left: -68%; /* 横向偏移（与 before 错开） */
+  bottom: -800rpx; /* 纵向偏移（与 before 错开） */
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  transform: rotate(-10deg);
+}
+
+.bg-wave-gold {
+  position: absolute; /* 金色波浪装饰 */
+  width: 220%; /* 拉宽避免边缘断裂 */
+  height: 760rpx; /* 波浪高度 */
+  left: -70%; /* 横向偏移 */
+  bottom: -700rpx; /* 纵向偏移：控制露出高度 */
+  border-radius: 50%; /* 半圆弧 */
+  background: linear-gradient(90deg, var(--icf-gold, #ffbf3f) 0%, #ffd36a 55%, #f6b233 100%); /* 金色渐变（装饰强调） */
+  transform: rotate(-12deg); /* 倾斜角度，避免太“正” */
+  z-index: 1; /* 盖在蓝色底波浪上，但在文字下面（footer z-index 更高） */
+  pointer-events: none; /* 不挡住点击 */
 }

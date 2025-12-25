@@ -1,0 +1,6 @@
+<view class="page {{fadeClass}}">
+  <view class="card">
+    <view class="h1">八项教练能力</view>
+    <view class="muted mt-12">页面预留中，后续将补充内容。</view>
+  </view>
+</view>

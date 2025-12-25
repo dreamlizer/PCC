@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "header-bar": "/components/headerBar/index"
+  },
   "navigationBarTitleText": "题目详情"
 }

@@ -1,2 +1,92 @@
 /* pages/profile/favorites.wxss */
-.list-star { width: 32rpx; height: 32rpx; display: block; }
+/* 复用 Hero 样式 */
+.hero {
+  padding: 40rpx 32rpx 24rpx;
+  background: linear-gradient(135deg, #1F2A44 0%, #2FB3A9 100%);
+  color: #fff;
+}
+.hero .h1 {
+  font-size: var(--font-xl);
+  font-weight: 700;
+  letter-spacing: 1rpx;
+}
+.hero .sub {
+  margin-top: 12rpx;
+  opacity: 0.9;
+}
+
+/* 列表卡片优化 (复用 practice/index.wxss) */
+.question-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  margin: 16rpx 24rpx;
+  
+  min-height: 80rpx;
+  padding: 24rpx 32rpx;
+
+  border-radius: var(--radius-tight, 10rpx);
+  background: #fff;
+  border: 1rpx solid rgba(0,0,0,0.03);
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.04);
+  overflow: hidden;
+}
+
+.question-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: var(--qbar-width, 8rpx);
+  background: currentColor;
+  opacity: 0.15;
+  border-top-right-radius: var(--radius-tight, 10rpx);
+  border-bottom-right-radius: var(--radius-tight, 10rpx);
+}
+
+.question-card:active {
+  transform: scale(0.99);
+  background: #FAFAFA;
+}
+
+.q-number {
+  font-family: 'Times New Roman', Georgia, 'Noto Serif SC', 'Noto Serif CJK SC', 'Source Han Serif SC', 'Songti SC', 'STSong', SimSun, serif;
+  font-weight: 800;
+  font-size: 30rpx;
+  color: #111;
+  letter-spacing: 0.5rpx;
+}
+
+.list-star {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 16rpx;
+}
+
+.chevron {
+  width: 14rpx;
+  height: 14rpx;
+  border-top: 4rpx solid #BDC3C7;
+  border-right: 4rpx solid #BDC3C7;
+  transform: rotate(45deg);
+  opacity: 0.6;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.muted {
+  text-align: center;
+  margin-top: 48rpx;
+  color: #95A5A6;
+  font-size: 26rpx;
+}

@@ -1,0 +1,5 @@
+page { background: #F7F7F7; }
+.page { padding: 24rpx; }
+.card { background: #fff; border-radius: 16rpx; padding: 24rpx; box-shadow: 0 10rpx 24rpx rgba(0,0,0,0.06); }
+.h1 { font-size: 44rpx; font-weight: 800; color: #060e9f; }
+.muted { color: rgba(0,0,0,0.55); font-size: 28rpx; line-height: 1.6; }

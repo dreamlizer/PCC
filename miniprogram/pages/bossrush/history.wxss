@@ -1,0 +1,112 @@
+/* pages/bossrush/history.wxss */
+/* 列表容器 - 玻璃拟态风格 */
+.history-list {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 24rpx;
+  margin: 24rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.05);
+  border: 1rpx solid rgba(255, 255, 255, 0.6);
+  overflow: hidden;
+}
+
+/* 单条记录 */
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32rpx;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.03);
+  transition: background 0.2s;
+  position: relative;
+}
+
+.history-item:last-child {
+  border-bottom: none;
+}
+
+.history-item:active {
+  background: #F5F7FA;
+}
+
+/* 左侧信息区 */
+.item-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.mode-badge {
+  display: inline-flex;
+  align-self: flex-start;
+  font-size: 22rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  font-weight: 600;
+  letter-spacing: 1rpx;
+}
+
+.mode-seq {
+  background: rgba(47, 179, 169, 0.1);
+  color: #2FB3A9;
+}
+
+.mode-random {
+  background: rgba(255, 159, 67, 0.1);
+  color: #FF9F43;
+}
+
+.score-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12rpx;
+}
+
+.score-val {
+  font-size: 44rpx;
+  font-weight: 800;
+  color: #2C3E50;
+  line-height: 1;
+}
+
+.score-unit {
+  font-size: 24rpx;
+  color: #95A5A6;
+}
+
+.meta-info {
+  font-size: 24rpx;
+  color: #95A5A6;
+  margin-top: 4rpx;
+  display: flex;
+  gap: 16rpx;
+}
+
+/* 右侧操作区 */
+.item-right {
+  display: flex;
+  align-items: center;
+}
+
+.btn-review {
+  font-size: 26rpx;
+  padding: 12rpx 28rpx;
+  border-radius: 32rpx;
+  background: #fff;
+  color: #2FB3A9;
+  border: 1rpx solid #2FB3A9;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-review:active {
+  background: #2FB3A9;
+  color: #fff;
+}
+
+/* 空状态 */
+.empty-state {
+  padding: 80rpx 0;
+  text-align: center;
+  color: #95A5A6;
+  font-size: 28rpx;
+}

@@ -1,1 +1,92 @@
 /* pages/bossrush/review.wxss */
+/* 列表卡片优化 */
+.question-card {
+  position: relative;
+  display: flex;
+  align-items: center; /* 垂直居中 */
+  justify-content: space-between;
+  
+  margin: 20rpx 24rpx;
+  padding: 32rpx;
+  
+  border-radius: 20rpx;
+  background: #fff;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.04);
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.question-card:active {
+  transform: scale(0.99);
+  background: #FAFAFA;
+}
+
+/* 内容区 */
+.card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 标题 */
+.title {
+  font-size: 30rpx;
+  color: #2C3E50;
+  font-weight: 600;
+  margin-bottom: 16rpx;
+  line-height: 1.4;
+}
+
+/* 状态行 */
+.status-row {
+  display: flex;
+  align-items: center;
+}
+
+/* 徽章基础样式 */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  
+  font-size: 22rpx;
+  font-weight: 600;
+  padding: 6rpx 16rpx;
+  border-radius: 8rpx;
+  
+  transition: all 0.2s;
+}
+
+/* 完美徽章 (金/绿) */
+.badge-perfect {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  color: #fff;
+  box-shadow: 0 2rpx 8rpx rgba(255, 165, 0, 0.3);
+  padding: 8rpx 20rpx;
+}
+
+/* 成功徽章 (绿) */
+.badge-success {
+  background: rgba(46, 204, 113, 0.1);
+  color: #27ae60;
+  border: 1rpx solid rgba(46, 204, 113, 0.2);
+}
+
+/* 错误徽章 (红) */
+.badge-error {
+  background: rgba(231, 76, 60, 0.1);
+  color: #c0392b;
+  border: 1rpx solid rgba(231, 76, 60, 0.2);
+}
+
+/* 右侧箭头 */
+.chevron {
+  width: 12rpx;
+  height: 12rpx;
+  border-top: 4rpx solid #E0E0E0;
+  border-right: 4rpx solid #E0E0E0;
+  transform: rotate(45deg);
+  margin-left: 24rpx;
+  flex-shrink: 0;
+}
+
+.ml-12 { margin-left: 12rpx; }

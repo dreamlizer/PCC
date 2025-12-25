@@ -1,15 +1,22 @@
-<view class="page">
-  <view class="card">
-    <view class="h2">逐题解析</view>
-    <view class="muted">按题号(number)排列，黄色星星代表已收藏</view>
-  </view>
+<view class="page {{fadeClass}} {{fontScaleClass}}" style="background: {{theme.pageBg}};">
+  <hero-header theme="{{theme}}" title="逐题解析" subtitle="按题号(number)排列，黄色星星代表已收藏" />
 
   <scroll-view scroll-y style="height: calc(100vh - 240rpx);">
     <block wx:for="{{list}}" wx:key="id">
-      <view class="card" bindtap="openDetail" data-id="{{item.id}}">
+      <view
+        class="card question-card {{item.favored ? 'is-favored' : ''}}"
+        bindtap="openDetail"
+        data-id="{{item.id}}"
+      >
+        <view class="q-bar"></view>
         <view class="row space-between">
-          <view>题目 {{item.number}}</view>
-          <image wx:if="{{item.favored}}" class="list-star" src="/images/icons/favorite-on.svg" mode="aspectFit"></image>
+          <view class="q-content">
+            <view class="q-number"># {{item.number}}</view>
+          </view>
+          <view class="row">
+            <image wx:if="{{item.favored}}" class="list-star" src="/images/icons/favorite-on.svg" mode="aspectFit"></image>
+            <view class="chevron"></view>
+          </view>
         </view>
       </view>
     </block>

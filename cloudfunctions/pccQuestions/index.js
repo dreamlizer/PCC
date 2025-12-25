@@ -19,11 +19,20 @@ function normalize(list) {
       analyses: q.analyses,
     };
   });
-  // 若存在 number 字段则按 number 升序排序
+  // 排序：提取题号中的数字部分进行升序；无法解析数字时按字符串比较
+  const extractNum = (val) => {
+    const m = String(val == null ? '' : val).match(/\d+/);
+    return m ? parseInt(m[0], 10) : NaN;
+  };
   mapped.sort((a, b) => {
-    const an = a.number != null ? parseInt(String(a.number), 10) : Number.POSITIVE_INFINITY;
-    const bn = b.number != null ? parseInt(String(b.number), 10) : Number.POSITIVE_INFINITY;
-    return an - bn;
+    const an = extractNum(a.number);
+    const bn = extractNum(b.number);
+    const aStr = String(a.number != null ? a.number : a.id);
+    const bStr = String(b.number != null ? b.number : b.id);
+    if (!isNaN(an) && !isNaN(bn)) return an - bn;
+    if (!isNaN(an)) return -1;
+    if (!isNaN(bn)) return 1;
+    return aStr.localeCompare(bStr);
   });
   return mapped;
 }

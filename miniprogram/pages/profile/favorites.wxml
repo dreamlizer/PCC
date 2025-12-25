@@ -1,15 +1,25 @@
-<view class="page">
-  <view class="card">
-    <view class="h2">我的收藏</view>
+<view class="page {{fadeClass}} {{fontScaleClass}}">
+  <view class="hero" style="background: linear-gradient(135deg, {{theme.heroFrom}} 0%, {{theme.heroTo}} 100%);">
+    <view class="h1">我的收藏</view>
+    <view class="sub">My Favorites</view>
   </view>
+
   <scroll-view scroll-y style="height: calc(100vh - 240rpx);">
     <block wx:for="{{list}}" wx:key="id">
-      <view class="card" bindtap="openDetail" data-id="{{item.id}}">
+      <view class="card question-card" bindtap="openDetail" data-id="{{item.id}}" data-idx="{{index}}" style="color: {{theme.heroFrom}};">
         <view class="row space-between">
-          <view>{{item.title}}</view>
-          <image class="list-star" src="/images/icons/favorite-on.svg" mode="aspectFit"></image>
+          <view class="q-content">
+            <view class="q-number"># {{item.display}}</view>
+          </view>
+          <view class="row">
+            <image class="list-star" src="/images/icons/favorite-on.svg" mode="aspectFit"></image>
+            <view class="chevron"></view>
+          </view>
         </view>
       </view>
     </block>
+    <view wx:if="{{list.length === 0}}" class="muted">
+      暂无收藏题目
+    </view>
   </scroll-view>
 </view>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "挑战记录",
+  "usingComponents": {
+    "hero-header": "/components/heroHeader/index"
+  }
+}

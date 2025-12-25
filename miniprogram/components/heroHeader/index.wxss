@@ -1,0 +1,32 @@
+/* 统一的页面 Hero 头部组件：使用全局设计变量以保证一致性 */
+.hh {
+  padding: var(--hero-pad-top, 40rpx) var(--hero-pad-h, 32rpx) var(--hero-pad-bottom, 24rpx);
+  color: #fff;
+  box-sizing: border-box;
+}
+.hh__row { display: flex; align-items: center; justify-content: space-between; gap: 16rpx; }
+.hh__title { font-size: var(--font-hero, 40rpx); font-weight: 700; color: #fff; letter-spacing: 1rpx; font-family: var(--font-serif, 'Times New Roman', Georgia, 'Noto Serif SC', 'Noto Serif CJK SC', 'Source Han Serif SC', 'Songti SC', 'STSong', SimSun, serif); }
+.hh__accent {
+  width: 88rpx;
+  height: 10rpx;
+  background: linear-gradient(90deg, var(--accent-from, var(--icf-gold, #ffbf3f)) 0%, var(--accent-to, #ffd36a) 100%);
+  margin-top: 18rpx;
+  border-radius: 999rpx;
+  box-shadow: 0 10rpx 22rpx var(--accent-shadow, rgba(0, 0, 0, 0.12));
+}
+.hh__sub { margin-top: 12rpx; opacity: 0.9; color: #fff; font-size: var(--font-sm, 24rpx); }
+.hh__right {
+  height: 64rpx;
+  padding: 0 22rpx;
+  border-radius: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-sm, 24rpx);
+  font-weight: 600;
+  color: #fff;
+  border: 1rpx solid rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(4px);
+}
+.hh__right.is-disabled { opacity: 0.5; }

@@ -1,0 +1,18 @@
+<view class="hb" style="background: linear-gradient(135deg, {{theme.heroFrom}} 0%, {{theme.heroTo}} 100%);">
+  <view class="hb__left">
+    <text class="hb__label">{{leftText}}</text>
+  </view>
+  <view class="hb__right">
+    <view wx:if="{{showStar}}" class="hb__icon-box" bindtap="onStarTap">
+      <image class="hb__icon" src="/images/icons/{{favoriteOn ? 'favorite-on' : 'favorite-off-white'}}.svg" mode="aspectFit"></image>
+    </view>
+
+    <view wx:if="{{showLang}}" class="hb__btn {{langDisabled ? 'is-disabled' : ''}}" bindtap="onLangTap">
+      <text>{{langText}}</text>
+    </view>
+
+    <view wx:if="{{showStop}}" class="hb__btn" bindtap="onStopTap">
+      <text>{{stopText}}</text>
+    </view>
+  </view>
+</view>

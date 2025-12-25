@@ -1,0 +1,13 @@
+<view
+  class="hh"
+  style="background: linear-gradient(135deg, {{theme.heroFrom}} 0%, {{theme.heroTo}} 100%); --accent-from: {{theme.accentFrom}}; --accent-to: {{theme.accentTo}}; --accent-shadow: {{theme.accentShadow}};"
+>
+  <view class="hh__row">
+    <view class="hh__title">{{title}}</view>
+    <view wx:if="{{rightText}}" class="hh__right {{rightDisabled ? 'is-disabled' : ''}}" bindtap="onRightTap">
+      <text>{{rightText}}</text>
+    </view>
+  </view>
+  <view wx:if="{{showAccent}}" class="hh__accent"></view>
+  <view wx:if="{{subtitle}}" class="hh__sub">{{subtitle}}</view>
+</view>

@@ -2,7 +2,7 @@
 // 需要准备：
 // 1) 在微信公众平台开发者工具中导出项目私钥文件（*.key），将路径配置到 PRIVATE_KEY_PATH
 // 2) 确保当前账号对云环境 cloud1-8gay4zt288916e1c 有“云开发管理员”权限
-// 3) 已在云开发控制台预先创建 pccFramework / pccQuestions 两个云函数
+// 3) 已在云开发控制台预先创建 pccQuestions 云函数
 
 const path = require('path');
 const ci = require('miniprogram-ci');
@@ -23,10 +23,6 @@ async function main() {
   });
 
   const functions = [
-    {
-      name: 'pccFramework',
-      dir: path.resolve(PROJECT_PATH, 'cloudfunctions/pccFramework'),
-    },
     {
       name: 'pccQuestions',
       dir: path.resolve(PROJECT_PATH, 'cloudfunctions/pccQuestions'),

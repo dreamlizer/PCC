@@ -1,7 +1,7 @@
 page {
   background-color: white;
   padding-bottom: 50px;
-  font-family: PingFang SC;
+  font-family: 'Times New Roman', Georgia, 'Noto Serif SC', 'Noto Serif CJK SC', 'Source Han Serif SC', 'Songti SC', 'STSong', SimSun, serif;
 }
 
 .page-container {

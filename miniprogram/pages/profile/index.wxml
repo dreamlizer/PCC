@@ -1,39 +1,35 @@
-<view class="page" style="background: {{theme.pageBg}};">
-  <view class="hero" style="background: linear-gradient(135deg, {{theme.heroFrom}} 0%, {{theme.heroTo}} 100%);">
-    <view class="h1">个人中心</view>
-  </view>
-  <view class="card card--split">
-    <view class="row-split">
-      <view class="h2 left nowrap">挑战记录</view>
-      <view class="actions"><button class="btn-ghost" bindtap="openReview">查看</button></view>
-    </view>
-    <block wx:for="{{history}}" wx:key="timestamp">
-      <view class="mt-16 row space-between" bindtap="openReview" data-idx="{{index}}">
-        <view>
-          <view>模式：{{item.mode === 'sequence' ? '按序' : '随机'}}</view>
-          <view class="muted">用时：{{item.duration}}</view>
-        </view>
-        <view>
-          <view>得分：{{item.score}}%</view>
-          <view class="muted">正确：{{item.correct_count}} / {{item.total_count}}</view>
-        </view>
-      </view>
-      <view class="divider"></view>
-    </block>
-  </view>
+<view class="page {{fadeClass}} {{fontScaleClass}}" style="background: {{theme.pageBg}};">
+  <hero-header theme="{{theme}}" title="个人中心" subtitle="设置与管理" />
 
-  <view class="card card--split mt-24">
-    <view class="row-split">
-      <view class="h2 left nowrap">收藏的题目（共 {{favoritesCount}} 题）</view>
-      <view class="actions"><button class="btn-ghost" bindtap="openFavorites">查看</button></view>
+  <view class="menu-list" style="box-shadow: 0 8rpx 24rpx -6rpx {{theme.heroFrom}}33; --accent-from: {{theme.accentFrom}}; --accent-to: {{theme.accentTo}}; --accent-shadow: {{theme.accentShadow}};">
+    <!-- 挑战记录 -->
+    <view class="menu-item" bindtap="openReview" hover-class="none">
+      <view class="menu-content">挑战记录</view>
+      <view class="menu-extra">共 {{history.length}} 次</view>
+      <view class="chevron"></view>
+    </view>
+    
+    <!-- 收藏题目 -->
+    <view class="menu-item" bindtap="openFavorites" hover-class="none">
+      <view class="menu-content">收藏的题目</view>
+      <view class="menu-extra">共 {{favoritesCount}} 题</view>
+      <view class="chevron"></view>
+    </view>
+
+    <!-- 主题配色 -->
+    <view class="menu-item" bindtap="openDrawer" hover-class="none">
+      <view class="menu-content">主题配色</view>
+      <view class="menu-extra" style="color: {{theme.heroFrom}};">{{theme.name}}</view>
+      <view class="chevron"></view>
     </view>
   </view>
 
-  <view class="card card--split mt-24" style="border-left-color: {{theme.cardBorder}};">
-    <view class="row-split">
-      <view class="h2 left nowrap">主题配色</view>
-      <view class="actions"><button class="btn-ghost" bindtap="openDrawer">选择</button></view>
-    </view>
+  <view class="font-label" style="border-left-color: {{theme.heroFrom}};">字体大小</view>
+  <view class="font-control">
+    <view class="font-segment {{fontScale === 1 ? 'active' : ''}}" data-scale="1" bindtap="onFontTap">小</view>
+    <view class="font-segment {{fontScale === 2 ? 'active' : ''}}" data-scale="2" bindtap="onFontTap">标准</view>
+    <view class="font-segment {{fontScale === 3 ? 'active' : ''}}" data-scale="3" bindtap="onFontTap">大</view>
+    <view class="font-segment {{fontScale === 4 ? 'active' : ''}}" data-scale="4" bindtap="onFontTap">特大</view>
   </view>
 
   <theme-drawer visible="{{drawerVisible}}" themes="{{themes}}" active-id="{{themeId}}" bindselect="onSelectTheme" bindclose="onCloseDrawer" />

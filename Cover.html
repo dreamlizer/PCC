@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>PCC 模拟试题</title>
+    
+    <!-- 引入 ICF 官方常用字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* ICF 官方品牌色 */
+            --icf-blue: #060E9F;
+            --icf-gold: #FFBF3F;
+            --icf-grey: #F4F4F4;
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #e6e9f0; /* 浏览器背景加深，突出中间卡片 */
+            color: var(--icf-blue);
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* 手机竖屏模拟容器 */
+        #mobile-viewport {
+            width: 100%;
+            height: 100%;
+            max-width: 430px;
+            background-color: var(--white);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 0 80px rgba(6, 14, 159, 0.15); /* 阴影带一点蓝调，更有质感 */
+            overflow: hidden;
+        }
+
+        /* 主要内容区域 */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* 背景渐变加重，从纯白过渡到非常浅的蓝灰色，增加厚重感 */
+            background: radial-gradient(circle at 50% 40%, #ffffff 0%, #eef2f8 100%);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 装饰性线条 - 稍微加粗一点点，颜色更正 */
+        .accent-line {
+            width: 44px;
+            height: 5px;
+            background-color: var(--icf-gold);
+            margin-bottom: 24px;
+            border-radius: 3px;
+            box-shadow: 0 2px 4px rgba(255, 191, 63, 0.3); /* 给金线加一点光晕 */
+        }
+
+        h1 {
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            font-size: 38px; /* 字体稍微大回来一点点，撑起气场 */
+            color: var(--icf-blue);
+            margin-bottom: 10px;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 4px rgba(6, 14, 159, 0.05); /* 文字微投影 */
+        }
+
+        .sub-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            color: #555; /* 颜色加深，不再是浅灰 */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            font-weight: 700; /* 字重增加 */
+        }
+
+        /* 按钮容器 */
+        .button-group {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px; /* 间距微调 */
+        }
+
+        /* 按钮通用样式 */
+        .icf-btn {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700; /* 加粗 */
+            font-size: 15px;
+            width: 230px;    /* 稍微宽一点点，更有份量 */
+            padding: 13px 0; 
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            border: 2px solid transparent; /* 边框加粗到2px */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* 主按钮：实心蓝 - 颜色加深 */
+        .icf-btn.btn-primary {
+            background-color: var(--icf-blue);
+            color: var(--white);
+            border-color: var(--icf-blue);
+            box-shadow: 0 10px 25px -5px rgba(6, 14, 159, 0.4); /* 投影加重 */
+        }
+
+        .icf-btn.btn-primary:active {
+            transform: scale(0.97);
+            background-color: #04097a; /* 按下时更深 */
+        }
+
+        /* 次级按钮：描边蓝 - 视觉加重 */
+        .icf-btn.btn-outline {
+            background-color: transparent;
+            color: var(--icf-blue);
+            /* 改为实色边框，不再半透明，增加重量感 */
+            border-color: var(--icf-blue); 
+            font-weight: 600;
+        }
+
+        .icf-btn.btn-outline:active {
+            background-color: rgba(6, 14, 159, 0.08);
+            transform: scale(0.97);
+        }
+        
+        /* 个人中心按钮 */
+        .icf-btn.btn-ghost {
+            background-color: transparent;
+            color: #777; /* 加深灰色 */
+            font-weight: 600;
+            font-size: 13px;
+            border: none;
+            width: auto;
+            padding: 8px 20px;
+            margin-top: 5px;
+            box-shadow: none;
+        }
+        
+        .icf-btn.btn-ghost:active {
+            color: var(--icf-blue);
+        }
+
+        /* 底部版权 */
+        footer {
+            padding: 24px;
+            text-align: center;
+            background-color: transparent;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            z-index: 2;
+        }
+        
+        .footer-text {
+            font-size: 10px;
+            color: #999; /* 加深 */
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* 背景装饰图形 - 增加不透明度，让颜色显现出来 */
+        .bg-shape-top {
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            /* 增加蓝色浓度 */
+            background: linear-gradient(135deg, rgba(6, 14, 159, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+            top: -110px;
+            right: -110px;
+            z-index: -1;
+        }
+        
+        .bg-shape-bottom {
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            /* 增加金色浓度 */
+            background: linear-gradient(315deg, rgba(255, 191, 63, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+            bottom: -60px;
+            left: -90px;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mobile-viewport">
+        <main>
+            <!-- 背景装饰 -->
+            <div class="bg-shape-top"></div>
+            <div class="bg-shape-bottom"></div>
+            
+            <!-- ICF 金色装饰线 -->
+            <div class="accent-line"></div>
+            
+            <!-- 核心文字 -->
+            <h1>PCC<br>模拟试题</h1>
+            <div class="sub-title">Professional Certified Coach</div>
+
+            <!-- 按钮组 -->
+            <div class="button-group">
+                <button class="icf-btn btn-primary" onclick="alert('进入模拟考试...')">模拟考试</button>
+                <button class="icf-btn btn-outline" onclick="alert('进入八项教练能力...')">八项教练能力</button>
+                <button class="icf-btn btn-outline" onclick="alert('进入逐题解析...')">逐题解析</button>
+                <button class="icf-btn btn-ghost" onclick="alert('进入个人中心...')">个人中心</button>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-text">&copy; 2025 International Coaching Federation</div>
+        </footer>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<view class="page {{fadeClass}} {{fontScaleClass}}" style="background: {{theme.pageBg}};">
+  <hero-header theme="{{theme}}" title="挑战记录" right-text="清空记录" bind:right="onClear" />
+
+  <view class="history-list">
+    <block wx:if="{{list.length === 0}}">
+      <view class="empty-state">暂无挑战记录</view>
+    </block>
+    <block wx:else>
+      <block wx:for="{{list}}" wx:key="timestamp" wx:for-index="index">
+        <view class="history-item">
+          <view class="item-left">
+            <view class="mode-badge {{item.mode === 'sequence' ? 'mode-seq' : 'mode-random'}}">
+              {{item.mode === 'sequence' ? '按序模式' : '随机挑战'}}
+            </view>
+            <view class="score-row">
+              <text class="score-val">{{item.score}}</text>
+              <text class="score-unit">%</text>
+            </view>
+            <view class="meta-info">
+              <text>用时 {{item.duration}}</text>
+              <text>·</text>
+              <text>正确 {{item.correct_count}}/{{item.total_count}}</text>
+            </view>
+          </view>
+          
+          <view class="item-right">
+             <!-- 仅最新的一条记录支持复盘 (因为 storage 仅存了一份 lastAnswers) -->
+             <view wx:if="{{index === 0}}" class="btn-review" bindtap="gotoReview">
+               复盘
+             </view>
+          </view>
+        </view>
+      </block>
+    </block>
+  </view>
+</view>

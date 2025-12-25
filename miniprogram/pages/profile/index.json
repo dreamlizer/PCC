@@ -1,5 +1,6 @@
 {
   "usingComponents": {
+    "hero-header": "/components/heroHeader/index",
     "theme-drawer": "/components/themeDrawer/index"
   },
   "navigationBarTitleText": "个人中心"

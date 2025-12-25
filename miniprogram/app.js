@@ -18,12 +18,12 @@ App({
       });
     }
 
-    // 集中初始化只读数据（框架 + 题库），统一 Promise 机制
+    // 集中初始化只读数据（题库），统一 Promise 机制
     const { initOnce } = require('./services/bootstrap');
     const { initUserDataIfNeeded } = require('./services/userData');
     const { getCurrentTheme } = require('./services/theme');
-    initOnce(this).then(({ framework, questions }) => {
-      console.log('数据加载完成', { frameworkSections: framework?.sections?.length || 0, questionCount: questions?.length || 0 });
+    initOnce(this).then(({ questions }) => {
+      console.log('数据加载完成', { questionCount: questions?.length || 0 });
     }).catch((e) => {
       console.error('数据加载失败', e);
     });

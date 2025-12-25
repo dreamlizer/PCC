@@ -1,14 +1,65 @@
-<view class="page">
-  <view class="card">
-    <view class="h2">战报</view>
-    <view class="mt-16">模式：{{mode === 'sequence' ? '按序挑战' : '随机挑战'}}</view>
-    <view class="mt-12">总得分：{{score}}%</view>
-    <view class="mt-12">最佳正确率：{{bestRate}}%</view>
-    <view class="mt-12">最差正确率：{{worstRate}}%</view>
-    <view class="mt-12">用时：{{duration}}</view>
-    <view class="row space-between mt-24">
-      <button class="btn-ghost" bindtap="exit">退出</button>
-      <button class="btn" bindtap="gotoReview">🚀 逐题复盘</button>
+<!-- pages/bossrush/report.wxml -->
+<view class="page {{fadeClass}}">
+  <view class="report-bg">
+    <view class="bg-shape-top"></view>
+    <view class="bg-shape-bottom"></view>
+    <view class="bg-wave-gold"></view>
+  </view>
+
+  <view class="card report-hero" style="background: linear-gradient(135deg, {{theme.heroFrom}} 0%, {{theme.heroTo}} 100%);">
+    <view class="report-hero__title">战报结算</view>
+    <view class="report-hero__accent"></view>
+
+    <view class="report-metric report-metric--first">
+      <view class="report-metric__label">挑战模式</view>
+      <view class="report-metric__value">{{mode === 'sequence' ? '按序挑战' : '随机挑战'}}</view>
+    </view>
+
+    <view class="report-metric">
+      <view class="report-metric__label">答题总数</view>
+      <view class="report-metric__value">{{total}} (含最佳/最差)</view>
+    </view>
+
+    <view class="report-metric">
+      <view class="report-metric__label">正确数量</view>
+      <view class="report-metric__value">{{correctCount}}</view>
+    </view>
+
+    <view class="report-metric report-metric--score">
+      <view class="report-metric__label">综合得分</view>
+      <view class="report-score">
+        <view class="report-score__dot"></view>
+        <view class="report-score__text">{{score}}%</view>
+      </view>
+    </view>
+
+    <view class="report-metric report-metric--last">
+      <view class="report-metric__label">耗时</view>
+      <view class="report-metric__value">{{duration}}</view>
+    </view>
+  </view>
+
+  <!-- Stats Details Card -->
+  <view class="card report-panel">
+    <view class="report-panel__head">
+      <view class="report-panel__title">细项表现</view>
+      <view class="report-panel__accent"></view>
+    </view>
+
+    <view class="report-rates">
+      <view class="report-rate report-rate--best">
+        <view class="report-rate__label">最佳项正确率</view>
+        <view class="report-rate__value">{{bestRate}}%</view>
+      </view>
+      <view class="report-rate report-rate--worst">
+        <view class="report-rate__label">最差项正确率</view>
+        <view class="report-rate__value">{{worstRate}}%</view>
+      </view>
+    </view>
+
+    <view class="report-actions">
+      <button class="btn-ghost report-actions__btn" bindtap="exit">退出</button>
+      <button class="btn report-actions__btn report-actions__primary" bindtap="gotoReview">逐题复盘</button>
     </view>
   </view>
 </view>

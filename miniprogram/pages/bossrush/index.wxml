@@ -1,38 +1,119 @@
-<view class="page">
+<wxs module="utils">
+var resolve = function(text, lang) {
+  if (typeof text === 'string') return text;
+  if (text && typeof text === 'object') {
+    var val = lang === 'en' ? text.en : text.zh;
+    return val || text.zh || '';
+  }
+  return '';
+};
+module.exports = {
+  resolve: resolve
+};
+</wxs>
+
+<view class="page {{fadeClass}} {{fontScaleClass}}" style="background: {{theme.pageBg}};">
+  
   <!-- 阶段0：选模式 -->
-  <view class="card" wx:if="{{phase === 'mode'}}">
-    <view class="h2">选择挑战模式</view>
-    <view class="row space-between mt-24">
-      <button class="btn" bindtap="startMode" data-mode="sequence">▷ 按序挑战</button>
-      <button class="btn-secondary" bindtap="startMode" data-mode="random">🔀 随机挑战</button>
+  <block wx:if="{{phase === 'mode'}}">
+    <!-- 标准化表头 -->
+    <hero-header theme="{{theme}}" title="Boss Rush" subtitle="挑战极限，测试你的真实水平" />
+
+    <view class="container-mode">
+      <!-- 模式卡片：按序挑战 -->
+      <view class="card-mode" bindtap="startMode" data-mode="sequence" style="border-left-color: {{theme.heroFrom}}; color: {{theme.heroFrom}};">
+        <view class="mode-icon" style="background: {{theme.heroFrom}}15; color: {{theme.heroFrom}};">
+          <view class="icon-text">1</view>
+        </view>
+        <view class="mode-info">
+          <view class="mode-title">按序挑战 (Sequence)</view>
+          <view class="mode-desc">从第1题开始，步步为营，完整覆盖所有知识点。</view>
+        </view>
+        <view class="chevron"></view>
+      </view>
+
+      <!-- 模式卡片：随机挑战 -->
+      <view class="card-mode" bindtap="startMode" data-mode="random" style="border-left-color: {{theme.heroTo}}; color: {{theme.heroTo}};">
+        <view class="mode-icon" style="background: {{theme.heroTo}}15; color: {{theme.heroTo}};">
+          <view class="icon-text">?</view>
+        </view>
+        <view class="mode-info">
+          <view class="mode-title">随机挑战 (Random)</view>
+          <view class="mode-desc">随机打乱全部题目顺序，直面未知，模拟真实考试压力。</view>
+        </view>
+        <view class="chevron"></view>
+      </view>
+
+      <!-- 说明 -->
+      <view class="mode-note">
+        <view class="note-title">规则说明</view>
+        <view class="note-item">• 挑战过程中不提供即时反馈（无最佳/最差提示）</view>
+        <view class="note-item">• 完成所有题目后生成详细战报</view>
+        <view class="note-item">• 中途退出将不会保存记录</view>
+      </view>
     </view>
-    <view class="muted mt-16">挑战过程中不提供反馈，完成后进入战报与复盘。</view>
-  </view>
+  </block>
 
   <!-- 阶段1：答题 -->
-  <view class="card" wx:if="{{phase === 'answer'}}">
-    <view class="row space-between">
-      <view class="h2">{{elapsed}}</view>
-      <view>进度：{{currentIndex + 1}} / {{order.length}}</view>
+  <view wx:if="{{phase === 'answer'}}">
+    <!-- 答题页不需要顶部 Hero，使用沉浸式 HeaderBar -->
+    <view class="card" style="padding: 0; overflow: hidden; margin-top: 24rpx;">
+      <!-- Header Component -->
+      <header-bar
+        left-text="{{'⏱ ' + elapsed + ' | 题 ' + (currentIndex + 1) + '/' + order.length}}"
+        theme="{{theme}}"
+        show-stop="{{true}}"
+        stop-text="结束"
+        show-lang="{{true}}"
+        lang-text="{{ lang === 'zh' ? 'EN' : '中文' }}"
+        lang-disabled="{{!isBilingual}}"
+        bind:stop="stopEarly"
+        bind:lang="switchLang"
+      />
+
+      <!-- Question Title -->
+      <view class="question-body" style="background: {{theme.questionBg}}; padding: 24rpx 24rpx 32rpx 24rpx;">
+        <view class="h2 {{lang === 'en' ? 'en-text' : ''}}" style="color: #000; font-weight: 600;">{{utils.resolve(question.title, lang)}}</view>
     </view>
-    <view class="row space-between mt-16">
-      <view class="h2">{{resolve(question.title)}}</view>
-      <button class="btn-ghost" wx:if="{{isBilingual}}" bindtap="switchLang">[中/EN]</button>
     </view>
-    <view class="divider mt-16"></view>
-    <block wx:for="{{question.options}}" wx:key="id">
-      <view class="mt-16 option-card">
-        <view class="row space-between">
-          <view>{{resolve(item.text)}}</view>
-          <view class="row">
-            <button class="btn-ghost" data-id="{{item.id}}" bindtap="pickBest">(★)</button>
-            <button class="btn-ghost ml-12" data-id="{{item.id}}" bindtap="pickWorst">(👎)</button>
+
+    <!-- Options List -->
+    <view class="card">
+      <block wx:for="{{question.options}}" wx:key="id" wx:for-index="idx">
+        <view class="option-card mt-12 {{bestChoice === item.id ? 'is-picked-best' : ''}} {{worstChoice === item.id ? 'is-picked-worst' : ''}}">
+          <view class="option-main">
+            <view class="option-text {{lang === 'en' ? 'en-text' : ''}}">
+              <text class="label">{{['A','B','C','D'][idx]}}.</text> {{utils.resolve(item.text, lang)}}
+            </view>
+          </view>
+
+          <view class="action-bar">
+            <button class="action-btn is-best {{bestChoice === item.id ? 'is-on' : ''}}" data-id="{{item.id}}" bindtap="pickBest">
+              <view class="action-inner">
+                <view class="action-radio {{bestChoice === item.id ? 'is-on' : ''}}">
+                  <text wx:if="{{bestChoice === item.id}}" class="action-check">✓</text>
+                </view>
+                <text class="action-label">最佳行动 (Best)</text>
+              </view>
+            </button>
+            <button class="action-btn is-worst {{worstChoice === item.id ? 'is-on' : ''}}" data-id="{{item.id}}" bindtap="pickWorst">
+              <view class="action-inner">
+                <view class="action-radio {{worstChoice === item.id ? 'is-on' : ''}}">
+                  <text wx:if="{{worstChoice === item.id}}" class="action-check">✕</text>
+                </view>
+                <text class="action-label">最差行动 (Worst)</text>
+              </view>
+            </button>
           </view>
         </view>
-      </view>
-    </block>
-    <view class="row space-between mt-24">
-      <button class="btn" bindtap="next">{{currentIndex + 1 === order.length ? '完成答题' : '下一题'}}</button>
+      </block>
+    </view>
+
+    <!-- Bottom Action -->
+    <view class="row px-24 mt-24" style="padding-bottom: 48rpx;">
+      <button class="btn-ghost" bindtap="next">
+        {{currentIndex + 1 === order.length ? '完成挑战' : '下一题 (Next)'}}
+      </button>
     </view>
   </view>
 </view>

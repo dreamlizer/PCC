@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "hero-header": "/components/heroHeader/index"
+  },
   "navigationBarTitleText": "逐题练习"
 }

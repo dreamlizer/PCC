@@ -1,0 +1,29 @@
+.hb {
+  box-sizing: border-box;
+  padding: 40rpx 32rpx 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: none;
+}
+
+.hb__left { flex: 1 1 auto; min-width: 0; }
+.hb__label { color: #fff; font-size: var(--font-xl); font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Times New Roman', Georgia, 'Noto Serif SC', 'Noto Serif CJK SC', 'Source Han Serif SC', 'Songti SC', 'STSong', SimSun, serif; }
+
+.hb__right { flex: 0 0 auto; display: flex; align-items: center; gap: 12rpx; }
+
+.hb__icon-box { width: 64rpx; height: 64rpx; display: flex; align-items: center; justify-content: center; }
+.hb__icon { width: 48rpx; height: 48rpx; }
+
+.hb__btn {
+  width: 100rpx;
+  height: 64rpx;
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: rgba(255,255,255,0.2);
+  border: 1rpx solid rgba(255,255,255,0.5);
+}
+.hb__btn.is-disabled { opacity: 0.5; }

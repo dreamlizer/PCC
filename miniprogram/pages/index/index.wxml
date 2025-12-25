@@ -1,29 +1,29 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="title">快速了解云开发</view>
-  <view class="top_tip">免鉴权接口调用 免部署后台 高并发</view>
-  <view class="power" wx:key="title" wx:for="{{powerList}}" wx:for-item="power">
-    <view class="power_info" data-index="{{index}}" data-type="{{ power.type }}" bindtap="onClickPowerInfo">
-      <view class="power_info_text">
-        <view class="power_info_text_title">
-          {{power.title}}
-          <view class="power_info_text_tag" wx:if="{{power.tag}}">{{power.tag}}</view>
+<view class="page {{fadeClass}}">
+  <view class="viewport">
+    <view class="main">
+      <view class="bg-shape-top"></view>
+      <view class="bg-shape-bottom"></view>
+      <view class="bg-wave-gold"></view>
+
+      <view class="content">
+        <view class="accent-line"></view>
+
+        <view class="title">
+          PCC
+          <text class="br">\n</text>
+          模拟试题
         </view>
-        <view class="power_info_text_tip">{{power.tip}}</view>
-      </view>
-      <image wx:if="{{!power.showItem && power.item.length}}" class="power_info_more" src="../../images/arrow.svg"></image>
-      <image wx:if="{{power.showItem && power.item.length}}" class="power_info_less" src="../../images/arrow.svg"></image>
-      <image wx:if="{{!power.item.length}}" class="power_item_icon" src="../../images/arrow.svg"></image>
-    </view>
-    <view wx:if="{{power.showItem}}">
-      <view wx:key="title" wx:for="{{power.item}}">
-        <view class="line"></view>
-        <view class="power_item" bindtap="jumpPage" data-type="{{ item.type }}" data-page="{{item.page}}">
-          <view class="power_item_title">{{item.title}}</view>
-          <image class="power_item_icon" src="../../images/arrow.svg"></image>
+        <view class="sub-title">Professional Certified Coach</view>
+
+        <view class="button-group">
+          <button class="icf-btn btn-primary" bindtap="goExam">模拟考试</button>
+          <button class="icf-btn btn-primary" bindtap="goCompetencies">八项教练能力</button>
+          <button class="icf-btn btn-primary" bindtap="goPractice">逐题解析</button>
+          <button class="icf-btn btn-primary" bindtap="goProfile">个人中心</button>
         </view>
       </view>
     </view>
+
+    <view class="footer"></view>
   </view>
-  <cloud-tip-modal showTipProps="{{showTip}}" title="{{title}}" content="{{content}}"></cloud-tip-modal>
 </view>

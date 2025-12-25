@@ -1,48 +1,23 @@
 // services/dataLoader.js
+// 负责统一从云端加载题库，并在成功时写入本地缓存；
+// 当云端不可用时回退至本地缓存，以保证离线可用与启动稳定性。
 const app = getApp ? getApp() : null;
+const {
+  getCachedQuestions,
+  setCachedQuestions,
+  getQuestionsVersion,
+  setQuestionsVersion,
+} = require('../utils/storage');
 
-function normalizeFrameworkDoc(doc) {
-  // 将云端记录结构转换为页面需要的结构
-  if (!doc) return null;
-  let levels = Array.isArray(doc.levels) ? doc.levels.slice() : [];
-
-  // 若无 0 级，则补充一个默认的 0 级
-  const hasZero = levels.some(l => String(l.level) === '0' || (typeof l.level === 'number' && l.level === 0) || /(^|\b)0\b/.test(String(l.name || '')));
-  if (!hasZero) {
-    levels.unshift({
-      level: 0,
-      name: 'Aha 时刻',
-      description: '瞬间的领悟或洞察，连接事实与意义，常带轻松与清晰感。作为进入探索的起点。'
-    });
+// 简单哈希（DJB2）用于生成版本号；不依赖外部库，足够稳定。
+function computeHash(obj) {
+  const json = JSON.stringify(obj || '');
+  let hash = 5381;
+  for (let i = 0; i < json.length; i++) {
+    hash = ((hash << 5) + hash) + json.charCodeAt(i);
+    hash &= 0xffffffff; // 限定为 32 位
   }
-
-  // 排序策略：若多数 level 可解析，则按数值排序，否则保留原始顺序
-  const numericCount = levels.reduce((acc, l) => acc + (!isNaN(parseInt(l.level, 10)) ? 1 : 0), 0);
-  if (numericCount >= Math.max(1, Math.floor(levels.length / 2))) {
-    levels.sort((a, b) => {
-      const na = parseInt(a.level, 10);
-      const nb = parseInt(b.level, 10);
-      const va = isNaN(na) ? 999 : na;
-      const vb = isNaN(nb) ? 999 : nb;
-      return va - vb;
-    });
-  }
-
-  return {
-    title: doc.title || '客户感受 9 级框架',
-    sections: levels.map((lv, idx) => {
-      const parsed = parseInt(lv.level, 10);
-      const num = !isNaN(parsed) ? String(parsed) : String(idx);
-      const name = lv.name || '';
-      const hasName = name && String(name).trim().length > 0;
-      const title = hasName ? `${num} 级：${name}` : `${num} 级`;
-      return {
-        title,
-        text: lv.description || '',
-        level: num
-      };
-    }),
-  };
+  return String(hash >>> 0);
 }
 
 function normalizeQuestionList(list) {
@@ -53,7 +28,7 @@ function normalizeQuestionList(list) {
   });
 }
 
-// 已移除本地回退逻辑：仅使用云端数据
+// 云端优先，但允许本地回退：避免网络或环境异常导致应用不可用
 
 async function callCloudFunctionCompat(fnName) {
   // 兼容调用：优先使用标准参数 name，若出现 FunctionName 参数错误，再尝试 functionName
@@ -88,7 +63,6 @@ async function loadFromCloud() {
     return { framework: null, questions: [] };
   }
 
-  let framework = null;
   let questions = [];
 
   // 打印环境ID，便于定位环境不一致问题
@@ -96,30 +70,6 @@ async function loadFromCloud() {
     const envId = (app && app.globalData && app.globalData.env) || '';
     console.log('[Cloud] envId =', envId);
   } catch (_) {}
-
-  // 先拉框架（必要），失败则数据库兜底
-  try {
-    console.log('[Cloud] call pccFramework');
-    const fwRes = await callCloudFunctionCompat('pccFramework');
-    const r = fwRes?.result;
-    const fwData = (r && r.ok ? r.data : null) || r || [];
-    const first = Array.isArray(fwData) && fwData.length ? fwData[0] : null;
-    framework = normalizeFrameworkDoc(first) || null;
-  } catch (errFw) {
-    console.warn('云函数 pccFramework 读取失败，尝试数据库兜底：', errFw);
-  }
-
-  if (!framework) {
-    try {
-      console.log('[Cloud] fallback read DB collection framework');
-      const db = wx.cloud.database();
-      const dbRes = await db.collection('9Framework').limit(1).get();
-      const first2 = Array.isArray(dbRes?.data) && dbRes.data.length ? dbRes.data[0] : null;
-      framework = normalizeFrameworkDoc(first2) || null;
-    } catch (e2) {
-      console.warn('直接读取数据库失败：', e2);
-    }
-  }
 
   // 再拉题库（可选），失败忽略
   try {
@@ -153,20 +103,40 @@ async function loadFromCloud() {
 
   // 统一题库结构：保证每题都有稳定的 id
   questions = normalizeQuestionList(questions);
-  return { framework, questions };
+  return { framework: null, questions };
 }
 
 async function loadAllDataOnce() {
-  // 始终以云端为准，不使用本地缓存回退
-  const global = app ? app.globalData || {} : {};
+  let { questions } = await loadFromCloud();
 
-  const { framework, questions } = await loadFromCloud();
+  // 云端成功时，写入本地缓存与版本号
+  try {
+    if (Array.isArray(questions) && questions.length > 0) {
+      setCachedQuestions(questions);
+      setQuestionsVersion(computeHash(questions));
+    }
+  } catch (e) {
+    console.warn('写入本地缓存失败（可忽略）', e);
+  }
+
+  // 若云端缺失或失败，则回退至本地缓存（离线可用）
+  if (!Array.isArray(questions) || questions.length === 0) {
+    const cachedQs = getCachedQuestions();
+    if (Array.isArray(cachedQs) && cachedQs.length) questions = cachedQs;
+  }
+
   if (app) {
     app.globalData = app.globalData || {};
-    app.globalData.framework = framework;
+    app.globalData.framework = null;
     app.globalData.questionBank = questions;
+    // 可选：暴露当前版本号，便于页面展示或调试
+    try {
+      app.globalData.dataVersion = {
+        questions: getQuestionsVersion(),
+      };
+    } catch (_) {}
   }
-  return { framework, questions };
+  return { framework: null, questions };
 }
 
 module.exports = {

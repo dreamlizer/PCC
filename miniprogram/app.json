@@ -1,46 +1,23 @@
 {
   "cloud": true,
   "pages": [
-    "pages/framework/index",
+    "pages/index/index",
     "pages/practice/index",
     "pages/practice/detail",
     "pages/bossrush/index",
     "pages/profile/index",
     "pages/bossrush/report",
     "pages/bossrush/review",
-    "pages/profile/favorites"
+    "pages/profile/favorites",
+    "pages/bossrush/history",
+    "pages/competencies/index"
   ],
   "window": {
     "backgroundColor": "#F7F7F7",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F7F7F7",
-    "navigationBarTitleText": "ICF PCC 9级框架训练器",
+    "navigationBarTitleText": "PCC 模拟试题",
     "navigationBarTextStyle": "black"
-  },
-  "tabBar": {
-    "custom": true,
-    "color": "#333333",
-    "selectedColor": "#007AFF",
-    "backgroundColor": "#F7F7F7",
-    "borderStyle": "black",
-    "list": [
-      {
-        "pagePath": "pages/framework/index",
-        "text": "框架学习"
-      },
-      {
-        "pagePath": "pages/practice/index",
-        "text": "逐题练习"
-      },
-      {
-        "pagePath": "pages/bossrush/index",
-        "text": "Boss Rush"
-      },
-      {
-        "pagePath": "pages/profile/index",
-        "text": "个人中心"
-      }
-    ]
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2",

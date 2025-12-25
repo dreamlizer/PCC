@@ -1,4 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "hero-header": "/components/heroHeader/index",
+    "header-bar": "/components/headerBar/index"
+  },
   "navigationBarTitleText": "Boss Rush"
 }

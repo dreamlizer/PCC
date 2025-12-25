@@ -20,31 +20,58 @@ button::after{
 
 
 page {
-  background: #F7F7F7;
+  background: #F0F2F5; /* 更高级的灰阶，比纯白或 F7F7F7 更沉稳 */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   font-size: var(--font-md);
   line-height: 1.6;
-  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: var(--font-serif, 'Times New Roman', Georgia, 'Noto Serif SC', 'Noto Serif CJK SC', 'Source Han Serif SC', 'Songti SC', 'STSong', SimSun, serif);
+  -webkit-font-smoothing: antialiased; /* iOS 字体平滑 */
 }
 
 /* 主题配色 */
 :root {
-  --page-bg: #F7F7F7;
+  --page-bg: #F0F2F5;
   --card-bg: #FFFFFF;
-  --text-main: #333333;
-  --text-secondary: #999999;
+  --text-main: #2C3E50; /* 深蓝灰，比纯黑更有质感 */
+  --text-secondary: #7F8C8D;
   --primary: #007AFF;
-  --best: #28A745;
-  --worst: #DC3545;
-  --favorite: #FFC107;
+  --best: #27AE60; /* 更鲜艳的绿 */
+  --worst: #E74C3C; /* 更鲜艳的红 */
+  --favorite: #F1C40F;
+  --icf-blue: #060E9F;
+  --icf-gold: #ffbf3f;
+  --radius-tight: 10rpx;
+  --qbar-width: 8rpx;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-serif: 'Times New Roman', Georgia, 'Noto Serif SC', 'Noto Serif CJK SC', 'Source Han Serif SC', 'Songti SC', 'STSong', SimSun, serif;
+  /* 页面 Hero 区域的设计变量（系统化统一） */
+  --hero-pad-top: 40rpx;
+  --hero-pad-h: 32rpx;
+  --hero-pad-bottom: 24rpx;
   /* 字体等级：统一全局 */
+  --font-hero: 42rpx;
   --font-xl: 36rpx;
   --font-lg: 32rpx;
   --font-md: 28rpx;
   --font-sm: 24rpx;
 }
+
+/* 全局 Hero 样式：统一页头视觉框架 */
+.hero { padding: var(--hero-pad-top) var(--hero-pad-h) var(--hero-pad-bottom); color: #fff; }
+.hero .h1 { font-size: var(--font-hero); font-weight: 700; color: #fff; letter-spacing: 1rpx; font-family: 'Times New Roman', Georgia, 'Noto Serif SC', 'Noto Serif CJK SC', 'Source Han Serif SC', 'Songti SC', 'STSong', SimSun, serif; }
+.hero .sub { margin-top: 12rpx; opacity: 0.9; color: #fff; font-size: var(--font-sm); }
+
+/* 字体缩放（4 档）：显著拉大跨度 */
+/* Scale 1 (小): 略微减小 */
+.font-scale-1 { --font-hero: 36rpx; --font-xl: 30rpx; --font-lg: 26rpx; --font-md: 22rpx; --font-sm: 18rpx; }
+/* Scale 2 (标准): 保持基准 */
+.font-scale-2 { --font-hero: 40rpx; --font-xl: 34rpx; --font-lg: 30rpx; --font-md: 26rpx; --font-sm: 22rpx; }
+/* Scale 3 (大): 显著增大 (+5rpx) */
+.font-scale-3 { --font-hero: 46rpx; --font-xl: 39rpx; --font-lg: 35rpx; --font-md: 31rpx; --font-sm: 27rpx; }
+/* Scale 4 (特大): 更加显著 (+10rpx) */
+.font-scale-4 { --font-hero: 52rpx; --font-xl: 44rpx; --font-lg: 40rpx; --font-md: 36rpx; --font-sm: 32rpx; }
 
 .page {
   background-color: var(--page-bg);
@@ -53,24 +80,24 @@ page {
 
 .card {
   background-color: var(--card-bg);
-  border-radius: 12rpx;
-  padding: 24rpx;
-  box-shadow: 0 6rpx 12rpx rgba(0,0,0,0.04);
-  margin: 16rpx 24rpx;
+  border-radius: 16rpx; /* 统一圆角 */
+  padding: 32rpx;       /* 增加内部呼吸感 */
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.05); /* 更柔和的扩散阴影 */
+  margin: 24rpx;        /* 统一外边距 */
+  border: 1rpx solid rgba(0,0,0,0.02); /* 极细微边框增加层次 */
 }
 
 .h1 { font-size: var(--font-xl); font-weight: 700; color: var(--text-main); }
 .h2 { font-size: var(--font-lg); font-weight: 700; color: var(--text-main); }
 .muted { color: var(--text-secondary); font-size: var(--font-sm); }
 .primary { color: var(--primary); }
-.best { background-color: rgba(40,167,69,0.08); }
-.worst { background-color: rgba(220,53,69,0.08); }
 
 .row { display: flex; flex-direction: row; align-items: center; }
 .col { display: flex; flex-direction: column; }
 .flex-1 { flex: 1; }
 .space-between { justify-content: space-between; }
 .center { justify-content: center; align-items: center; }
+.mt-12 { margin-top: 12rpx; }
 .mt-16 { margin-top: 16rpx; }
 .mt-24 { margin-top: 24rpx; }
 .mt-32 { margin-top: 32rpx; }
@@ -78,14 +105,85 @@ page {
 .px-24 { padding-left: 24rpx; padding-right: 24rpx; }
 .py-16 { padding-top: 16rpx; padding-bottom: 16rpx; }
 
-.btn { color: #fff; background-color: var(--primary); border-radius: 10rpx; padding: 18rpx 28rpx; font-size: var(--font-md); font-weight: 700; }
-.btn-secondary { color: var(--primary); background-color: rgba(0,122,255,0.1); border-radius: 10rpx; padding: 18rpx 28rpx; font-size: var(--font-md); font-weight: 700; }
-.btn-ghost { color: var(--primary); background-color: transparent; border: 2rpx solid var(--primary); border-radius: 10rpx; padding: 16rpx 26rpx; font-size: var(--font-md); font-weight: 700; }
+.btn { color: #fff; background-color: var(--primary); border-radius: 12rpx; padding: 20rpx 32rpx; font-size: var(--font-md); font-weight: 600; box-shadow: 0 4rpx 12rpx rgba(0,122,255,0.2); }
+.btn-secondary { color: var(--primary); background-color: rgba(0,122,255,0.08); border-radius: 12rpx; padding: 20rpx 32rpx; font-size: var(--font-md); font-weight: 600; }
+.btn-ghost { color: var(--primary); background-color: transparent; border: 2rpx solid rgba(0,122,255,0.3); border-radius: 12rpx; padding: 18rpx 30rpx; font-size: var(--font-md); font-weight: 600; }
 
-.accordion { overflow: hidden; transition: max-height 0.2s ease; }
-.divider { height: 1rpx; background-color: #eaeaea; margin: 12rpx 0; }
+.en-text {
+  text-align: justify;
+  line-height: 1.3;
+  font-family: 'Times New Roman', Georgia, serif;
+}
 
-.icon { font-weight: 600; }
-.icon-star { color: var(--favorite); }
-.icon-check { color: var(--best); }
-.icon-cross { color: var(--worst); }
+.question-body { border-top: 8rpx solid var(--icf-gold, #ffbf3f); }
+
+.option-card {
+  border-radius: 16rpx;
+  background: #fff;
+  border: 2rpx solid rgba(0,0,0,0.06);
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.option-card.is-picked-best { border-color: #1B5E20; }
+.option-card.is-picked-worst { border-color: #D32F2F; }
+.option-card.is-correct-best { border-color: #1B5E20; }
+.option-card.is-correct-worst { border-color: #D32F2F; }
+
+.option-main { padding: 20rpx 24rpx 16rpx; }
+
+.option-text {
+  display: block;
+  width: 100%;
+  word-break: break-word;
+  line-height: 1.5;
+  color: #111;
+}
+
+.label { font-weight: 600; margin-right: 8rpx; }
+
+.action-bar {
+  display: flex;
+  height: 88rpx;
+  border-top: 1rpx solid rgba(0,0,0,0.06);
+}
+
+.action-btn {
+  flex: 1;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  background: #fff;
+  border: none;
+}
+
+.action-btn + .action-btn { border-left: 1rpx solid rgba(0,0,0,0.06); }
+
+.action-inner {
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+  color: #98a2b3;
+  font-weight: 700;
+  font-size: 26rpx;
+}
+
+.action-radio {
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 18rpx;
+  border: 2rpx solid #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-check { font-size: 22rpx; line-height: 1; color: #98a2b3; }
+
+.action-btn.is-best.is-on { background: #1B5E20; }
+.action-btn.is-worst.is-on { background: #D32F2F; }
+.action-btn.is-on .action-inner { color: #fff; }
+.action-btn.is-on .action-radio { border-color: rgba(255,255,255,0.9); }
+.action-btn.is-on .action-check { color: #fff; }

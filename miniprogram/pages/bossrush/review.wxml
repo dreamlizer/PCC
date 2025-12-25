@@ -1,22 +1,41 @@
-<view class="page">
-  <view class="card">
-    <view class="row space-between">
-      <view class="h2">逐题复盘</view>
-      <button class="btn-ghost" bindtap="toggleWrongOnly">{{showWrongOnly ? '显示全部' : '只看错题'}}</button>
-    </view>
-  </view>
+<view class="page {{fadeClass}} {{fontScaleClass}}">
+  <hero-header
+    theme="{{theme}}"
+    title="逐题复盘"
+    right-text="{{showWrongOnly ? '显示全部' : '只看错题'}}"
+    bind:right="toggleWrongOnly"
+  />
+
   <scroll-view scroll-y style="height: calc(100vh - 240rpx);">
     <block wx:for="{{list}}" wx:key="id">
-      <view class="card" wx:if="{{!showWrongOnly || item.wrong}}" bindtap="openDetail" data-id="{{item.id}}">
-        <view class="row space-between">
-          <view>{{item.title}}</view>
-          <view>
-            <text class="icon {{item.isBestCorrect ? 'icon-check' : 'icon-cross'}}">{{item.isBestCorrect ? '✓' : '✗'}}</text>
-            <text class="icon ml-12 {{item.isWorstCorrect ? 'icon-check' : 'icon-cross'}}">{{item.isWorstCorrect ? '✓' : '✗'}}</text>
+      <view class="question-card" wx:if="{{!showWrongOnly || item.wrong}}" bindtap="openDetail" data-id="{{item.id}}">
+        <view class="card-content">
+          <view class="title">{{item.title}}</view>
+          
+          <view class="status-row">
+            <!-- Perfect Case -->
+            <view wx:if="{{!item.wrong}}" class="badge badge-perfect">
+              <text>★ 完美通过</text>
+            </view>
+            
+            <!-- Error Cases: Show explicit status for Best/Worst -->
+            <block wx:else>
+               <view class="badge {{item.isBestCorrect ? 'badge-success' : 'badge-error'}}">
+                 最佳 {{item.isBestCorrect ? '✓' : '✗'}}
+               </view>
+               <view class="badge {{item.isWorstCorrect ? 'badge-success' : 'badge-error'}} ml-12">
+                 最差 {{item.isWorstCorrect ? '✓' : '✗'}}
+               </view>
+            </block>
           </view>
         </view>
-        <view wx:if="{{item.wrong}}" class="mt-12 worst">答错高亮</view>
+        
+        <!-- Chevron arrow for affordance -->
+        <view class="chevron"></view>
       </view>
     </block>
+    <view wx:if="{{list.length === 0}}" class="muted" style="text-align: center; margin-top: 48rpx; color: #95A5A6; font-size: 26rpx;">
+      暂无复盘记录
+    </view>
   </scroll-view>
 </view>

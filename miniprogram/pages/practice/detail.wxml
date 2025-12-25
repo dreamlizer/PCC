@@ -1,52 +1,68 @@
-<view class="page">
-  <view class="card">
-    <view class="row space-between">
-      <view>
-        <text class="muted">第 {{currentIndex + 1}} / {{questions.length}} 题</text>
-      </view>
-      <view class="row">
-        <button class="btn-secondary" wx:if="{{isBilingual}}" bindtap="switchLang">[中/EN]</button>
-        <button class="btn-ghost ml-12 icon-btn" bindtap="toggleFavorite">
-          <image class="icon-img" src="/images/icons/{{favoriteOn ? 'favorite-on' : 'favorite-off'}}.svg" mode="aspectFit"></image>
-        </button>
-      </view>
+<view class="page {{fadeClass}} {{fontScaleClass}}">
+  <!-- Header Card with Theme Gradient using shared component -->
+  <view class="card" style="padding: 0; overflow: hidden;">
+    <header-bar
+      left-text="{{ lang === 'en' ? (labels.counter + ' ' + (currentIndex + 1) + ' / ' + questions.length) : ('第 ' + (currentIndex + 1) + ' / ' + questions.length + ' 题') }}"
+      theme="{{theme}}"
+      show-star="{{true}}"
+      favorite-on="{{favoriteOn}}"
+      show-lang="{{true}}"
+      lang-text="{{ lang === 'zh' ? 'EN' : '中文' }}"
+      lang-disabled="{{lang==='zh' && !hasEnglish}}"
+      bind:star="toggleFavorite"
+      bind:lang="toggleLangE"
+    />
+
+    <!-- Question Body - Light Background & Black Text -->
+    <view class="question-body" style="background: {{theme.questionBg}}; padding: 24rpx 24rpx 32rpx 24rpx;">
+      <view class="h2 {{lang === 'en' ? 'en-text' : ''}}" style="color: #000; font-weight: 600;">{{questionTitle}}</view>
+      <view wx:if="{{state === 'analysis'}}" class="analysis-recap mt-12" style="color: rgba(0,0,0,0.6);">{{analysisRecap}}</view>
     </view>
-    <view class="h2 mt-12">{{questionTitle}}</view>
-    <view wx:if="{{state === 'analysis'}}" class="analysis-recap mt-12">{{analysisRecap}}</view>
   </view>
 
   <view class="card">
     <block wx:for="{{optionsResolved}}" wx:key="id">
-      <view class="option-card mt-12 {{state === 'analysis' && item.id === question.answer.best ? 'best' : ''}} {{state === 'analysis' && item.id === question.answer.worst ? 'worst' : ''}} {{state === 'answer' && item.id === bestChoice ? 'best' : ''}} {{state === 'answer' && item.id === worstChoice ? 'worst' : ''}}">
-        <view class="option-text"><text class="label">{{item.letter}}.</text> {{item.textResolved}}</view>
-        <view class="row actions mt-12" wx:if="{{state === 'answer'}}">
-          <button class="btn-best btn-sm {{bestChoice === item.id ? 'selected' : ''}}" data-id="{{item.id}}" bindtap="pickBest">最佳行动</button>
-          <button class="btn-worst btn-sm ml-12 {{worstChoice === item.id ? 'selected' : ''}}" data-id="{{item.id}}" bindtap="pickWorst">最差行动</button>
+      <view class="option-card mt-12 {{state === 'analysis' && item.id === question.answer.best ? 'is-correct-best' : ''}} {{state === 'analysis' && item.id === question.answer.worst ? 'is-correct-worst' : ''}} {{state === 'answer' && item.id === bestChoice ? 'is-picked-best' : ''}} {{state === 'answer' && item.id === worstChoice ? 'is-picked-worst' : ''}}">
+        <view class="option-main">
+          <view class="option-text {{lang === 'en' ? 'en-text' : ''}}"><text class="label">{{item.letter}}.</text> {{item.textResolved}}</view>
+          <view class="accordion" wx:if="{{state === 'analysis'}}">
+            <view class="divider"></view>
+            <view class="mt-12 {{lang === 'en' ? 'en-text' : ''}}">{{labels.analysis}}：{{question.analyses[item.id] ? question.analyses[item.id].text : ''}}</view>
+          </view>
         </view>
-        <view class="accordion" wx:if="{{state === 'analysis'}}">
-          <view class="divider"></view>
-          <view class="muted">等级：{{question.analyses[item.id].level}}（{{question.analyses[item.id].level_name}}）</view>
-          <view class="mt-12">解析：{{question.analyses[item.id].text}}</view>
+
+        <view class="action-bar" wx:if="{{state === 'answer'}}">
+          <button class="action-btn is-best {{bestChoice === item.id ? 'is-on' : ''}}" data-id="{{item.id}}" bindtap="pickBest">
+            <view class="action-inner">
+              <view class="action-radio {{bestChoice === item.id ? 'is-on' : ''}}">
+                <text wx:if="{{bestChoice === item.id}}" class="action-check">✓</text>
+              </view>
+              <text class="action-label">{{labels.best}}</text>
+            </view>
+          </button>
+          <button class="action-btn is-worst {{worstChoice === item.id ? 'is-on' : ''}}" data-id="{{item.id}}" bindtap="pickWorst">
+            <view class="action-inner">
+              <view class="action-radio {{worstChoice === item.id ? 'is-on' : ''}}">
+                <text wx:if="{{worstChoice === item.id}}" class="action-check">✕</text>
+              </view>
+              <text class="action-label">{{labels.worst}}</text>
+            </view>
+          </button>
         </view>
       </view>
     </block>
   </view>
 
-  <view class="card mt-24" wx:if="{{state === 'analysis'}}">
-    <view class="h2">总结</view>
-    <view class="mt-12">{{summaryResolved}}</view>
-  </view>
-
   <view class="row space-between px-24 mt-24">
-    <button class="btn-ghost" bindtap="goBackToList">返回列表</button>
-    <button wx:if="{{state === 'answer'}}" class="btn analyze-btn" bindtap="viewAnalysis" disabled="{{!bestChoice || !worstChoice}}">答案解析</button>
-    <button wx:if="{{state === 'analysis'}}" class="btn analyze-btn" bindtap="returnToAnswer">返回题目</button>
+    <button class="btn-ghost" bindtap="goBackToList">{{labels.backToList}}</button>
+    <button wx:if="{{state === 'answer'}}" class="btn analyze-btn" bindtap="viewAnalysis" disabled="{{!bestChoice || !worstChoice}}" style="background: linear-gradient(90deg, {{theme.heroFrom}}, {{theme.heroTo}});">{{labels.analyze}}</button>
+    <button wx:if="{{state === 'analysis'}}" class="btn analyze-btn" bindtap="returnToAnswer" style="background: linear-gradient(90deg, {{theme.heroFrom}}, {{theme.heroTo}});">{{labels.returnToQuestion}}</button>
   </view>
 
   <!-- 移除多余的正确答案与重复提示卡片 -->
 
-  <view class="row space-between px-24 mt-24">
-    <button class="btn-ghost" bindtap="prev">上一题</button>
-    <button class="btn" bindtap="next">下一题</button>
+  <view class="row space-between px-24 mt-24" style="margin-bottom: 48rpx;">
+    <button class="btn-ghost" bindtap="prev">{{labels.prev}}</button>
+    <button class="btn-ghost" bindtap="next">{{labels.next}}</button>
   </view>
 </view>
