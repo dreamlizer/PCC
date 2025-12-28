@@ -1,0 +1,661 @@
+{
+"_id": "ICF-001_EN",
+"analyses": {
+"a": {
+"text": "This is the worst action because it constitutes a direct violation of ICF Core Competency 1: Demonstrates Ethical Practice. Concealing a financial interest in a competitor fails to demonstrate integrity and honesty (sub-competency 1.01). It creates a hidden agenda and a conflict of interest that compromises the foundation of trust required in Competency 4: Cultivates Trust and Safety. Even if the coach attempts to keep the roles separate, the lack of disclosure is unethical and risks significant damage to the client's trust."
+},
+"b": {
+"text": "This option is not the best because it is disingenuous. The prompt states the coach *already* recognizes the business. Feigning ignorance to delay the conversation lacks the personal integrity and honesty required by Competency 1 (sub-competency 1.01) and delays the necessary ethical disclosure. Transparency should be immediate when a clear conflict is identified."
+},
+"c": {
+"text": "While this option eventually leads to disclosure, it is not the best because it withholds critical information during the rapport-building phase. Competency 3: Establishes and Maintains Agreements involves defining what is appropriate in the relationship early on. Waiting for the client to follow up risks wasting the client's time and starting the relationship on a foundation of partial truth."
+},
+"d": {
+"text": "This option aligns with ICF Core Competency 1: Demonstrates Ethical Practice, specifically sub-competency 1.01, which requires the coach to demonstrate personal integrity and honesty in interactions with clients. By disclosing the investment immediately, the coach upholds the ICF Code of Ethics regarding conflicts of interest. This approach prioritizes transparency and respects the client's autonomy, allowing the client to make an informed decision about whether to proceed."
+}
+},
+"answer": {
+"best": "d",
+"worst": "a"
+},
+"number": "ICF-001EN",
+"options": [
+{
+"id": "a",
+"text": "Not say anything. Try to keep their role as an investor in a competing business separate from their role as a coach."
+},
+{
+"id": "b",
+"text": "Share that the business name sounds familiar and make a mental note to determine whether it is a competitor business later that evening."
+},
+{
+"id": "c",
+"text": "Share their role as investor in the competitor business only if the potential client follows up to pursue coaching with the coach."
+},
+{
+"id": "d",
+"text": "Share their role as an investor in a competing business and acknowledge the possibility of a conflict of interest with the client."
+}
+],
+"title": "A coach is meeting with a prospective client who is growing a new business. The coach and potential client quickly establish an easy connection. The coach is excited about the opportunity to work with the client. As the coach and client are ending their conversation, the prospective client briefly mentions the name of their new business. The coach recognizes the business, as the coach is an investor in a more established competitor business in the same community. What should the coach do?"
+}
+
+{
+"_id": "ICF-001_CN",
+"analyses": {
+"a": {
+"text": "这是最差的行动，因为它直接违反了 ICF 核心能力 1：体现道德实践。隐瞒在竞争对手处的经济利益未能体现正直和诚实（子能力 1.01）。这制造了一个隐秘的议程和利益冲突，破坏了 能力 4：培养信任和安全感 所需的信任基础。即使教练试图将角色分开，缺乏披露也是不道德的，并可能严重损害客户的信任。"
+},
+"b": {
+"text": "这个选项不是最好的，因为它是虚伪的。题目指出教练*已经*认出了该业务。假装无知以推迟对话缺乏 能力 1（子能力 1.01）要求的个人正直和诚实，并推迟了必要的道德披露。当发现明显的冲突时，应立即保持透明。"
+},
+"c": {
+"text": "虽然这个选项最终会导致披露，但它不是最好的，因为它在建立融洽关系的阶段隐瞒了关键信息。能力 3：建立和维持协议 涉及尽早定义关系中什么是适当的。等待客户跟进可能会浪费客户的时间，并在部分事实的基础上开始关系。"
+},
+"d": {
+"text": "这个选项符合 ICF 核心能力 1：体现道德实践，特别是子能力 1.01，要求教练在与客户互动时表现出个人正直和诚实。通过立即披露投资情况，教练遵守了关于利益冲突的 ICF 道德准则。这种方法优先考虑透明度并尊重客户的自主权，允许客户在知情的情况下决定是否继续。"
+}
+},
+"answer": {
+"best": "d",
+"worst": "a"
+},
+"number": "ICF-001CN",
+"options": [
+{
+"id": "a",
+"text": "什么也不说。试图将其作为竞争企业投资人的角色与教练的角色分开。"
+},
+{
+"id": "b",
+"text": "分享该企业名称听起来很熟悉，并记在心里以便当晚确认是否为竞争企业。"
+},
+{
+"id": "c",
+"text": "仅当潜在客户后续跟进寻求教练服务时，才分享其作为竞争企业投资人的角色。"
+},
+{
+"id": "d",
+"text": "分享其作为竞争企业投资人的角色，并承认与客户存在利益冲突的可能性。"
+}
+],
+"title": "教练正在会见一位正在发展新业务的潜在客户。教练和潜在客户很快建立了轻松的联系。教练对与该客户合作的机会感到兴奋。当教练和客户结束谈话时，潜在客户简要提到了他们新业务的名称。教练认出了该业务，因为教练是同一社区中一家更成熟的竞争对手企业的投资人。教练应该怎么做？"
+}
+
+{
+"_id": "ICF-002_EN",
+"analyses": {
+"a": {
+"text": "This option is not the best because it shifts the focus away from the client and onto the coach's performance in the middle of the session. By immediately reflecting on what they could have done differently, the coach is taking responsibility for the client's actions. This violates Competency 8: Facilitates Client Growth, specifically sub-competency 8.03, which requires the coach to acknowledge and support client autonomy in the design of goals and actions. The client is responsible for their follow-through, not the coach."
+},
+"b": {
+"text": "This is the best action because it aligns perfectly with Competency 2: Embodies a Coaching Mindset and Competency 5: Maintains Presence. Specifically, sub-competency 2.01 states the coach acknowledges that clients are responsible for their own choices. Furthermore, sub-competency 5.04 requires the coach to manage one's emotions to stay present with the client. By taking a breath to regulate the feeling of disappointment and re-anchoring in the principle of client autonomy, the coach remains objective and supportive, ready to explore what the client learned from their choice."
+},
+"c": {
+"text": "This is a strong second-best option as it involves emotional regulation (Competency 2.06) and seeking supervision (Competency 2.08). However, Option B is superior because it actively reframes the coach's mindset in the moment towards client autonomy, which is the immediate internal shift needed to continue the session effectively."
+},
+"d": {
+"text": "This is the worst action because it is judgmental and directive, violating Competency 4: Cultivates Trust and Safety. Using the word failed and asking a leading question implies the coach knows better than the client, which undermines partnership. It violates sub-competency 4.04 (Shows support, empathy and concern) and ignores the client's context for why they made that decision. The praise... but structure is manipulative rather than supportive."
+}
+},
+"answer": {
+"best": "b",
+"worst": "d"
+},
+"number": "ICF-002EN",
+"options": [
+{
+"id": "a",
+"text": "Immediately reflect back on their last session with the client and identify what they could have done differently to support the client in following through on their plans."
+},
+{
+"id": "b",
+"text": "Take a breath and acknowledge that the client is responsible for their own choice of whether to follow through with their stated plans or not."
+},
+{
+"id": "c",
+"text": "Set aside their disappointment for now and focus on the current session with the client. Decide to reflect on this situation during an upcoming session with their mentor coach."
+},
+{
+"id": "d",
+"text": "Praise the client for meeting the project deadlines, but ask why the client failed to support their team members' development."
+}
+],
+"title": "A client struggles with delegating tasks at work to other team members. During the last session, the client shared that an important project they are leading is falling behind schedule. The coach supported the client in identifying strategies to delegate tasks to other team members. At the next session, the client reports back and shares, “In the end, I decided to complete all the tasks myself. That was the only way to get them done on time.” The coach feels disappointment that the client did not follow through on their plans to delegate. What should the coach do?"
+}
+
+{
+"_id": "ICF-002_CN",
+"analyses": {
+"a": {
+"text": "这个选项不是最好的，因为它将焦点从客户转移到了教练在会话中的表现上。通过立即反思自己本可以做些什么不同，教练实际上是在为客户的行为承担责任。这违反了能力 8：促进客户成长，特别是子能力 8.03，该能力要求教练承认并支持客户在设计目标和行动时的自主权。客户应对他们的执行情况负责，而不是教练。"
+},
+"b": {
+"text": "这是最佳行动，因为它完美符合能力 2：体现教练思维和能力 5：保持在场。具体而言，子能力 2.01 指出教练应承认客户对自己的选择负责。此外，子能力 5.04 要求教练管理自己的情绪以保持与客户同在。通过深呼吸来调节失望的情绪，并重新立足于客户自主权的原则，教练能够保持客观和支持的态度，准备好去探索客户从他们的选择中学到了什么。"
+},
+"c": {
+"text": "这是一个强有力的次优选项，因为它涉及情绪管理（能力 2.06）和寻求督导（能力 2.08）。然而，选项 B 更优，因为它在当下主动重塑了教练关于客户自主权的思维模式，这是继续有效进行会话所需的即时内在转变。"
+},
+"d": {
+"text": "这是最差的行动，因为它是评判性的和指导性的，违反了能力 4：培养信任和安全感。使用“失败”一词并提出引导性问题暗示教练比客户更懂，这破坏了伙伴关系。它违反了子能力 4.04（表现出支持、同理心和关注），并忽略了客户做出该决定的语境。“表扬……但是”的结构是操纵性的，而非支持性的。"
+}
+},
+"answer": {
+"best": "b",
+"worst": "d"
+},
+"number": "ICF-002CN",
+"options": [
+{
+"id": "a",
+"text": "立即回想与客户的上一次会话，并确定自己本可以做些什么不同，以支持客户执行他们的计划。"
+},
+{
+"id": "b",
+"text": "深呼吸，并承认客户对自己是否执行其既定计划的选择负责。"
+},
+{
+"id": "c",
+"text": "暂时把失望放在一边，专注于与客户当前的会话。决定在即将到来的导师教练会话中反思这种情况。"
+},
+{
+"id": "d",
+"text": "表扬客户按时完成了项目期限，但询问客户为什么未能支持团队成员的发展。"
+}
+],
+"title": "一位客户在工作中难以将任务委派给其他团队成员。在上次会话中，客户分享说他们领导的一个重要项目落后于计划。教练支持客户确定了将任务委派给其他团队成员的策略。在下一次会话中，客户反馈并分享道：“最后，我决定自己完成所有任务。那是按时完成任务的唯一方法。”教练对客户没有执行他们的委派计划感到失望。教练应该怎么做？"
+}
+{
+"_id": "ICF-003_EN",
+"analyses": {
+"a": {
+"text": "This option is not the best because, while it demonstrates empathy and awareness of the client's state (Competency 5: Maintains Presence), it delays the establishment of the coaching agreement. While taking a pause can be helpful, it does not actively help the client organize their thoughts or clarify their agenda for the session."
+},
+"b": {
+"text": "This option is not the best because the coach is selecting the topic based on their own interest or assumption, rather than the client's preference. This violates Competency 3: Establishes and Maintains Agreements, as the coach is not partnering with the client to define the session focus."
+},
+"c": {
+"text": "This is the best action because it demonstrates Competency 6: Listens Actively, specifically sub-competency 6.02, by summarizing what the client has communicated to ensure understanding. It also aligns with Competency 3: Establishes and Maintains Agreements, specifically sub-competency 3.06, which requires the coach to partner with the client to identify what they want to accomplish in the session. By reflecting the list back and asking the client to choose, the coach respects client autonomy and helps bring focus to the session."
+},
+"d": {
+"text": "This is the worst action because the coach is unilaterally deciding the agenda based on the arbitrary fact that the client mentioned the work event first. This violates Competency 3: Establishes and Maintains Agreements and Competency 8: Facilitates Client Growth (sub-competency 8.03), as it ignores client autonomy and imposes the coach's logic on the session flow."
+}
+},
+"answer": {
+"best": "c",
+"worst": "d"
+},
+"number": "ICF-003EN",
+"options": [
+{
+"id": "a",
+"text": "Ask the client if they need to take a moment before starting the coaching sessions, since they seem stressed."
+},
+{
+"id": "b",
+"text": "Ask the client to share more about their aging parents."
+},
+{
+"id": "c",
+"text": "Acknowledge that the client has shared three significant challenges that they are facing and ask the client which one they would like to explore first."
+},
+{
+"id": "d",
+"text": "Ask the client to begin with the major event they are planning at work, since they mentioned it first."
+}
+],
+"title": "A client comes to a session appearing stressed. When the coach asks what the client wants to talk about, the client frantically lists a major event they are planning at work, a large family gathering they are organizing, and caring for their aging parents. What should the coach do?"
+}
+{
+"_id": "ICF-003_CN",
+"analyses": {
+"a": {
+"text": "这个选项不是最好的，因为虽然它体现了同理心和对客户状态的觉察（能力 5：保持在场），但它推迟了教练协议的建立。虽然暂停一下可能有所帮助，但它并没有积极帮助客户整理思绪或明确本次会话的议程。"
+},
+"b": {
+"text": "这个选项不是最好的，因为教练是根据自己的兴趣或假设来选择话题，而不是根据客户的偏好。这违反了能力 3：建立和维持协议，因为教练没有与客户合作来定义会话的焦点。"
+},
+"c": {
+"text": "这是最佳行动，因为它体现了能力 6：积极倾听，特别是子能力 6.02，通过总结客户所传达的内容来确保理解。它也符合能力 3：建立和维持协议，特别是子能力 3.06，要求教练与客户合作确定他们希望在会话中完成什么。通过将客户列出的事项反馈回去并请客户做出选择，教练尊重了客户的自主权，并帮助会话聚焦。"
+},
+"d": {
+"text": "这是最差的行动，因为教练仅仅根据客户最先提到工作活动这一随意的事实，就单方面决定了议程。这违反了能力 3：建立和维持协议以及能力 8：促进客户成长（子能力 8.03），因为它忽视了客户的自主权，并将教练的逻辑强加于会话流程之上。"
+}
+},
+"answer": {
+"best": "c",
+"worst": "d"
+},
+"number": "ICF-003CN",
+"options": [
+{
+"id": "a",
+"text": "询问客户是否需要在他开始教练会话之前休息片刻，因为他们看起来很有压力。"
+},
+{
+"id": "b",
+"text": "请客户分享更多关于他们年迈父母的情况。"
+},
+{
+"id": "c",
+"text": "承认客户已经分享了他们面临的三个重大挑战，并询问客户希望首先探索哪一个。"
+},
+{
+"id": "d",
+"text": "请客户从他们正在筹划的工作中的重大活动开始，因为这是他们最先提到的。"
+}
+],
+"title": "一位客户来到会话时显得很有压力。当教练询问客户想谈论什么时，客户急促地列出了一项他们正在筹划的工作中的重大活动、一次他们正在组织的家庭大型聚会，以及照顾年迈的父母。教练应该怎么做？"
+}
+{
+"_id": "ICF-004_EN",
+"analyses": {
+"a": {
+"text": "This is the best action because it demonstrates Competency 4: Cultivates Trust and Safety and Competency 6: Listens Actively. The client has clearly signaled a preference for written communication over verbal sharing regarding their emotions. By acknowledging the work and asking about their comfort level, the coach respects the client's unique style (sub-competency 4.02) and prioritizes psychological safety before diving into content. This approach meets the client where they are."
+},
+"b": {
+"text": "This option is not the best because it ignores the non-verbal cue the client just gave. The client handed over the journal silently, suggesting a reluctance to speak. Asking them to summarize verbally forces them back into the mode of communication they currently find difficult, which could increase anxiety and reduce trust."
+},
+"c": {
+"text": "This is the worst action because it rushes to action planning (Competency 8: Facilitates Client Growth) without first establishing safety or exploring awareness (Competency 7). It ignores the client's emotional state and the vulnerability required to share the journal. Pushing for 'steps to overcome' implies the anxiety is a problem to be fixed immediately rather than an experience to be understood, which violates the coaching mindset of curiosity and empathy."
+},
+"d": {
+"text": "This option is a valid coaching question under Competency 7: Evokes Awareness, but it is not the best choice in this specific moment. Given the client's silence and previous discomfort, asking a cognitive question about 'new awareness' might feel like a test. Option A is superior because it focuses on building the relationship and safety first."
+}
+},
+"answer": {
+"best": "a",
+"worst": "c"
+},
+"number": "ICF-004EN",
+"options": [
+{
+"id": "a",
+"text": "Acknowledge the reflection work the client has done, and ask the client if they feel comfortable exploring some of the emotions they described in their journal."
+},
+{
+"id": "b",
+"text": "Ask the client if they would summarize the entries they detailed in their journal for the coach."
+},
+{
+"id": "c",
+"text": "Ask the client to identify some steps they can take to overcome the anxieties they wrote about."
+},
+{
+"id": "d",
+"text": "Ask the client what new awareness they developed about themselves through the journaling process."
+}
+],
+"title": "A university biomedical researcher is working with a coach to improve their interactions with colleagues. The client is a very analytical thinker and can easily explain detailed data points and complex graphs, but seems reluctant share anything personal with the coach. In previous sessions, the coach encouraged the client to describe how they felt at social events, but the client seems highly uncomfortable, answering only with short, one-word responses. When the client arrives to their session today, the client silently hands the coach a journal. The client has written several, detailed entries over the last week about their experience attending a university luncheon, a faculty party, and a staff development workshop since their last session. While the client says little to the coach in the moment, their entries show deep reflections about the anxiety the client experienced at these events and their desire to overcome social anxiety. What should the coach do?"
+}
+{
+"_id": "ICF-004_CN",
+"analyses": {
+"a": {
+"text": "这是最佳行动，因为它体现了能力 4：培养信任和安全感以及能力 6：积极倾听。客户已经清楚地表明了在表达情绪方面，他们更倾向于书面沟通而非口头分享。通过承认这项工作并询问他们的舒适度，教练尊重了客户独特的风格（子能力 4.02），并在深入探讨内容之前优先考虑心理安全。这种方法是在客户所在的当下状态与他们相遇。"
+},
+"b": {
+"text": "这个选项不是最好的，因为它忽略了客户刚刚发出的非语言信号。客户默默地递交日记，暗示了他们不愿开口说话。要求他们口头总结会迫使他们回到目前感到困难的沟通模式中，这可能会增加焦虑并降低信任。"
+},
+"c": {
+"text": "这是最差的行动，因为它在没有先建立安全感或探索觉察（能力 7）的情况下，就急于进行行动规划（能力 8：促进客户成长）。它忽略了客户的情绪状态以及分享日记所需的脆弱性。催促制定“克服步骤”暗示焦虑是一个需要立即解决的问题，而不是一种需要被理解的经历，这违反了保持好奇心和同理心的教练思维。"
+},
+"d": {
+"text": "这个选项在能力 7：引起觉察下是一个有效的教练问题，但在此时此刻并不是最佳选择。鉴于客户的沉默和之前的不适，询问关于“新觉察”的认知性问题可能会让客户感觉像是在接受测试。选项 A 更优，因为它首先关注建立关系和安全感。"
+}
+},
+"answer": {
+"best": "a",
+"worst": "c"
+},
+"number": "ICF-004CN",
+"options": [
+{
+"id": "a",
+"text": "承认客户所做的反思工作，并询问客户是否觉得可以舒适地探索他们在日记中描述的一些情绪。"
+},
+{
+"id": "b",
+"text": "询问客户是否愿意为教练总结他们在日记中详述的条目。"
+},
+{
+"id": "c",
+"text": "要求客户确定一些他们可以采取的步骤，以克服他们在日记中写到的焦虑。"
+},
+{
+"id": "d",
+"text": "询问客户通过写日记的过程，对自己产生了什么新的觉察。"
+}
+],
+"title": "一位大学生物医学研究员正在与教练合作，以改善他们与同事的互动。客户是一位非常善于分析的思考者，可以轻松解释详细的数据点和复杂的图表，但似乎不愿与教练分享任何个人信息。在之前的会话中，教练鼓励客户描述他们在社交活动中的感受，但客户显得非常不自在，只用简短的单字回答。当客户今天到达会话时，客户默默地递给教练一本名为日记。自上次会话以来，客户写了几篇详细的条目，关于他们参加大学午宴、教职员工聚会和员工发展研讨会的经历。虽然客户当时对教练说话很少，但他们的条目显示了对客户在这些活动中经历的焦虑以及他们克服社交焦虑的渴望的深刻反思。教练应该怎么做？"
+}
+{
+"_id": "ICF-005_EN",
+"analyses": {
+"a": {
+"text": "This is the worst action because it ignores the significant emotional data the client just shared, violating Competency 6: Listens Actively and Competency 4: Cultivates Trust and Safety. By immediately redirecting the client back to the logical task of planning, the coach fails to demonstrate empathy or presence. It prioritizes the coach's agenda (or the previous agenda) over the client's immediate human experience, potentially causing the client to feel unheard or dismissed."
+},
+"b": {
+"text": "This option is not the best because it asks a leading question based on the coach's interpretation of the client's emotion. Asking if they are sure they want to retire challenges the client's life decision rather than exploring the feeling. It does not partner with the client to understand what the emotion means to them."
+},
+"c": {
+"text": "This option is a good display of empathy (Competency 4), but it stops short of partnering. By simply normalizing the feeling, the coach acts slightly more as an expert or supporter rather than a partner who invites the client to decide how to use this emotion in the coaching session."
+},
+"d": {
+"text": "This is the best action because it aligns with Competency 5: Maintains Presence (creating space for silence) and Competency 3: Establishes and Maintains Agreements. The coach acknowledges the emerging strong emotion (Competency 6.04) and then partners with the client (Competency 3.10) to determine if they want to shift the session focus to these feelings or stick to the original plan. This respects client autonomy and meets the client where they are."
+}
+},
+"answer": {
+"best": "d",
+"worst": "a"
+},
+"number": "ICF-005EN",
+"options": [
+{
+"id": "a",
+"text": "Pause for a moment, then ask the client to identify the remaining plans they would like to focus on today."
+},
+{
+"id": "b",
+"text": "Ask the client if they are sure they want to retire."
+},
+{
+"id": "c",
+"text": "Acknowledge that retirement is a significant life transition and that emotional responses are normal."
+},
+{
+"id": "d",
+"text": "Pause, then acknowledge the emotional impacts the transition seems to be having on the client, and ask if they would like to spend some time with those feelings."
+}
+],
+"title": "A coach recently began working with a client to help them plan for retirement. The client is a well-respected teacher who has taught for 30 years... During the current session... Suddenly, the client begins to cry and says, 'I've spent half my life at this school! I adore my students and my colleagues are my best friends. I can't imagine what my life is going to be like when I no longer walk through the front doors of the school each morning!' What should the coach do?"
+}
+
+{
+"_id": "ICF-005_CN",
+"analyses": {
+"a": {
+"text": "这是最差的行动，因为它忽略了客户刚刚分享的重要情绪数据，违反了能力 6：积极倾听和能力 4：培养信任和安全感。通过立即将客户重新引向逻辑性的规划任务，教练未能表现出同理心或在场。这把教练的议程（或之前的议程）置于客户当下的体验之上，可能会让客户感到没被听见或被忽视。"
+},
+"b": {
+"text": "这个选项不是最好的，因为它基于教练对客户情绪的解读提出了一个引导性问题。询问他们是否确定想要退休是在挑战客户的人生决定，而不是探索这种感觉。这并没有与客户合作去理解这种情绪对他们意味着什么。"
+},
+"c": {
+"text": "这个选项很好地展示了同理心（能力 4），但它在伙伴关系方面做得不够。通过简单地将感受正常化，教练的表现更像是一个专家或支持者，而不是一个邀请客户决定如何在教练会话中使用这种情绪的伙伴。"
+},
+"d": {
+"text": "这是最佳行动，因为它符合能力 5：保持在场（创造沉默的空间）和能力 3：建立和维持协议。教练承认了浮现出的强烈情绪（能力 6.04），然后与客户合作（能力 3.10）以确定他们是想将会话重点转移到这些感受上，还是坚持原来的计划。这尊重了客户的自主权，并在客户当下的状态中与他们相遇。"
+}
+},
+"answer": {
+"best": "d",
+"worst": "a"
+},
+"number": "ICF-005CN",
+"options": [
+{
+"id": "a",
+"text": "暂停片刻，然后请客户确定他们今天想关注的剩余计划。"
+},
+{
+"id": "b",
+"text": "询问客户是否确定要退休。"
+},
+{
+"id": "c",
+"text": "承认退休是一个重大的人生转折，情绪反应是正常的。"
+},
+{
+"id": "d",
+"text": "暂停，然后承认这一转变似乎对客户产生的情绪影响，并询问他们是否愿意花些时间来处理这些感受。"
+}
+],
+"title": "一位教练最近开始与一位客户合作，帮助他们规划退休生活。客户是一位受人尊敬的教师，在一所当地小学教了30年书……在当前的会话中……突然，客户开始哭泣并说：‘我半辈子都在这所学校度过！我崇拜我的学生，我的同事是我最好的朋友。我无法想象当我不再每天早上走进学校大门时，我的生活会变成什么样！’教练应该怎么做？"
+}
+{
+"_id": "ICF-006_EN",
+"analyses": {
+"a": {
+"text": "This is the worst action because it completely ignores the client's non-verbal communication and emotional shift. By simply repeating the question, the coach demonstrates a lack of sensory awareness and empathy, violating Competency 6: Listens Actively, which requires noticing energy shifts and non-verbal cues. It prioritizes the coach's agenda (getting an answer) over the client's well-being and breaks the safety of the container."
+},
+"b": {
+"text": "This option is not the best because, while it shows concern, it assumes the client is incapacitated or in need of a break, rather than viewing the silence as a potential door to insight. It interrupts the flow of the session unnecessarily instead of using the moment to deepen the coaching conversation."
+},
+"c": {
+"text": "This is the best action because it aligns directly with Competency 6: Listens Actively (sub-competency 6.04: Notices, acknowledges and explores the client's emotions, energy shifts, non-verbal cues) and Competency 7: Evokes Awareness (sub-competency 7.05: Invites the client to share more about their experience in the moment). By pausing and acknowledging the shift without judgment, the coach creates a safe space for the client to process the realization that likely just occurred regarding the conflict between their career goals and family responsibilities."
+},
+"d": {
+"text": "This option is not effective because it bypasses the significant emotional data that just emerged. By reverting to the logical analysis of job offers, the coach misses a critical opportunity to explore the whole person (Competency 1.02 and 4.01). Ignoring the client's reaction to the question about family suggests the coach is only interested in the professional aspect of the client, not their full identity."
+}
+},
+"answer": {
+"best": "c",
+"worst": "a"
+},
+"number": "ICF-006EN",
+"options": [
+{
+"id": "a",
+"text": "Repeat the question to the client to give them another opportunity to respond to the coach's inquiry."
+},
+{
+"id": "b",
+"text": "Ask the client if they are okay to proceed with the session, or if they need a break."
+},
+{
+"id": "c",
+"text": "Pause for a moment, then share with the client that they noticed a change in the client's energy. Ask if the client would like to explore what they are feeling in this moment."
+},
+{
+"id": "d",
+"text": "Support the client in weighing the offers they have received by inviting the client to explore each of the characteristics they listed for a new job."
+}
+],
+"title": "A client is working with a coach to support them during an important career transition. The client currently holds a demanding role as Chief Operating Officer of a company, while also raising two young children and serving as primary caretaker for their aging parents, who live with the client. The client recently received job offers from three different companies, each requiring the client and their family to relocate. The client comes to the session excited about the new job opportunities and hopes to gain clarity through the session on which offer to choose. The client starts by discussing the things they are looking for in a new job, energetically listing opportunities for growth, challenging responsibilities, a talented team to lead, and the potential for travel. When the coach asks what the client's children and aging parents may need in a new community, the client's excited smile disappears and they are suddenly quiet. What should the coach do?"
+}
+
+{
+"_id": "ICF-006_CN",
+"analyses": {
+"a": {
+"text": "这是最差的行动，因为它完全忽略了客户的非语言沟通和情绪转变。通过简单地重复问题，教练表现出缺乏感知力和同理心，违反了能力 6：积极倾听，该能力要求注意能量转变和非语言线索。它将教练的议程（获得答案）置于客户的福祉之上，并破坏了会话的安全氛围。"
+},
+"b": {
+"text": "这个选项不是最好的，因为虽然它表示了关心，但它假设客户无法继续或需要休息，而不是将沉默视为通往洞察的潜在大门。这不必要地打断了会话的流程，而不是利用这一刻来加深教练对话。"
+},
+"c": {
+"text": "这是最佳行动，因为它直接符合能力 6：积极倾听（子能力 6.04：注意、承认并探索客户的情绪、能量转变、非语言线索）和能力 7：引起觉察（子能力 7.05：邀请客户分享更多关于当下的体验）。通过暂停并不带评判地承认这种转变，教练为客户创造了一个安全的空间，让他们处理刚刚可能发生的关于职业目标与家庭责任之间冲突的觉察。"
+},
+"d": {
+"text": "这个选项无效，因为它绕过了刚刚浮现的重要情绪数据。通过回到对工作机会的逻辑分析，教练错失了一个探索客户全人（能力 1.02 和 4.01）的关键机会。忽略客户对关于家庭问题的反应，表明教练只对客户的职业方面感兴趣，而不是他们的完整身份。"
+}
+},
+"answer": {
+"best": "c",
+"worst": "a"
+},
+"number": "ICF-006CN",
+"options": [
+{
+"id": "a",
+"text": "向客户重复这个问题，给他们另一次机会回答教练的询问。"
+},
+{
+"id": "b",
+"text": "询问客户是否可以继续进行会话，或者是否需要休息一下。"
+},
+{
+"id": "c",
+"text": "暂停片刻，然后与客户分享他们注意到客户的能量发生了变化。询问客户是否愿意探索他们此时此刻的感受。"
+},
+{
+"id": "d",
+"text": "通过邀请客户探索他们列出的新工作的每一个特征，支持客户权衡他们收到的录用通知。"
+}
+],
+"title": "一位客户正在与教练合作，以支持他们度过重要的职业转型期。客户目前在一家公司担任首席运营官这一要求很高的职位，同时还抚养两个年幼的孩子，并担任与客户同住的年迈父母的主要照顾者。客户最近收到了三家不同公司的工作邀请，每一家都要求客户及其家人搬迁。客户带着对新工作机会的兴奋来到会话，并希望通过会话清楚地知道该选择哪个邀请。客户开始讨论他们在寻找新工作时看重的东西，精力充沛地列出了成长机会、具有挑战性的责任、领导有才华的团队以及出差的潜力。当教练询问客户的孩子和年迈的父母在新社区可能需要什么时，客户兴奋的笑容消失了，突然变得安静。教练应该怎么做？"
+}
+{
+"_id": "ICF-007_EN",
+"analyses": {
+"a": {
+"text": "This option is a valid coaching intervention aligned with Competency 7: Evokes Awareness, as it invites the client to look at the underlying emotion (fear). However, it is not the best option because it focuses on the problem (the fear) rather than leveraging the client's unique strength and language (the marathon metaphor) which offers a more empowering path to insight."
+},
+"b": {
+"text": "This is the worst action because it acts as a cheerleader rather than a coach, violating Competency 7: Evokes Awareness and Competency 8: Facilitates Client Growth. By telling the client they can do it, the coach is imposing their own opinion and minimizing the client's current struggle. It attempts to fix the client's mood externally rather than helping the client access their own internal resources to overcome the challenge."
+},
+"c": {
+"text": "This is the best action because it masterfully applies Competency 6: Listens Actively and Competency 7: Evokes Awareness. The coach notices the client's language (running metaphors), acknowledges the specific term used ('hit a wall'), and integrates the client's expertise (marathon running) into the coaching. By asking the client to bridge their physical endurance success to their current writing challenge, the coach empowers the client to discover their own solution using a framework they already master."
+},
+"d": {
+"text": "This option is not effective because it jumps straight to action planning (Competency 8) without first addressing the client's state of being (Competency 5) or evoking new awareness (Competency 7). The client is tired and discouraged; moving immediately to strategies ignores their emotional state and risks creating a plan the client has no energy to execute."
+}
+},
+"answer": {
+"best": "c",
+"worst": "b"
+},
+"number": "ICF-007EN",
+"options": [
+{
+"id": "a",
+"text": "Ask the client if they would like to explore their fear of not finishing the book."
+},
+{
+"id": "b",
+"text": "Remind the client that they have achieved extremely challenging goals in the past and can meet this big goal, too."
+},
+{
+"id": "c",
+"text": "Ask the client if there was a time when they were running a marathon and felt like they couldn't finish. Invite the client to share how they handled that challenge in the race."
+},
+{
+"id": "d",
+"text": "Support the client in identifying strategies to help them move forward in writing the remaining chapters of the book."
+}
+],
+"title": "A coach is working with a client who is an experienced marathon runner writing a book on training for endurance races. This is a long-held dream for the client. The coach notices that the client often uses running metaphors when talking about their challenges and progress in their writing. The client is typically upbeat and energetic, but they arrive at today's session appearing tired and discouraged. They share with the coach that they have recently “hit a wall” in writing, with three chapters remaining. When they sit down to write, the client says they can barely come up with anything, and nothing that is worth publishing. The client says they are afraid they won’t be able to complete the book on time and that all of their work toward this goal will be lost. What should the coach do?"
+}
+{
+"_id": "ICF-007_CN",
+"analyses": {
+"a": {
+"text": "这个选项是一个有效的教练干预，符合能力 7：引起觉察，因为它邀请客户审视潜在的情绪（恐惧）。然而，它不是最佳选项，因为它聚焦于问题（恐惧），而不是利用客户独特的优势和语言（马拉松隐喻），后者能提供一条更有力量通往洞察的路径。"
+},
+"b": {
+"text": "这是最差的行动，因为它扮演的是啦啦队长的角色而非教练，违反了能力 7：引起觉察和能力 8：促进客户成长。通过告诉客户他们能做到，教练是在强加自己的观点，并淡化了客户当前的挣扎。它试图从外部修复客户的情绪，而不是帮助客户调用自己的内在资源来克服挑战。"
+},
+"c": {
+"text": "这是最佳行动，因为它巧妙地运用了能力 6：积极倾听和能力 7：引起觉察。教练注意到了客户的语言（跑步隐喻），识别了使用的特定术语（‘撞墙期’），并将客户的专长（马拉松跑）整合进教练过程中。通过要求客户将他们在身体耐力上的成功经验连接到当前的写作挑战上，教练赋能客户使用他们已经掌握的框架来发现自己的解决方案。"
+},
+"d": {
+"text": "这个选项无效，因为它在没有先处理客户的存在状态（能力 5）或引起新觉察（能力 7）的情况下，就直接跳到了行动规划（能力 8）。客户感到疲惫和沮丧；立即转向策略会忽略他们的情绪状态，并可能导致制定出一个客户没有精力去执行的计划。"
+}
+},
+"answer": {
+"best": "c",
+"worst": "b"
+},
+"number": "ICF-007CN",
+"options": [
+{
+"id": "a",
+"text": "询问客户是否愿意探索他们对于无法完成这本书的恐惧。"
+},
+{
+"id": "b",
+"text": "提醒客户他们过去曾达成过极具挑战性的目标，也能实现这个大目标。"
+},
+{
+"id": "c",
+"text": "询问客户是否有过在跑马拉松时觉得无法跑完全程的经历。邀请客户分享他们在比赛中是如何应对那个挑战的。"
+},
+{
+"id": "d",
+"text": "支持客户确定策略，以帮助他们推进本书剩余章节的写作。"
+}
+],
+"title": "一位教练正在与一位客户合作，该客户是一位经验丰富的马拉松跑者，正在撰写一本关于耐力赛训练的书。这是客户长久以来的梦想。教练注意到，客户在谈论他们写作中的挑战和进展时，经常使用跑步的隐喻。客户通常乐观且充满活力，但他们今天到达会话时显得疲惫和沮丧。他们与教练分享说，最近在写作中“遇到了撞墙期”（hit a wall），还剩下三章。当他们坐下来写作时，客户说他们几乎想不出任何东西，也没什么值得发表的内容。客户说他们担心无法按时完成这本书，并且他们为这个目标所做的一切工作都将付诸东流。教练应该怎么做？"
+}
+{
+"_id": "ICF-008_EN",
+"analyses": {
+"a": {
+"text": "This is the best action because it aligns with Competency 8: Facilitates Client Growth, specifically sub-competency 8.08: 'Acknowledges the client's progress and successes.' By acknowledging the client's confidence and growth, the coach reinforces the positive change (also Competency 7.06). Inviting celebration respects the closing nature of the session and focuses on integrating the learning and success (Competency 8.01) before jumping to new work."
+},
+"b": {
+"text": "This option is not the best because it rushes past the moment of celebration and closure. While identifying future challenges is part of coaching, in this specific 'closing session' context, skipping the acknowledgment of the current victory diminishes the client's accomplishment and the sense of completion."
+},
+"c": {
+"text": "This option focuses on maintenance, which is valid, but less empowering than celebration in this specific moment. It implies a fear of losing the confidence rather than trusting the client's new state of being. Option A is superior because it centers on the positive emotion and achievement first."
+},
+"d": {
+"text": "This is the worst action because it serves the coach's business interest rather than the client's needs, potentially violating Competency 1: Demonstrates Ethical Practice (integrity). It also ignores the current agreement (Competency 3), which was for a specific engagement that is now closing. Suggesting an extension immediately upon hearing good news can feel transactional and dismissive of the client's readiness to move forward independently (Competency 8.03: Acknowledges client autonomy)."
+}
+},
+"answer": {
+"best": "a",
+"worst": "d"
+},
+"number": "ICF-008EN",
+"options": [
+{
+"id": "a",
+"text": "Acknowledge the client's growth in confidence over the past year, and invite the client to share how they plan to celebrate their selection for the leadership development program."
+},
+{
+"id": "b",
+"text": "Invite the client to identify challenges they would like to take on next."
+},
+{
+"id": "c",
+"text": "Ask the client what they may need to maintain their new confidence."
+},
+{
+"id": "d",
+"text": "Suggest to the client that they extend their coaching engagement to work toward a new goal of being promoted to a leadership role."
+}
+],
+"title": "A coach has worked for one year with a client. The client has been identified by their supervisor as a potential leader... During their closing session, the coach notices that the client has a confident, easy smile. When the coach shares their observation with the client, the client responds by saying, 'I feel different, empowered, ready to take on new challenges.' The client adds, 'And I was just nominated by the CEO to be part of a leadership development program for emerging leaders in our company!' What should the coach do?"
+}
+{
+"_id": "ICF-008_CN",
+"analyses": {
+"a": {
+"text": "这是最佳行动，因为它符合能力 8：促进客户成长，特别是子能力 8.08：“承认客户的进步和成功”。通过承认客户的自信和成长，教练强化了积极的变化（也符合能力 7.06）。邀请庆祝尊重了会话的结束性质，并在跳到新工作之前，专注于整合学习和成功（能力 8.01）。"
+},
+"b": {
+"text": "这个选项不是最好的，因为它匆忙跳过了庆祝和结束的时刻。虽然确定未来的挑战是教练的一部分，但在这种特定的“结束会话”语境中，跳过对当前胜利的承认会削弱客户的成就感和完成感。"
+},
+"c": {
+"text": "这个选项侧重于维持，这是有效的，但在此时此刻不如庆祝更有力量。它暗示了对失去信心的恐惧，而不是信任客户新的存在状态。选项 A 更优，因为它首先以积极的情绪和成就为中心。"
+},
+"d": {
+"text": "这是最差的行动，因为它服务于教练的商业利益而不是客户的需求，可能违反了能力 1：体现道德实践（正直）。它也忽略了当前的协议（能力 3），该协议是针对现在正在结束的特定契约。一听到好消息就建议续约可能会让人感觉是交易性的，并且无视了客户独立前进的准备状态（能力 8.03：承认客户自主权）。"
+}
+},
+"answer": {
+"best": "a",
+"worst": "d"
+},
+"number": "ICF-008CN",
+"options": [
+{
+"id": "a",
+"text": "承认客户过去一年在自信心方面的成长，并邀请客户分享他们计划如何庆祝自己入选领导力发展项目。"
+},
+{
+"id": "b",
+"text": "邀请客户确定他们下一步想要承担的挑战。"
+},
+{
+"id": "c",
+"text": "询问客户他们可能需要什么来维持他们的新自信。"
+},
+{
+"id": "d",
+"text": "建议客户延长他们的教练契约，以致力于晋升为领导角色的新目标。"
+}
+],
+"title": "一位教练与一位客户合作了一年。该客户因其高质量的工作、与同事的良好关系以及对未来项目的创新想法，被其主管认定为组织中的潜在领导者……在他们的结束会话中，教练注意到客户带着自信、轻松的微笑。当教练与客户分享他们的观察时，客户回应说：“我感觉不同了，充满力量，准备好接受新的挑战。”客户补充道：“而且我刚刚被 CEO 提名为我们公司新兴领导者领导力发展项目的一员！”教练应该怎么做？"
+}

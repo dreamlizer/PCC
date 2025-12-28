@@ -84,9 +84,9 @@
         <view class="code_box_record_detail">{{item.region}}</view>
         <view class="code_box_record_detail">{{item.city}}</view>
         <!-- <view class="code_box_record_detail">{{item.sales}}</view> -->
-        <input style="background-color: rgba(0, 0, 0, 0.03)" class="code_box_record_detail" bindinput="bindInput" data-index="{{index}}" value="{{item.sales}}" type="number"></input>
+        <input class="code_box_record_detail record-input" bindinput="bindInput" data-index="{{index}}" value="{{item.sales}}" type="number"></input>
         <view class="code_box_record_detail">
-          <button style="font-size: 12px" bind:tap="deleteRecord" data-id="{{item._id}}">删除</button>
+          <button class="btn-delete" bind:tap="deleteRecord" data-id="{{item._id}}">删除</button>
         </view>
       </view>
     </view>
@@ -142,7 +142,7 @@
     <view class="title">集成 Agent-UI 组件指引</view>
     <view class="block">
       <view class="step-title"><text class="step-left">step</text> <text class="step-right">1 </text>拷贝组件源码包</view>
-      <view style="display: flex;align-items: center;">点击复制查看组件仓库地址 <image mode="widthFix" style="width: 20px;height: 20px" bind:tap="copyUrl" src='../../images/copy.svg'/></view>
+      <view class="copy-row">点击复制查看组件仓库地址 <image mode="widthFix" class="copy-icon" bind:tap="copyUrl" src='../../images/copy.svg'/></view>
       <view class="step-title"><text class="step-left">step</text> <text class="step-right">2 </text>将组件拷贝至小程序目录中</view>
       <image class="img" mode="widthFix" src="../../images/ai_example2.png"></image>
       <view class="step-title"><text class="step-left">step</text> <text class="step-right">3 </text>在页面 .json 配置文件中注册组件</view>
@@ -185,5 +185,4 @@
     </view>
   </view>
 </block>
-
 

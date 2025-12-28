@@ -45,7 +45,7 @@ function mergeBilingualQuestion(qZh, qEn) {
   merged.title = enTitle ? { zh: zhTitle, en: enTitle } : (typeof (qZh && qZh.title) === 'object' ? qZh.title : zhTitle);
 
   if (Array.isArray(qZh && qZh.options)) {
-    merged.options = qZh.options.map((opt, idx) => {
+    merged.options = qZh.options.map(function(opt, idx) {
       const zhText = resolveText(opt && opt.text, 'zh');
       const optEn = qEn && Array.isArray(qEn.options) ? qEn.options[idx] : null;
       const enText = optEn ? resolveText(optEn.text, 'en') : '';
@@ -62,16 +62,23 @@ function shuffle(arr) {
   const a = arr.slice();
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
+    const tmp = a[i];
+    a[i] = a[j];
+    a[j] = tmp;
   }
   return a;
 }
 
+function pad2(n) {
+  const s = String(n);
+  return s.length >= 2 ? s : ('0' + s);
+}
+
 function fmt(ms) {
   const s = Math.floor(ms / 1000);
-  const mm = String(Math.floor(s / 60)).padStart(2, '0');
-  const ss = String(s % 60).padStart(2, '0');
-  return `${mm}:${ss}`;
+  const mm = pad2(Math.floor(s / 60));
+  const ss = pad2(s % 60);
+  return mm + ':' + ss;
 }
 
 Page({
@@ -134,8 +141,8 @@ Page({
         const bank = (app && app.globalData && app.globalData.questionBank) || [];
         self.bankQuestions = bank;
         const questions = bank
-          .filter(q => !isEnglishVariantNumber(q && q.number))
-          .map(q => mergeBilingualQuestion(q, locateEnglishByNumber(q, bank)));
+          .filter(function(q) { return !isEnglishVariantNumber(q && q.number); })
+          .map(function(q) { return mergeBilingualQuestion(q, locateEnglishByNumber(q, bank)); });
         self.setData({ 
           questions: questions, 
           theme: getCurrentTheme(), 
@@ -147,8 +154,8 @@ Page({
         const bank = (app && app.globalData && app.globalData.questionBank) || [];
         self.bankQuestions = bank;
         const questions = bank
-          .filter(q => !isEnglishVariantNumber(q && q.number))
-          .map(q => mergeBilingualQuestion(q, locateEnglishByNumber(q, bank)));
+          .filter(function(q) { return !isEnglishVariantNumber(q && q.number); })
+          .map(function(q) { return mergeBilingualQuestion(q, locateEnglishByNumber(q, bank)); });
         self.setData({ 
           questions: questions, 
           theme: getCurrentTheme(), 
@@ -160,8 +167,8 @@ Page({
       const bank = (app && app.globalData && app.globalData.questionBank) || [];
       this.bankQuestions = bank;
       const questions = bank
-        .filter(q => !isEnglishVariantNumber(q && q.number))
-        .map(q => mergeBilingualQuestion(q, locateEnglishByNumber(q, bank)));
+        .filter(function(q) { return !isEnglishVariantNumber(q && q.number); })
+        .map(function(q) { return mergeBilingualQuestion(q, locateEnglishByNumber(q, bank)); });
       this.setData({ 
         questions: questions, 
         theme: getCurrentTheme(), 
@@ -187,9 +194,9 @@ Page({
   // 阶段控制
   startMode(e) {
     const mode = e.currentTarget.dataset.mode;
-    const all = this.data.questions.map(q => q.id);
+    const all = this.data.questions.map(function(q) { return q.id; });
     const order = mode === 'random' ? shuffle(all) : all;
-    const q0 = this.data.questions.find(q => q.id === order[0]);
+    const q0 = this.data.questions.find(function(q) { return q.id === order[0]; });
     const isBilingual = !!(q0 && q0.title && typeof q0.title === 'object' && q0.title.en);
     this.setData({
       phase: 'answer',
@@ -205,9 +212,10 @@ Page({
       startTs: Date.now(),
       elapsed: '00:00',
     });
-    const timerId = setInterval(() => {
-      const elapsed = fmt(Date.now() - this.data.startTs);
-      this.setData({ elapsed });
+    const self = this;
+    const timerId = setInterval(function() {
+      const elapsed = fmt(Date.now() - self.data.startTs);
+      self.setData({ elapsed: elapsed });
     }, 1000);
     this.setData({ timerId });
   },
@@ -239,7 +247,7 @@ Page({
   saveCurrentAnswer() {
     const q = this.data.question;
     if (!q) return;
-    const answers = { ...this.data.answers };
+    const answers = Object.assign({}, this.data.answers);
     answers[q.id] = { best: this.data.bestChoice, worst: this.data.worstChoice };
     this.setData({ answers });
   },
@@ -256,7 +264,7 @@ Page({
       return;
     }
     const qId = this.data.order[nextIdx];
-    const q = this.data.questions.find(x => x.id === qId);
+    const q = this.data.questions.find(function(x) { return x.id === qId; });
     const isBilingual = !!(q && q.title && typeof q.title === 'object' && q.title.en);
     this.setData({
       currentIndex: nextIdx,
@@ -271,19 +279,21 @@ Page({
   },
 
   stopEarly() {
+    const self = this;
     wx.showModal({
       title: '结束挑战',
       content: '确定要提前结束吗？将只统计已作答的题目。',
-      success: (res) => {
+      success: function(res) {
         if (res.confirm) {
-          this.saveCurrentAnswer(); // Save current if selected
-          this.finish(true);
+          self.saveCurrentAnswer();
+          self.finish(true);
         }
       }
     });
   },
 
-  finish(isEarly = false) {
+  finish(isEarly) {
+    if (typeof isEarly === 'undefined') isEarly = false;
     if (!isEarly) this.saveCurrentAnswer();
     if (this.data.timerId) clearInterval(this.data.timerId);
     const duration = fmt(Date.now() - this.data.startTs);
@@ -304,30 +314,43 @@ Page({
     // let correctBoth = 0; // 不再强调全对
     
     // Only review answered questions
-    const reviewList = answeredIds.map(id => {
-      const q = this.data.questions.find(x => x.id === id);
-      const sel = this.data.answers[id];
+    const self = this;
+    const reviewList = answeredIds.map(function(id) {
+      const q = self.data.questions.find(function(x) { return x.id === id; });
+      const sel = self.data.answers[id];
+      if (!q || !sel) return null;
       const isBestCorrect = sel.best === q.answer.best;
       const isWorstCorrect = sel.worst === q.answer.worst;
       if (isBestCorrect) correctBest++;
       if (isWorstCorrect) correctWorst++;
       // if (isBestCorrect && isWorstCorrect) correctBoth++;
-      return { id, isBestCorrect, isWorstCorrect };
-    });
+      return {
+        id,
+        bestChoice: sel.best,
+        worstChoice: sel.worst,
+        isBestCorrect,
+        isWorstCorrect
+      };
+    }).filter(function(x) { return !!x; });
 
     const totalCorrectAnswers = correctBest + correctWorst;
     const overallScore = Math.round((totalCorrectAnswers / totalAnswerCount) * 100);
     const bestRate = Math.round((correctBest / questionCount) * 100);
     const worstRate = Math.round((correctWorst / questionCount) * 100);
 
-    // 保存到历史
+    // 保存到历史（包含答题明细，便于“挑战记录”里回看能力平衡轮/复盘）
     addBossRushRecord({
       timestamp: Date.now(),
-      mode: this.data.mode + (isEarly ? ' (Partial)' : ''),
+      mode: this.data.mode,
+      is_partial: !!isEarly,
       score: overallScore,
+      best_rate: bestRate,
+      worst_rate: worstRate,
       correct_count: totalCorrectAnswers,
       total_count: totalAnswerCount,
-      duration,
+      question_count: questionCount,
+      duration: duration,
+      answers: reviewList
     });
 
     // 暂存复盘数据
@@ -337,13 +360,21 @@ Page({
     this.resetSession();
 
     // 跳转战报页前淡出过渡
-    this.applyFadeLeaveThen(() => {
+    this.applyFadeLeaveThen(function() {
       wx.navigateTo({
-        url: `/pages/bossrush/report?mode=${this.data.mode}&score=${overallScore}&bestRate=${bestRate}&worstRate=${worstRate}&duration=${duration}&total=${totalAnswerCount}&correctCount=${totalCorrectAnswers}`,
+        url: '/pages/bossrush/report?mode=' + self.data.mode +
+          '&score=' + overallScore +
+          '&bestRate=' + bestRate +
+          '&worstRate=' + worstRate +
+          '&duration=' + duration +
+          '&total=' + totalAnswerCount +
+          '&correctCount=' + totalCorrectAnswers +
+          '&questionCount=' + questionCount +
+          '&isPartial=' + (isEarly ? 1 : 0),
       });
     }, 500);
   },
 
   // 辅助渲染函数
-  resolve(text) { return resolveText(text, this.data.lang); }
+  resolve: function(text) { return resolveText(text, this.data.lang); }
 });

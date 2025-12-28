@@ -1,4 +1,7 @@
-<view class="page {{fadeClass}}">
+<view
+  class="page {{fadeClass}} {{fontScaleClass}}"
+  style="--icf-blue: {{theme.heroFrom}}; --icf-gold: {{theme.accentFrom}}; --icf-blue-rgb: {{theme.heroRgb}}; --icf-gold-rgb: {{theme.accentRgb}};"
+>
   <view class="viewport">
     <view class="main">
       <view class="bg-shape-top"></view>
@@ -16,9 +19,9 @@
         <view class="sub-title">Professional Certified Coach</view>
 
         <view class="button-group">
-          <button class="icf-btn btn-primary" bindtap="goExam">模拟考试</button>
-          <button class="icf-btn btn-primary" bindtap="goCompetencies">八项教练能力</button>
           <button class="icf-btn btn-primary" bindtap="goPractice">逐题解析</button>
+          <button class="icf-btn btn-primary" bindtap="goExam">模拟考试</button>
+          <button class="icf-btn btn-primary" bindtap="goCompetencies">八项核心能力</button>
           <button class="icf-btn btn-primary" bindtap="goProfile">个人中心</button>
         </view>
       </view>

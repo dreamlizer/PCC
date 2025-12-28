@@ -13,9 +13,9 @@
     "pages/competencies/index"
   ],
   "window": {
-    "backgroundColor": "#F7F7F7",
+    "backgroundColor": "#F0F2F5",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F7F7F7",
+    "navigationBarBackgroundColor": "#F0F2F5",
     "navigationBarTitleText": "PCC 模拟试题",
     "navigationBarTextStyle": "black"
   },

@@ -1,10 +1,10 @@
-<view class="page {{fadeClass}} {{fontScaleClass}}" style="background: {{theme.pageBg}};">
-  <hero-header theme="{{theme}}" title="逐题解析" subtitle="按题号(number)排列，黄色星星代表已收藏" />
+<view class="page {{fadeClass}} {{fontScaleClass}}" style="background: {{theme.pageBg}}; --icf-blue: {{theme.heroFrom}}; --icf-gold: {{theme.accentFrom}}; --icf-blue-rgb: {{theme.heroRgb}}; --icf-gold-rgb: {{theme.accentRgb}};">
+  <hero-header theme="{{theme}}" title="逐题解析" subtitle="按题号排列，黄色星星代表已收藏" />
 
   <scroll-view scroll-y style="height: calc(100vh - 240rpx);">
     <block wx:for="{{list}}" wx:key="id">
       <view
-        class="card question-card {{item.favored ? 'is-favored' : ''}}"
+        class="question-card {{item.favored ? 'is-favored' : ''}}"
         bindtap="openDetail"
         data-id="{{item.id}}"
       >
@@ -21,7 +21,7 @@
       </view>
     </block>
     <view wx:if="{{!list.length}}" class="card">
-      <view class="muted">暂未加载到题目，请稍候或检查云环境。</view>
+      <view class="muted empty-hint">暂未加载到题目，请稍候或检查云环境。</view>
     </view>
   </scroll-view>
 </view>

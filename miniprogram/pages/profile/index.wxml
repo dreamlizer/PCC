@@ -1,4 +1,4 @@
-<view class="page {{fadeClass}} {{fontScaleClass}}" style="background: {{theme.pageBg}};">
+<view class="page {{fadeClass}} {{fontScaleClass}}" style="background: {{theme.pageBg}}; --icf-blue: {{theme.heroFrom}}; --icf-gold: {{theme.accentFrom}}; --icf-blue-rgb: {{theme.heroRgb}}; --icf-gold-rgb: {{theme.accentRgb}};">
   <hero-header theme="{{theme}}" title="个人中心" subtitle="设置与管理" />
 
   <view class="menu-list" style="box-shadow: 0 8rpx 24rpx -6rpx {{theme.heroFrom}}33; --accent-from: {{theme.accentFrom}}; --accent-to: {{theme.accentTo}}; --accent-shadow: {{theme.accentShadow}};">
@@ -32,5 +32,5 @@
     <view class="font-segment {{fontScale === 4 ? 'active' : ''}}" data-scale="4" bindtap="onFontTap">特大</view>
   </view>
 
-  <theme-drawer visible="{{drawerVisible}}" themes="{{themes}}" active-id="{{themeId}}" bindselect="onSelectTheme" bindclose="onCloseDrawer" />
+  <theme-drawer visible="{{drawerVisible}}" themes="{{themes}}" active-id="{{themeId}}" bindselect="onSelectTheme" bindclose="onCloseDrawer" style="--icf-gold: {{theme.accentFrom}}; --icf-gold-rgb: {{theme.accentRgb}};" />
 </view>

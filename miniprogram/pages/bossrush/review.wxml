@@ -1,4 +1,4 @@
-<view class="page {{fadeClass}} {{fontScaleClass}}">
+<view class="page {{fadeClass}} {{fontScaleClass}}" style="background: {{theme.pageBg}}; --icf-blue: {{theme.heroFrom}}; --icf-gold: {{theme.accentFrom}}; --icf-blue-rgb: {{theme.heroRgb}}; --icf-gold-rgb: {{theme.accentRgb}};">
   <hero-header
     theme="{{theme}}"
     title="逐题复盘"
@@ -34,7 +34,7 @@
         <view class="chevron"></view>
       </view>
     </block>
-    <view wx:if="{{list.length === 0}}" class="muted" style="text-align: center; margin-top: 48rpx; color: #95A5A6; font-size: 26rpx;">
+    <view wx:if="{{list.length === 0}}" class="muted empty-hint">
       暂无复盘记录
     </view>
   </scroll-view>

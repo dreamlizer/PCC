@@ -1,5 +1,5 @@
 // pages/bossrush/history.js
-const { getBossRushHistory, clearBossRushHistory } = require('../../utils/storage');
+const { getBossRushHistory, clearBossRushHistory, normalizeBossRushRecord } = require('../../utils/storage');
 const { getCurrentTheme } = require('../../services/theme');
 const { getFontScaleClassByStorage } = require('../../services/typography');
 
@@ -13,14 +13,36 @@ Page({
   },
   onShow() {
     const theme = getCurrentTheme();
-    const list = getBossRushHistory();
+    const raw = getBossRushHistory();
+    const list = (raw || []).map(function(r) {
+      return normalizeBossRushRecord(r);
+    });
     this.setData({ theme, list, fadeClass: 'fade-enter', fontScaleClass: getFontScaleClassByStorage() });
   },
   gotoReview(e) {
-    // 进入 Boss Rush 的复盘页面（按记录本身不传参，复盘页读取最新答题集）
+    const ts = e && e.currentTarget && e.currentTarget.dataset ? e.currentTarget.dataset.ts : '';
+    const rawHas = e && e.currentTarget && e.currentTarget.dataset ? e.currentTarget.dataset.has : null;
+    const has = rawHas === true || rawHas === 1 || rawHas === '1' || rawHas === 'true';
+    if (!has) {
+      wx.showToast({ title: '该记录暂无明细', icon: 'none' });
+      return;
+    }
     this.setData({ fadeClass: 'fade-leave' });
     setTimeout(() => {
-      wx.navigateTo({ url: '/pages/bossrush/review' });
+      wx.navigateTo({ url: '/pages/bossrush/review?ts=' + ts });
+    }, 500);
+  },
+  gotoWheel(e) {
+    const ts = e && e.currentTarget && e.currentTarget.dataset ? e.currentTarget.dataset.ts : '';
+    const rawHas = e && e.currentTarget && e.currentTarget.dataset ? e.currentTarget.dataset.has : null;
+    const has = rawHas === true || rawHas === 1 || rawHas === '1' || rawHas === 'true';
+    if (!has) {
+      wx.showToast({ title: '该记录暂无明细', icon: 'none' });
+      return;
+    }
+    this.setData({ fadeClass: 'fade-leave' });
+    setTimeout(() => {
+      wx.navigateTo({ url: '/pages/bossrush/report?view=ability&ts=' + ts });
     }, 500);
   },
 

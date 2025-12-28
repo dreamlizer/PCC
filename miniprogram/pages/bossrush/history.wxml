@@ -1,4 +1,4 @@
-<view class="page {{fadeClass}} {{fontScaleClass}}" style="background: {{theme.pageBg}};">
+<view class="page {{fadeClass}} {{fontScaleClass}}" style="background: {{theme.pageBg}}; --icf-blue: {{theme.heroFrom}}; --icf-gold: {{theme.accentFrom}}; --icf-blue-rgb: {{theme.heroRgb}}; --icf-gold-rgb: {{theme.accentRgb}};">
   <hero-header theme="{{theme}}" title="挑战记录" right-text="清空记录" bind:right="onClear" />
 
   <view class="history-list">
@@ -10,7 +10,7 @@
         <view class="history-item">
           <view class="item-left">
             <view class="mode-badge {{item.mode === 'sequence' ? 'mode-seq' : 'mode-random'}}">
-              {{item.mode === 'sequence' ? '按序模式' : '随机挑战'}}
+              {{item.mode === 'sequence' ? '按序模式' : '随机挑战'}}<text wx:if="{{item.is_partial}}">·未完成</text>
             </view>
             <view class="score-row">
               <text class="score-val">{{item.score}}</text>
@@ -19,13 +19,17 @@
             <view class="meta-info">
               <text>用时 {{item.duration}}</text>
               <text>·</text>
+              <text>做题 {{item.question_count}}</text>
+              <text>·</text>
               <text>正确 {{item.correct_count}}/{{item.total_count}}</text>
             </view>
           </view>
           
           <view class="item-right">
-             <!-- 仅最新的一条记录支持复盘 (因为 storage 仅存了一份 lastAnswers) -->
-             <view wx:if="{{index === 0}}" class="btn-review" bindtap="gotoReview">
+             <view class="btn-review btn-review--wheel {{item.has_answers ? '' : 'btn-review--disabled'}}" bindtap="gotoWheel" data-ts="{{item.timestamp}}" data-has="{{item.has_answers}}">
+               能力平衡轮
+             </view>
+             <view class="btn-review {{item.has_answers ? '' : 'btn-review--disabled'}}" bindtap="gotoReview" data-ts="{{item.timestamp}}" data-has="{{item.has_answers}}">
                复盘
              </view>
           </view>

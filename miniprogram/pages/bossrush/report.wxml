@@ -1,23 +1,30 @@
 <!-- pages/bossrush/report.wxml -->
-<view class="page {{fadeClass}}">
+<view class="page {{fadeClass}} {{fontScaleClass}}" style="background: {{theme.pageBg}}; --icf-blue: {{theme.heroFrom}}; --icf-gold: {{theme.accentFrom}}; --icf-blue-rgb: {{theme.heroRgb}}; --icf-gold-rgb: {{theme.accentRgb}};">
   <view class="report-bg">
     <view class="bg-shape-top"></view>
     <view class="bg-shape-bottom"></view>
     <view class="bg-wave-gold"></view>
   </view>
 
-  <view class="card report-hero" style="background: linear-gradient(135deg, {{theme.heroFrom}} 0%, {{theme.heroTo}} 100%);">
+  <view wx:if="{{view !== 'ability'}}" class="card report-hero" style="background: linear-gradient(135deg, {{theme.heroFrom}} 0%, {{theme.heroTo}} 100%);">
     <view class="report-hero__title">战报结算</view>
     <view class="report-hero__accent"></view>
 
     <view class="report-metric report-metric--first">
       <view class="report-metric__label">挑战模式</view>
-      <view class="report-metric__value">{{mode === 'sequence' ? '按序挑战' : '随机挑战'}}</view>
+      <view class="report-metric__value">
+        {{mode === 'sequence' ? '按序挑战' : '随机挑战'}}<text wx:if="{{isPartial}}">（未完成）</text>
+      </view>
     </view>
 
     <view class="report-metric">
       <view class="report-metric__label">答题总数</view>
       <view class="report-metric__value">{{total}} (含最佳/最差)</view>
+    </view>
+
+    <view class="report-metric">
+      <view class="report-metric__label">题目数量</view>
+      <view class="report-metric__value">{{questionCount}}</view>
     </view>
 
     <view class="report-metric">
@@ -42,11 +49,11 @@
   <!-- Stats Details Card -->
   <view class="card report-panel">
     <view class="report-panel__head">
-      <view class="report-panel__title">细项表现</view>
+      <view class="report-panel__title">{{view === 'ability' ? '能力平衡轮' : '细项表现'}}</view>
       <view class="report-panel__accent"></view>
     </view>
 
-    <view class="report-rates">
+    <view wx:if="{{view !== 'ability'}}" class="report-rates">
       <view class="report-rate report-rate--best">
         <view class="report-rate__label">最佳项正确率</view>
         <view class="report-rate__value">{{bestRate}}%</view>
@@ -57,9 +64,48 @@
       </view>
     </view>
 
+    <view wx:if="{{abilityList && abilityList.length}}" class="ability">
+      <view class="ability-head">
+        <view class="ability-title">核心能力画像</view>
+      </view>
+
+      <view wx:if="{{abilityWheel && abilityWheel.items && abilityWheel.items.length}}" class="ability-wheel-card">
+        <view class="ability-wheel">
+          <view class="ability-wheel__center">
+            <canvas type="2d" id="abilityWheel" class="ability-wheel__canvas"></canvas>
+          </view>
+          <block wx:for="{{abilityWheelSlots}}" wx:key="pos">
+            <view class="ability-wheel__slot ability-wheel__slot--{{item.pos}}">
+              <block wx:for="{{item.lines}}" wx:for-item="line" wx:key="*this">
+                <text class="ability-wheel__slot-line">{{line}}</text>
+              </block>
+            </view>
+          </block>
+        </view>
+      </view>
+
+      <view class="ability-bars">
+        <block wx:for="{{abilityList}}" wx:key="tag">
+          <view class="ability-item">
+            <view class="ability-row">
+              <view class="ability-name">{{item.tag}}</view>
+              <view class="ability-val">{{item.percent}}%</view>
+            </view>
+            <view class="ability-bar">
+              <view class="ability-bar__fill" style="width: {{item.percent}}%; background: linear-gradient(90deg, {{theme.heroFrom}}, {{theme.heroTo}});"></view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view wx:else class="report-empty">
+      <view class="report-empty__title">暂无能力数据</view>
+      <view class="report-empty__sub">若为历史记录，可能是早期版本未保存答题明细</view>
+    </view>
+
     <view class="report-actions">
-      <button class="btn-ghost report-actions__btn" bindtap="exit">退出</button>
-      <button class="btn report-actions__btn report-actions__primary" bindtap="gotoReview">逐题复盘</button>
+      <button class="btn-ghost report-actions__btn report-actions__exit" bindtap="exit">{{view === 'ability' ? '返回' : '退出'}}</button>
+      <button wx:if="{{view !== 'ability'}}" class="btn report-actions__btn report-actions__primary" bindtap="gotoReview">逐题复盘</button>
     </view>
   </view>
 </view>

@@ -8,7 +8,7 @@
 }
 
 .hb__left { flex: 1 1 auto; min-width: 0; }
-.hb__label { color: #fff; font-size: var(--font-xl); font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Times New Roman', Georgia, 'Noto Serif SC', 'Noto Serif CJK SC', 'Source Han Serif SC', 'Songti SC', 'STSong', SimSun, serif; }
+.hb__label { color: #fff; font-size: var(--font-xl); font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: var(--font-serif, 'Times New Roman', Georgia, 'Noto Serif SC', 'Noto Serif CJK SC', 'Source Han Serif SC', 'Songti SC', 'STSong', SimSun, serif); }
 
 .hb__right { flex: 0 0 auto; display: flex; align-items: center; gap: 12rpx; }
 

@@ -23,8 +23,8 @@ App({
     const { initUserDataIfNeeded } = require('./services/userData');
     const { getCurrentTheme } = require('./services/theme');
     initOnce(this).then(({ questions }) => {
-      console.log('数据加载完成', { questionCount: questions?.length || 0 });
-    }).catch((e) => {
+      console.log('数据加载完成', { questionCount: (questions && questions.length) || 0 });
+    }).catch(function(e) {
       console.error('数据加载失败', e);
     });
 

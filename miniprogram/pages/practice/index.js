@@ -11,6 +11,15 @@ function isEnglishVariantNumber(num) {
   return /(EN|E)$/i.test(s);
 }
 
+function stripCnSuffix(num) {
+  const s = String(num || '').trim();
+  if (!s) return '';
+  return s
+    .replace(/[\(\（]\s*CN\s*[\)\）]\s*$/i, '')
+    .replace(/(?:[_-]?)(CN)\s*$/i, '')
+    .trim();
+}
+
 Page({
   behaviors: [require('../../behaviors/fade'), require('../../behaviors/share')],
   data: {
@@ -22,7 +31,7 @@ Page({
 
   buildList() {
     const app = getApp();
-    const questions = (app?.globalData?.questionBank) || [];
+    const questions = (app && app.globalData && app.globalData.questionBank) || [];
     const favs = getFavorites();
     // 过滤：逐题列表不展示英文题（尾号 EN 或 E），仅保留基础题（如 "ICF-001"）
     const baseOnly = questions.filter(q => !isEnglishVariantNumber(q && q.number));
@@ -51,7 +60,10 @@ Page({
       if (!isNaN(bn)) return 1;
       return aStr.localeCompare(bStr);
     });
-    const list = sorted.map(q => ({ id: q.id, number: q.number != null ? q.number : q.id, favored: favs.includes(q.id) }));
+    const list = sorted.map(q => {
+      const raw = q.number != null ? q.number : q.id;
+      return { id: q.id, number: stripCnSuffix(raw), favored: favs.includes(q.id) };
+    });
     this.setData({ list });
   },
 
@@ -96,8 +108,8 @@ Page({
 
   openDetail(e) {
     const id = e.currentTarget.dataset.id;
-    this.applyFadeLeaveThen(() => {
-      wx.navigateTo({ url: `/pages/practice/detail?id=${id}` });
+    this.applyFadeLeaveThen(function() {
+      wx.navigateTo({ url: '/pages/practice/detail?id=' + id });
     }, 500);
   }
 });

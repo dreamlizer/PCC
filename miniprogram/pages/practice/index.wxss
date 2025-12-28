@@ -1,6 +1,6 @@
 /* pages/practice/index.wxss */
 /* 列表卡片优化 */
-.card.question-card {
+.question-card {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,7 @@
   padding: 18rpx 32rpx 18rpx 44rpx;
 
   border-radius: var(--radius-tight, 10rpx); /* 收敛圆角，更利落 */
-  background: #fff;                          /* 确保背景纯白 */
+  background: var(--card-bg, #fff);         /* 确保背景纯白 */
   border: 1rpx solid rgba(0,0,0,0.03);       /* 极细微边框 */
   box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.04); /* 统一柔和阴影 */
   color: var(--text-main);
@@ -41,14 +41,14 @@
 
 .question-card:active {
   transform: scale(0.99);
-  background: #FAFAFA;
+  background: rgba(0,0,0,0.02);
 }
 
 .q-number {
-  font-family: 'Times New Roman', Georgia, 'Songti SC', 'STSong', SimSun, serif;
+  font-family: var(--font-serif, 'Times New Roman', Georgia, 'Noto Serif SC', 'Noto Serif CJK SC', 'Source Han Serif SC', 'Songti SC', 'STSong', SimSun, serif);
   font-weight: 800;
-  font-size: 34rpx;
-  color: #111;
+  font-size: var(--font-xl);
+  color: var(--text-main, #2C3E50);
   letter-spacing: 0.5rpx;
 }
 
@@ -65,11 +65,4 @@
   border-right: 4rpx solid rgba(0,0,0,0.22);
   transform: rotate(45deg);
   opacity: 0.35;
-}
-
-.muted {
-  text-align: center;
-  margin-top: 48rpx;
-  color: #95A5A6;
-  font-size: 26rpx;
 }

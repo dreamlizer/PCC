@@ -11,6 +11,13 @@ function isEnglishVariantNumber(num) {
   return /(EN|E)$/i.test(s);
 }
 
+function pad3(n) {
+  const s = String(n);
+  if (s.length >= 3) return s;
+  if (s.length === 2) return '0' + s;
+  return '00' + s;
+}
+
 Page({
   behaviors: [require('../../behaviors/fade'), require('../../behaviors/share')],
   data: {
@@ -49,7 +56,7 @@ Page({
         .map(function(q) {
           const numStr = String(q.number != null ? q.number : q.id);
           const m = numStr.match(/\d+/);
-          const display = m ? m[0].padStart(3, '0') : numStr;
+          const display = m ? pad3(parseInt(m[0], 10)) : numStr;
           return { id: q.id, number: q.number, display: display };
         });
       
@@ -72,9 +79,9 @@ Page({
     const id = e.currentTarget.dataset.id;
     const idx = e.currentTarget.dataset.idx;
     this.setData({ fadeClass: 'fade-leave' });
-    setTimeout(() => {
+    setTimeout(function() {
       // 传递收藏上下文及索引，详情页将限制上一/下一在收藏集范围
-      wx.navigateTo({ url: `/pages/practice/detail?id=${id}&state=analysis&scope=favorites&favIndex=${idx}` });
+      wx.navigateTo({ url: '/pages/practice/detail?id=' + id + '&state=analysis&scope=favorites&favIndex=' + idx });
     }, 500);
   }
 });

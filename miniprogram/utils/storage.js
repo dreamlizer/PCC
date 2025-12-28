@@ -9,6 +9,10 @@ const KEYS = {
   questionBankVersion: 'questionBankVersion',
 };
 
+const LIMITS = {
+  bossRushHistoryMax: 50
+};
+
 function safeGet(key, fallback) {
   try {
     const v = wx.getStorageSync(key);
@@ -52,14 +56,62 @@ function toggleFavorite(id) {
 
 // Boss Rush History
 function getBossRushHistory() {
-  return safeGet(KEYS.bossRushHistory, []);
+  const list = safeGet(KEYS.bossRushHistory, []);
+  const max = Number(LIMITS.bossRushHistoryMax) || 50;
+  if (Array.isArray(list) && list.length > max) {
+    list.length = max;
+    safeSet(KEYS.bossRushHistory, list);
+  }
+  return list;
+}
+
+function normalizeBossRushMode(mode, isPartial) {
+  const raw = mode == null ? '' : String(mode);
+  const lower = raw.toLowerCase();
+  let normalizedMode = raw;
+  if (raw === 'sequence' || raw === 'random') {
+    normalizedMode = raw;
+  } else if (lower.indexOf('random') >= 0) {
+    normalizedMode = 'random';
+  } else if (lower.indexOf('sequence') >= 0) {
+    normalizedMode = 'sequence';
+  } else {
+    normalizedMode = 'sequence';
+  }
+  const normalizedPartial = !!isPartial || /partial/i.test(raw);
+  return { mode: normalizedMode, is_partial: normalizedPartial };
+}
+
+function normalizeBossRushRecord(record) {
+  const r = record || {};
+  const total = Number(r && r.total_count) || 0;
+  const answerLen = (r && Array.isArray(r.answers)) ? r.answers.length : 0;
+  const questionCount = answerLen || Number(r && r.question_count) || (total ? Math.round(total / 2) : 0);
+  const modeInfo = normalizeBossRushMode(r && r.mode, r && r.is_partial);
+  const hasAnswers = !!(r && Array.isArray(r.answers) && r.answers.length);
+  const out = Object.assign({}, r, modeInfo, { question_count: questionCount, has_answers: hasAnswers });
+  if (r && Array.isArray(r.answers)) out.answers = r.answers;
+  return out;
 }
 
 function addBossRushRecord(record) {
   const list = getBossRushHistory();
-  list.unshift(record);
+  list.unshift(normalizeBossRushRecord(record));
+  const max = Number(LIMITS.bossRushHistoryMax) || 50;
+  if (list.length > max) list.length = max;
   safeSet(KEYS.bossRushHistory, list);
   return list;
+}
+
+function getBossRushRecordByTimestamp(timestamp) {
+  const ts = Number(timestamp);
+  if (!ts) return null;
+  const list = getBossRushHistory();
+  for (let i = 0; i < list.length; i++) {
+    const item = list[i];
+    if (item && Number(item.timestamp) === ts) return item;
+  }
+  return null;
 }
 
 function clearBossRushHistory() {
@@ -94,6 +146,8 @@ module.exports = {
   toggleFavorite,
   getBossRushHistory,
   addBossRushRecord,
+  getBossRushRecordByTimestamp,
+  normalizeBossRushRecord,
   clearBossRushHistory,
   getBossRushLastAnswers,
   setBossRushLastAnswers,

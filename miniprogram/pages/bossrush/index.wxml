@@ -12,7 +12,7 @@ module.exports = {
 };
 </wxs>
 
-<view class="page {{fadeClass}} {{fontScaleClass}}" style="background: {{theme.pageBg}};">
+<view class="page {{fadeClass}} {{fontScaleClass}}" style="background: {{theme.pageBg}}; --icf-blue: {{theme.heroFrom}}; --icf-gold: {{theme.accentFrom}}; --icf-blue-rgb: {{theme.heroRgb}}; --icf-gold-rgb: {{theme.accentRgb}};">
   
   <!-- 阶段0：选模式 -->
   <block wx:if="{{phase === 'mode'}}">

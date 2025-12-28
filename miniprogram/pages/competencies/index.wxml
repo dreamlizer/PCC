@@ -1,6 +1,44 @@
-<view class="page {{fadeClass}}">
-  <view class="card">
-    <view class="h1">八项教练能力</view>
-    <view class="muted mt-12">页面预留中，后续将补充内容。</view>
-  </view>
+<view
+  class="page {{fadeClass}} {{fontScaleClass}}"
+  style="background: {{theme.pageBg}}; --icf-blue: {{theme.heroFrom}}; --icf-gold: {{theme.accentFrom}}; --icf-blue-rgb: {{theme.heroRgb}}; --icf-gold-rgb: {{theme.accentRgb}};"
+>
+  <hero-header
+    theme="{{theme}}"
+    title="{{labels.pageTitle}}"
+    subtitle="{{labels.pageSubtitle}}"
+    right-text="{{ lang === 'zh' ? 'EN' : '中文' }}"
+    bind:right="onLangTap"
+  />
+
+  <scroll-view scroll-y style="height: calc(100vh - 240rpx);">
+    <block wx:for="{{competencies}}" wx:key="id">
+      <view class="competency">
+        <view class="row space-between header" bindtap="toggleItem" data-id="{{item.id}}">
+          <view class="row">
+            <view class="badge {{item.isIntro ? 'is-intro' : ''}}">
+              <text wx:if="{{item.isIntro}}">🛈</text>
+              <text wx:else>{{item.no}}</text>
+            </view>
+            <view class="title">{{item.title}}</view>
+          </view>
+          <view class="chevron {{expandedId === item.id ? 'is-open' : ''}}"></view>
+        </view>
+
+        <view wx:if="{{expandedId === item.id}}" class="body">
+          <view class="definition">
+            <text wx:if="{{!item.isIntro}}" class="label">{{labels.definitionLabel}}</text>
+            <text>{{item.definition}}</text>
+          </view>
+          <view wx:if="{{item.items && item.items.length}}" class="sublist">
+            <block wx:for="{{item.items}}" wx:for-item="sub" wx:key="code">
+              <view class="subitem">
+                <text class="code">{{sub.code}}</text>
+                <text class="text">{{sub.text}}</text>
+              </view>
+            </block>
+          </view>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
 </view>

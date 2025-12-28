@@ -1,6 +1,6 @@
 // pages/bossrush/review.js
 const { getCurrentTheme } = require('../../services/theme');
-const { getBossRushLastAnswers } = require('../../utils/storage');
+const { getBossRushLastAnswers, getBossRushRecordByTimestamp, normalizeBossRushRecord } = require('../../utils/storage');
 const { getFontScaleClassByStorage } = require('../../services/typography');
 
 Page({
@@ -13,8 +13,18 @@ Page({
     fontScaleClass: ''
   },
 
-  onLoad() {
-    const answers = getBossRushLastAnswers();
+  onLoad(options) {
+    const ts = options && options.ts ? Number(options.ts) : 0;
+    const rawRecord = ts ? getBossRushRecordByTimestamp(ts) : null;
+    const record = rawRecord ? normalizeBossRushRecord(rawRecord) : null;
+    if (ts && !record) {
+      this.setData({ list: [], theme: getCurrentTheme(), fontScaleClass: getFontScaleClassByStorage() });
+      wx.showToast({ title: '记录不存在', icon: 'none' });
+      return;
+    }
+    const answers = ts
+      ? ((record && Array.isArray(record.answers)) ? record.answers : [])
+      : getBossRushLastAnswers();
     const app = getApp();
     const self = this;
     
@@ -24,6 +34,9 @@ Page({
 
     const render = function() {
       const questions = (app && app.globalData && app.globalData.questionBank) || [];
+      if (ts && answers.length === 0) {
+        wx.showToast({ title: '该记录暂无复盘明细', icon: 'none' });
+      }
       const list = answers.map(function(a) {
         const q = questions.find(function(x) { return x.id === a.id; });
         const title = q ? (typeof q.title === 'string' ? q.title : ((q.title && q.title.zh) || '')) : '';

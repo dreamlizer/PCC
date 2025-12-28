@@ -1,12 +1,18 @@
 // pages/index/index.js
+const { getCurrentTheme } = require('../../services/theme');
+const { getFontScaleClassByStorage } = require('../../services/typography');
+
 Page({
   behaviors: [require('../../behaviors/fade'), require('../../behaviors/share')],
   data: {
-    fadeClass: ''
+    fadeClass: '',
+    theme: null,
+    fontScaleClass: ''
   },
 
   onShow() {
     if (this.applyFadeEnter) this.applyFadeEnter();
+    this.setData({ theme: getCurrentTheme(), fontScaleClass: getFontScaleClassByStorage() });
   },
 
   goExam() {

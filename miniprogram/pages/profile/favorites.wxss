@@ -1,19 +1,4 @@
 /* pages/profile/favorites.wxss */
-/* 复用 Hero 样式 */
-.hero {
-  padding: 40rpx 32rpx 24rpx;
-  background: linear-gradient(135deg, #1F2A44 0%, #2FB3A9 100%);
-  color: #fff;
-}
-.hero .h1 {
-  font-size: var(--font-xl);
-  font-weight: 700;
-  letter-spacing: 1rpx;
-}
-.hero .sub {
-  margin-top: 12rpx;
-  opacity: 0.9;
-}
 
 /* 列表卡片优化 (复用 practice/index.wxss) */
 .question-card {
@@ -28,7 +13,7 @@
   padding: 24rpx 32rpx;
 
   border-radius: var(--radius-tight, 10rpx);
-  background: #fff;
+  background: var(--card-bg, #fff);
   border: 1rpx solid rgba(0,0,0,0.03);
   box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.04);
   overflow: hidden;
@@ -49,14 +34,14 @@
 
 .question-card:active {
   transform: scale(0.99);
-  background: #FAFAFA;
+  background: rgba(0,0,0,0.02);
 }
 
 .q-number {
-  font-family: 'Times New Roman', Georgia, 'Noto Serif SC', 'Noto Serif CJK SC', 'Source Han Serif SC', 'Songti SC', 'STSong', SimSun, serif;
+  font-family: var(--font-serif, 'Times New Roman', Georgia, 'Noto Serif SC', 'Noto Serif CJK SC', 'Source Han Serif SC', 'Songti SC', 'STSong', SimSun, serif);
   font-weight: 800;
-  font-size: 30rpx;
-  color: #111;
+  font-size: var(--font-lg);
+  color: var(--text-main, #2C3E50);
   letter-spacing: 0.5rpx;
 }
 
@@ -69,24 +54,8 @@
 .chevron {
   width: 14rpx;
   height: 14rpx;
-  border-top: 4rpx solid #BDC3C7;
-  border-right: 4rpx solid #BDC3C7;
+  border-top: 4rpx solid var(--text-secondary, #7F8C8D);
+  border-right: 4rpx solid var(--text-secondary, #7F8C8D);
   transform: rotate(45deg);
   opacity: 0.6;
-}
-
-.row {
-  display: flex;
-  align-items: center;
-}
-
-.space-between {
-  justify-content: space-between;
-}
-
-.muted {
-  text-align: center;
-  margin-top: 48rpx;
-  color: #95A5A6;
-  font-size: 26rpx;
 }

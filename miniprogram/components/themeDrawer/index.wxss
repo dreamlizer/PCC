@@ -1,8 +1,8 @@
 .drawer-mask { position: fixed; inset: 0; background: rgba(0,0,0,0.35); display: flex; align-items: flex-end; z-index: 99; }
 .drawer { width: 100%; background: #fff; border-top-left-radius: 24rpx; border-top-right-radius: 24rpx; padding: 24rpx; box-shadow: 0 -8rpx 24rpx rgba(0,0,0,0.15); }
-.drawer-header { font-weight: 700; font-size: 30rpx; margin-bottom: 12rpx; }
+.drawer-header { font-weight: 700; font-size: var(--font-lg); margin-bottom: 12rpx; }
 .theme-row { display: flex; align-items: center; padding: 14rpx 0; }
 .theme-chip { width: 72rpx; height: 36rpx; border-radius: 999rpx; margin-right: 16rpx; box-shadow: 0 4rpx 10rpx rgba(0,0,0,0.08); }
 .theme-name { flex: 1; font-weight: 600; }
-.theme-check { width: 40rpx; text-align: right; color: #2FB3A9; font-weight: 700; }
+.theme-check { width: 40rpx; text-align: right; color: var(--icf-gold, #ffbf3f); font-weight: 700; }
 .btn-close { margin-top: 12rpx; }

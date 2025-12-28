@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ICF 八项能力平衡轮</title>
+  <style>
+    :root{
+      --bg:#F6F7FB;
+      --navy:#0A1B6F;
+      --blue:#0B1FA8;
+      --blueAlt:#091B90;
+      --gold:#F5B335;
+      --outer:#B9BDD1;
+      --sector1:#EEF1FA;
+      --sector2:#E6EAF6;
+      --divider:#FFFFFF;
+    }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--navy);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif;
+      display:flex;
+      justify-content:center;
+      padding: 18px 14px 28px;
+    }
+    .card{
+      width: min(760px, 96vw);
+      background: rgba(255,255,255,0.65);
+      border: 1px solid rgba(10,27,111,0.08);
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(10,27,111,0.06);
+      overflow: hidden;
+    }
+    .card h1{
+      margin:0;
+      padding: 16px 16px 6px;
+      font-size: 18px;
+      letter-spacing: .2px;
+    }
+    .sub{
+      padding: 0 16px 14px;
+      font-size: 12px;
+      color: rgba(10,27,111,0.70);
+    }
+    .viz{
+      padding: 6px 10px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    svg{
+      width: min(560px, 92vw);
+      height: auto;
+      display:block;
+    }
+  </style>
+</head>
+<body>
+  <section class="card">
+    <h1>ICF 八项能力平衡轮</h1>
+    <div class="sub">8 个扇面展示 0–100 完成度；1/3 与 2/3 位置用浅金色参考环提示进度感。</div>
+    <div class="viz">
+      <svg id="wheel" viewBox="-220 -220 440 440" role="img" aria-label="能力平衡轮">
+        <g id="sectors"></g>
+        <g id="milestones"></g>
+        <g id="dividers"></g>
+
+        <circle r="160" fill="none" stroke="var(--outer)" stroke-width="2.6"></circle>
+        <text x="0" y="-175" text-anchor="middle" font-size="12" fill="var(--navy)">100</text>
+
+        <g id="labels"></g>
+      </svg>
+    </div>
+  </section>
+
+<script>
+  // =====================
+  // 数据：改 value 即可改变扇面长度
+  // 你也可以在控制台调用：
+  //   setScores({e:90, t:40}) 或 setCompetencyValue('e', 90)
+  // =====================
+  const competencies = [
+    { key: "g", label: "促进客户成长", value: 55 },
+    { key: "m", label: "体现教练思维", value: 78 },
+    { key: "e", label: "展现道德实践", value: 86 },
+    { key: "a", label: "建立和维护协议", value: 62 },
+    { key: "t", label: "培养信任和安全", value: 48 },
+    { key: "p", label: "保持同在感", value: 71 },
+    { key: "l", label: "积极倾听", value: 56 },
+    { key: "w", label: "唤起意识", value: 82 },
+  ];
+
+  const R = 160;
+  const N = competencies.length;
+  const wedge = (2 * Math.PI) / N;
+
+  const sectorsG = document.getElementById("sectors");
+  const milestonesG = document.getElementById("milestones");
+  const dividersG = document.getElementById("dividers");
+  const labelsG = document.getElementById("labels");
+
+  const css = getComputedStyle(document.documentElement);
+  const sectorBg1 = css.getPropertyValue("--sector1").trim();
+  const sectorBg2 = css.getPropertyValue("--sector2").trim();
+  const blueDeep = css.getPropertyValue("--blue").trim();
+  const blueAlt  = css.getPropertyValue("--blueAlt").trim();
+  const gold = css.getPropertyValue("--gold").trim();
+  const divider = css.getPropertyValue("--divider").trim();
+  const navy = css.getPropertyValue("--navy").trim();
+
+  const blueLight1 = "#C9D6FF";
+  const blueLight2 = "#C3D0FF";
+
+  function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+  function lerp(a,b,t){ return a + (b-a)*t; }
+
+  function hexToRgb(hex){
+    const h = hex.replace("#","").trim();
+    const v = h.length === 3 ? h.split("").map(x=>x+x).join("") : h;
+    const n = parseInt(v, 16);
+    return { r: (n>>16)&255, g: (n>>8)&255, b: n&255 };
+  }
+  function rgbToHex({r,g,b}){
+    const to = (x)=>x.toString(16).padStart(2,"0");
+    return `#${to(r)}${to(g)}${to(b)}`;
+  }
+  function lerpColor(c1, c2, t){
+    const A = hexToRgb(c1), B = hexToRgb(c2);
+    return rgbToHex({
+      r: Math.round(lerp(A.r, B.r, t)),
+      g: Math.round(lerp(A.g, B.g, t)),
+      b: Math.round(lerp(A.b, B.b, t))
+    });
+  }
+
+  function sectorPath(start, end, r){
+    const large = (end - start) > Math.PI ? 1 : 0;
+    const x1 = r * Math.sin(start), y1 = -r * Math.cos(start);
+    const x2 = r * Math.sin(end),   y2 = -r * Math.cos(end);
+    return [
+      `M 0 0`,
+      `L ${x1.toFixed(3)} ${y1.toFixed(3)}`,
+      `A ${r} ${r} 0 ${large} 1 ${x2.toFixed(3)} ${y2.toFixed(3)}`,
+      `Z`
+    ].join(" ");
+  }
+
+  function makeEl(tag, attrs = {}){
+    const el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    for(const [k,v] of Object.entries(attrs)) el.setAttribute(k, v);
+    return el;
+  }
+
+  function top2Idx(){
+    const arr = competencies.map((c, i) => ({ i, v: c.value }))
+      .sort((a,b) => b.v - a.v)
+      .slice(0,2)
+      .map(x => x.i);
+    return new Set(arr);
+  }
+
+  function render(){
+    sectorsG.innerHTML = "";
+    milestonesG.innerHTML = "";
+    dividersG.innerHTML = "";
+    labelsG.innerHTML = "";
+
+    const tops = top2Idx();
+
+    // 扇面（底色 + 填充）
+    competencies.forEach((c, i) => {
+      const start = i * wedge;
+      const end   = (i+1) * wedge;
+
+      const bgFill = (i % 2 === 0) ? sectorBg1 : sectorBg2;
+      sectorsG.appendChild(makeEl("path", { d: sectorPath(start, end, R), fill: bgFill }));
+
+      const rr = (clamp(c.value, 0, 100) / 100) * R;
+      const t = clamp(c.value / 100, 0, 1);
+      const fillColor = (i % 2 === 0)
+        ? lerpColor(blueLight1, blueDeep, 0.25 + 0.75*t)
+        : lerpColor(blueLight2, blueAlt,  0.25 + 0.75*t);
+
+      sectorsG.appendChild(makeEl("path", { d: sectorPath(start, end, rr), fill: fillColor }));
+
+      // Top 2 轻微强调（可删）
+      if (tops.has(i)){
+        sectorsG.appendChild(makeEl("path", {
+          d: sectorPath(start, end, R),
+          fill: "none",
+          stroke: gold,
+          "stroke-width": "3"
+        }));
+      }
+
+      // 标签胶囊（B 方案）
+      const mid = start + wedge/2;
+      const labelR = R + 34;
+      const x = labelR * Math.sin(mid);
+      const y = -labelR * Math.cos(mid);
+
+      let anchor = "middle";
+      if (x > 44) anchor = "start";
+      if (x < -44) anchor = "end";
+
+      const label = c.label;
+      const len = (label || "").length;
+      let lines = [label];
+      if (len >= 5 && len <= 6) lines = [label.slice(0, 3), label.slice(3)];
+      if (len >= 7) lines = [label.slice(0, 4), label.slice(4)];
+
+      const text = makeEl("text", {
+        x: x.toFixed(2),
+        y: y.toFixed(2),
+        "text-anchor": anchor,
+        "dominant-baseline": "middle",
+        "font-size": "12",
+        "font-weight": "600",
+        fill: navy
+      });
+
+      if (lines.length === 1) {
+        const tspan = makeEl("tspan", { x: x.toFixed(2), dy: "0" });
+        tspan.textContent = lines[0];
+        text.appendChild(tspan);
+      } else {
+        const dyTop = -(lines.length - 1) * 7;
+        lines.forEach((ln, idx) => {
+          const dy = idx === 0 ? String(dyTop) : "14";
+          const tspan = makeEl("tspan", { x: x.toFixed(2), dy });
+          tspan.textContent = ln;
+          text.appendChild(tspan);
+        });
+      }
+
+      labelsG.appendChild(text);
+
+      const bb = text.getBBox();
+      const padX = 10;
+      const padY = 6;
+      const rect = makeEl("rect", {
+        x: (bb.x - padX).toFixed(2),
+        y: (bb.y - padY).toFixed(2),
+        width: (bb.width + padX * 2).toFixed(2),
+        height: (bb.height + padY * 2).toFixed(2),
+        rx: "12",
+        ry: "12",
+        fill: "rgba(255,255,255,0.78)",
+        stroke: "rgba(10,27,111,0.14)",
+        "stroke-width": "1"
+      });
+      labelsG.insertBefore(rect, text);
+    });
+
+    // 1/3 与 2/3 里程碑环（浅金色、细实线）
+    const milestoneStyle = {
+      fill: "none",
+      stroke: gold,
+      "stroke-width": "1.4",
+      opacity: "0.22"
+    };
+    milestonesG.appendChild(makeEl("circle", { r: (R/3).toFixed(2), ...milestoneStyle }));
+    milestonesG.appendChild(makeEl("circle", { r: (2*R/3).toFixed(2), ...milestoneStyle }));
+
+    // 8 扇面分割线（必须触达外圈）
+    for (let i=0; i<N; i++){
+      const ang = i * wedge;
+      const x = R * Math.sin(ang);
+      const y = -R * Math.cos(ang);
+      dividersG.appendChild(makeEl("line", {
+        x1: "0", y1: "0",
+        x2: x.toFixed(2), y2: y.toFixed(2),
+        stroke: divider,
+        "stroke-width": "4"
+      }));
+    }
+  }
+
+  // ======= 对外暴露：方便你嵌入小程序/调试 =======
+  window.setCompetencyValue = (key, value) => {
+    const c = competencies.find(x => x.key === key);
+    if (!c) return;
+    c.value = clamp(Number(value), 0, 100);
+    render();
+  };
+
+  // setScores({e:90, t:40}) 或 setScores([55,78,86,62,48,71,56,82])
+  window.setScores = (payload) => {
+    if (Array.isArray(payload)) {
+      payload.forEach((v, i) => { if (competencies[i]) competencies[i].value = clamp(Number(v), 0, 100); });
+      render();
+      return;
+    }
+    if (payload && typeof payload === 'object') {
+      Object.entries(payload).forEach(([k,v]) => window.setCompetencyValue(k, v));
+    }
+  };
+
+  render();
+</script>
+</body>
+</html>

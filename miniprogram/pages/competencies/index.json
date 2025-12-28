@@ -1,4 +1,6 @@
 {
-  "navigationBarTitleText": "八项教练能力",
-  "usingComponents": {}
+  "navigationBarTitleText": "八项核心能力",
+  "usingComponents": {
+    "hero-header": "/components/heroHeader/index"
+  }
 }

@@ -4,15 +4,17 @@
 const STORAGE_KEY = 'pcc_theme_id';
 const DEFAULT_THEME_ID = 'navyGold';
 
-// 3 套主题（四字命名）
+// 2 套主题（默认 + 墨绿珊瑚）
 const THEMES = [
   {
     id: 'navyGold',
     name: '默认',
     heroFrom: '#060E9F',
     heroTo: '#0F4C81',
+    heroRgb: '6, 14, 159',
     accentFrom: '#FFBF3F',
     accentTo: '#FFD36A',
+    accentRgb: '255, 191, 63',
     accentShadow: 'rgba(255, 191, 63, 0.18)',
     pageBg: '#FFFFFF',
     badgeBg: '#060E9F',
@@ -20,30 +22,19 @@ const THEMES = [
     questionBg: '#EEF2F8'
   },
   {
-    id: 'sunrise',
-    name: '朝晖流金',
-    heroFrom: '#D35400',
-    heroTo: '#F1C40F',
-    accentFrom: '#FF6B35',
-    accentTo: '#FF4D6D',
-    accentShadow: 'rgba(255, 77, 109, 0.18)',
-    pageBg: '#FFF8E6',
-    badgeBg: '#8E4400',
-    cardBorder: '#F1C40F',
-    questionBg: '#FFF3E0'
-  },
-  {
-    id: 'ink',
-    name: '墨影云锦',
-    heroFrom: '#232526',
-    heroTo: '#414345',
-    accentFrom: '#6C5CE7',
-    accentTo: '#00D2D3',
-    accentShadow: 'rgba(108, 92, 231, 0.22)',
-    pageBg: '#F5F6F7',
-    badgeBg: '#232526',
-    cardBorder: '#7F8C8D',
-    questionBg: '#FAFAFA'
+    id: 'forestCoral',
+    name: '墨绿珊瑚',
+    heroFrom: '#0F3D2E',
+    heroTo: '#0F3D2E',
+    heroRgb: '15, 61, 46',
+    accentFrom: '#E76F51',
+    accentTo: '#E76F51',
+    accentRgb: '231, 111, 81',
+    accentShadow: 'rgba(231, 111, 81, 0.18)',
+    pageBg: '#FFFFFF',
+    badgeBg: '#0F3D2E',
+    cardBorder: '#E76F51',
+    questionBg: '#FFFFFF'
   }
 ];
 

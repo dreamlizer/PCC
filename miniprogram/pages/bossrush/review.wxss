@@ -10,14 +10,14 @@
   padding: 32rpx;
   
   border-radius: 20rpx;
-  background: #fff;
+  background: var(--card-bg, #fff);
   box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.04);
   transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .question-card:active {
   transform: scale(0.99);
-  background: #FAFAFA;
+  background: rgba(0,0,0,0.02);
 }
 
 /* 内容区 */
@@ -29,8 +29,8 @@
 
 /* 标题 */
 .title {
-  font-size: 30rpx;
-  color: #2C3E50;
+  font-size: var(--font-md);
+  color: var(--text-main, #2C3E50);
   font-weight: 600;
   margin-bottom: 16rpx;
   line-height: 1.4;
@@ -48,7 +48,7 @@
   align-items: center;
   justify-content: center;
   
-  font-size: 22rpx;
+  font-size: var(--font-sm);
   font-weight: 600;
   padding: 6rpx 16rpx;
   border-radius: 8rpx;
@@ -58,32 +58,32 @@
 
 /* 完美徽章 (金/绿) */
 .badge-perfect {
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  background: linear-gradient(135deg, var(--icf-gold, #ffbf3f) 0%, var(--icf-gold, #ffbf3f) 100%);
   color: #fff;
-  box-shadow: 0 2rpx 8rpx rgba(255, 165, 0, 0.3);
+  box-shadow: 0 2rpx 8rpx rgba(var(--icf-gold-rgb, 255, 191, 63), 0.3);
   padding: 8rpx 20rpx;
 }
 
 /* 成功徽章 (绿) */
 .badge-success {
-  background: rgba(46, 204, 113, 0.1);
-  color: #27ae60;
-  border: 1rpx solid rgba(46, 204, 113, 0.2);
+  background: rgba(var(--icf-blue-rgb, 6, 14, 159), 0.08);
+  color: var(--icf-blue, #060e9f);
+  border: 1rpx solid rgba(var(--icf-blue-rgb, 6, 14, 159), 0.18);
 }
 
 /* 错误徽章 (红) */
 .badge-error {
-  background: rgba(231, 76, 60, 0.1);
-  color: #c0392b;
-  border: 1rpx solid rgba(231, 76, 60, 0.2);
+  background: rgba(var(--icf-gold-rgb, 255, 191, 63), 0.10);
+  color: var(--icf-gold, #ffbf3f);
+  border: 1rpx solid rgba(var(--icf-gold-rgb, 255, 191, 63), 0.22);
 }
 
 /* 右侧箭头 */
 .chevron {
   width: 12rpx;
   height: 12rpx;
-  border-top: 4rpx solid #E0E0E0;
-  border-right: 4rpx solid #E0E0E0;
+  border-top: 4rpx solid var(--text-secondary, #7F8C8D);
+  border-right: 4rpx solid var(--text-secondary, #7F8C8D);
   transform: rotate(45deg);
   margin-left: 24rpx;
   flex-shrink: 0;

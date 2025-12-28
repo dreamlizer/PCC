@@ -1,5 +1,9 @@
 /* pages/practice/detail.wxss */
 
+.option-text {
+  font-size: calc(var(--font-lg) - 2rpx);
+}
+
 .option-card.is-correct-best .option-text {
   background: #EAF7EE;
   padding: 10rpx 12rpx;

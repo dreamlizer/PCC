@@ -20,9 +20,8 @@ function isEnglishVariantNumber(num) {
 function stripEnglishSuffix(num) {
   let s = String(num || '').trim();
   if (!s) return '';
-  s = s.replace(/[\(\（]\s*EN\s*[\)\）]$/i, '');
-  s = s.replace(/[\(\（]\s*E\s*[\)\）]$/i, '');
-  s = s.replace(/(EN|E)$/i, '');
+  s = s.replace(/[\(\（]\s*(EN|E|CN)\s*[\)\）]\s*$/i, '');
+  s = s.replace(/(?:[_-]?)(EN|E|CN)\s*$/i, '');
   return s.trim();
 }
 
@@ -53,7 +52,7 @@ Page({
   async onLoad(options) {
     const app = getApp();
     try { const { awaitReady } = require('../../services/bootstrap'); await awaitReady(app); } catch (_) {}
-    const bank = (app?.globalData?.questionBank) || [];
+    const bank = (app && app.globalData && app.globalData.questionBank) || [];
     this.bankQuestions = bank; // 全量题库，用于英文检索
     const theme = getCurrentTheme();
 
@@ -64,16 +63,16 @@ Page({
       return m ? parseInt(m[0], 10) : NaN;
     };
     const sortBaseQuestions = (a, b) => {
-      const aStr = String(a?.number != null ? a.number : a?.id);
-      const bStr = String(b?.number != null ? b.number : b?.id);
+      const aStr = String(a && (a.number != null ? a.number : a.id));
+      const bStr = String(b && (b.number != null ? b.number : b.id));
 
       const aIsIcf = /^icf-/i.test(aStr);
       const bIsIcf = /^icf-/i.test(bStr);
       if (aIsIcf && !bIsIcf) return -1;
       if (!aIsIcf && bIsIcf) return 1;
 
-      const an = extractNum(a?.number);
-      const bn = extractNum(b?.number);
+      const an = extractNum(a && a.number);
+      const bn = extractNum(b && b.number);
       if (!isNaN(an) && !isNaN(bn)) return an - bn;
       if (!isNaN(an)) return -1;
       if (!isNaN(bn)) return 1;
@@ -139,7 +138,7 @@ Page({
         });
       }
 
-      const qE = qERaw ? { ...qERaw, analyses } : qERaw;
+      const qE = qERaw ? Object.assign({}, qERaw, { analyses: analyses }) : qERaw;
       const { questionTitle, optionsResolved } = this.computeResolved(qE, 'en');
       const analysisRecap = this.data.state === 'analysis'
         ? this.buildAnalysisRecap({ question: qE, optionsResolved, bestChoice: this.data.bestChoice, worstChoice: this.data.worstChoice, lang: 'en' })
@@ -204,7 +203,7 @@ Page({
   next() {
     let nextIdx = this.data.currentIndex + 1;
     // 跳过英文题（尾号 EN 或 E），仅在列表导航中不出现
-    while (nextIdx < this.data.questions.length && isEnglishVariantNumber(this.data.questions[nextIdx]?.number)) {
+    while (nextIdx < this.data.questions.length && isEnglishVariantNumber(this.data.questions[nextIdx] && this.data.questions[nextIdx].number)) {
       nextIdx++;
     }
     if (nextIdx >= this.data.questions.length) {
@@ -238,7 +237,7 @@ Page({
   prev() {
     let prevIdx = this.data.currentIndex - 1;
     // 跳过英文题（尾号 EN 或 E）
-    while (prevIdx >= 0 && isEnglishVariantNumber(this.data.questions[prevIdx]?.number)) {
+    while (prevIdx >= 0 && isEnglishVariantNumber(this.data.questions[prevIdx] && this.data.questions[prevIdx].number)) {
       prevIdx--;
     }
     if (prevIdx < 0) {
@@ -270,7 +269,7 @@ Page({
   },
 
   goBackToList() {
-    this.applyFadeLeaveThen(() => {
+    this.applyFadeLeaveThen(function() {
       const pages = getCurrentPages();
       if (pages && pages.length > 1) {
         wx.navigateBack({ delta: 1 });
@@ -294,16 +293,20 @@ Page({
 
   // 根据题号定位英文题（优先尾号 EN，兼容尾号 E）
   locateEnglish(q, list) {
-    const base = stripEnglishSuffix(q?.number).toUpperCase();
+    const base = stripEnglishSuffix(q && q.number).toUpperCase();
     if (!base) return { hasEnglish: false, englishIndex: -1 };
-    const idx = (list || []).findIndex(it => isEnglishVariantNumber(it?.number) && stripEnglishSuffix(it?.number).toUpperCase() === base);
+    const idx = (list || []).findIndex(function(it) {
+      return isEnglishVariantNumber(it && it.number) && stripEnglishSuffix(it && it.number).toUpperCase() === base;
+    });
     return { hasEnglish: idx >= 0, englishIndex: idx };
   },
   locateBase(q, list) {
     // 去除 EN 或 E 尾号，定位基础题
-    const base = stripEnglishSuffix(q?.number).toUpperCase();
+    const base = stripEnglishSuffix(q && q.number).toUpperCase();
     if (!base) return { baseIndex: -1 };
-    const idx = (list || []).findIndex(it => stripEnglishSuffix(it?.number).toUpperCase() === base && !isEnglishVariantNumber(it?.number));
+    const idx = (list || []).findIndex(function(it) {
+      return stripEnglishSuffix(it && it.number).toUpperCase() === base && !isEnglishVariantNumber(it && it.number);
+    });
     return { baseIndex: idx };
   },
 
@@ -351,44 +354,44 @@ Page({
   buildAnalysisRecap({ question, optionsResolved, bestChoice, worstChoice, lang }) {
     if (!question) return '';
     const lettersMap = new Map(optionsResolved.map(o => [String(o.id), o.letter]));
-    const bestLetter = lettersMap.get(String(question.answer?.best)) || '';
-    const worstLetter = lettersMap.get(String(question.answer?.worst)) || '';
+    const bestLetter = lettersMap.get(String(question && question.answer && question.answer.best)) || '';
+    const worstLetter = lettersMap.get(String(question && question.answer && question.answer.worst)) || '';
     const userBestLetter = bestChoice ? (lettersMap.get(String(bestChoice)) || '') : '';
     const userWorstLetter = worstChoice ? (lettersMap.get(String(worstChoice)) || '') : '';
 
     if (!bestChoice || !worstChoice) {
       return lang === 'en'
-        ? `The best and worst actions are ${bestLetter} and ${worstLetter}.`
-        : `最佳/最差行动分别是 ${bestLetter} 和 ${worstLetter}。`;
+        ? 'The best and worst actions are ' + bestLetter + ' and ' + worstLetter + '.'
+        : '最佳/最差行动分别是 ' + bestLetter + ' 和 ' + worstLetter + '。';
     }
 
-    const bestCorrect = String(bestChoice) === String(question.answer?.best);
-    const worstCorrect = String(worstChoice) === String(question.answer?.worst);
+    const bestCorrect = String(bestChoice) === String(question && question.answer && question.answer.best);
+    const worstCorrect = String(worstChoice) === String(question && question.answer && question.answer.worst);
 
     if (bestCorrect && worstCorrect) {
       return lang === 'en'
-        ? `The best and worst actions are ${bestLetter} and ${worstLetter}; your answers are correct.`
-        : `最佳/最差行动分别是 ${bestLetter} 和 ${worstLetter}，你的回答是正确的。`;
+        ? 'The best and worst actions are ' + bestLetter + ' and ' + worstLetter + '; your answers are correct.'
+        : '最佳/最差行动分别是 ' + bestLetter + ' 和 ' + worstLetter + '，你的回答是正确的。';
     }
 
     const parts = [];
     if (lang === 'en') {
-      parts.push(`Your selections are ${userBestLetter} and ${userWorstLetter}`);
+      parts.push('Your selections are ' + userBestLetter + ' and ' + userWorstLetter);
       if (bestCorrect && !worstCorrect) {
-        parts.push(`, best action is correct, worst action is incorrect. See the analysis below.`);
+        parts.push(', best action is correct, worst action is incorrect. See the analysis below.');
       } else if (!bestCorrect && worstCorrect) {
-        parts.push(`, best action is incorrect, worst action is correct. See the analysis below.`);
+        parts.push(', best action is incorrect, worst action is correct. See the analysis below.');
       } else {
-        parts.push(`, both best and worst are incorrect. See the analysis below.`);
+        parts.push(', both best and worst are incorrect. See the analysis below.');
       }
     } else {
-      parts.push(`你的回答是 ${userBestLetter} 和 ${userWorstLetter}`);
+      parts.push('你的回答是 ' + userBestLetter + ' 和 ' + userWorstLetter);
       if (bestCorrect && !worstCorrect) {
-        parts.push(`，最佳行动回答正确，最差答案回答错误，请参阅下面的解析。`);
+        parts.push('，最佳行动回答正确，最差答案回答错误，请参阅下面的解析。');
       } else if (!bestCorrect && worstCorrect) {
-        parts.push(`，最佳行动回答错误，最差答案回答正确，请参阅下面的解析。`);
+        parts.push('，最佳行动回答错误，最差答案回答正确，请参阅下面的解析。');
       } else {
-        parts.push(`，最佳与最差均回答错误，请参阅下面的解析。`);
+        parts.push('，最佳与最差均回答错误，请参阅下面的解析。');
       }
     }
     return parts.join('');

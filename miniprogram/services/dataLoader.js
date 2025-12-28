@@ -20,11 +20,19 @@ function computeHash(obj) {
   return String(hash >>> 0);
 }
 
+function pad3(n) {
+  const s = String(n);
+  if (s.length >= 3) return s;
+  if (s.length === 2) return '0' + s;
+  return '00' + s;
+}
+
 function normalizeQuestionList(list) {
   if (!Array.isArray(list)) return [];
-  return list.map((q, idx) => {
-    const id = String(q.id || q._id || q.number || `q_${String(idx + 1).padStart(3, '0')}`);
-    return Object.assign({ id }, q);
+  return list.map(function(q, idx) {
+    const fallbackId = 'q_' + pad3(idx + 1);
+    const id = String((q && (q.id || q._id || q.number)) || fallbackId);
+    return Object.assign({ id: id }, q);
   });
 }
 
@@ -75,7 +83,7 @@ async function loadFromCloud() {
   try {
     console.log('[Cloud] call pccQuestions');
     const qRes = await callCloudFunctionCompat('pccQuestions');
-    const r2 = qRes?.result;
+    const r2 = qRes && qRes.result;
     questions = (r2 && r2.ok ? r2.data : null) || r2 || [];
   } catch (errQ) {
     console.warn('云函数 pccQuestions 读取失败（可忽略）：', errQ);
@@ -95,7 +103,12 @@ async function loadFromCloud() {
         tasks.push(db.collection('ExamQuestions').skip(i * batch).limit(batch).get());
       }
       const results = await Promise.all(tasks);
-      questions = results.flatMap(r => r.data || []);
+      const out = [];
+      results.forEach(function(r) {
+        const arr = (r && r.data) || [];
+        for (let i = 0; i < arr.length; i++) out.push(arr[i]);
+      });
+      questions = out;
     } catch (e4) {
       console.warn('直接读取题库失败：', e4);
     }
@@ -141,4 +154,5 @@ async function loadAllDataOnce() {
 
 module.exports = {
   loadAllDataOnce,
+  callCloudFunctionCompat,
 };
